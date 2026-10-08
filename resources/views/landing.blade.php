@@ -57,8 +57,8 @@
             <div class="flex justify-between items-center h-20">
                 <!-- Logo & Name -->
                 <div class="flex-shrink-0 flex items-center gap-3 cursor-pointer" onclick="window.scrollTo(0,0)">
-                    <div class="w-10 h-10 rounded-lg bg-corporate flex items-center justify-center text-white shadow-lg">
-                        <i data-lucide="shield-check" class="w-6 h-6 text-gold"></i>
+                    <div class="w-10 h-10 rounded-lg flex items-center justify-center shadow-lg bg-white overflow-hidden">
+                        <img src="/images/logo.png" alt="Logo Prasta" class="w-full h-full object-contain">
                     </div>
                     <div>
                         <h1 class="font-bold text-lg md:text-xl leading-tight text-corporate tracking-tight">Prasta Solusi Indonesia</h1>
@@ -68,8 +68,8 @@
                 <!-- Desktop Menu -->
                 <div class="hidden lg:flex space-x-8 items-center">
                     <a href="#beranda" class="text-sm font-semibold text-slate-900 hover:text-emerald-600 transition-colors">Beranda</a>
-                    <a href="#layanan" class="text-sm font-semibold text-slate-600 hover:text-emerald-600 transition-colors">Layanan & Portofolio</a>
                     <a href="#tentang" class="text-sm font-semibold text-slate-600 hover:text-emerald-600 transition-colors">Tentang Kami</a>
+                    <a href="#layanan" class="text-sm font-semibold text-slate-600 hover:text-emerald-600 transition-colors">Layanan & Portofolio</a>
                     <a href="#testimoni" class="text-sm font-semibold text-slate-600 hover:text-emerald-600 transition-colors">Penilaian Klien</a>
                     <div class="h-6 w-px bg-slate-300"></div>
                     <a href="/login" class="text-sm font-bold text-white bg-corporate hover:bg-emerald-600 px-5 py-2.5 rounded-full transition-colors flex items-center gap-2 shadow-md">
@@ -88,8 +88,8 @@
             <!-- Mobile Menu Dropdown -->
             <div id="mobile-menu" class="hidden lg:hidden bg-white border-t border-slate-100 shadow-lg absolute w-full left-0 top-20 flex-col py-4 px-6 space-y-4">
                 <a href="#beranda" class="mobile-link block text-sm font-semibold text-slate-900 hover:text-emerald-600 transition-colors py-2">Beranda</a>
-                <a href="#layanan" class="mobile-link block text-sm font-semibold text-slate-600 hover:text-emerald-600 transition-colors py-2">Layanan & Portofolio</a>
                 <a href="#tentang" class="mobile-link block text-sm font-semibold text-slate-600 hover:text-emerald-600 transition-colors py-2">Tentang Kami</a>
+                <a href="#layanan" class="mobile-link block text-sm font-semibold text-slate-600 hover:text-emerald-600 transition-colors py-2">Layanan & Portofolio</a>
                 <a href="#testimoni" class="mobile-link block text-sm font-semibold text-slate-600 hover:text-emerald-600 transition-colors py-2">Penilaian Klien</a>
                 <div class="h-px w-full bg-slate-200 my-2"></div>
                 <a href="/login" class="block w-full text-center text-sm font-bold text-white bg-corporate hover:bg-emerald-600 px-5 py-3 rounded-xl transition-colors shadow-md flex justify-center items-center gap-2">
@@ -575,8 +575,8 @@
                 <!-- Branding & Address -->
                 <div class="md:col-span-8">
                     <div class="flex items-center gap-3 mb-6">
-                        <div class="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center text-white">
-                            <i data-lucide="shield-check" class="w-6 h-6 text-gold"></i>
+                        <div class="w-10 h-10 rounded-lg bg-white flex items-center justify-center overflow-hidden">
+                            <img src="/images/logo.png" alt="Logo Prasta" class="w-full h-full object-contain">
                         </div>
                         <div>
                             <h2 class="font-bold text-xl text-white tracking-tight">Prasta Solusi Indonesia</h2>
