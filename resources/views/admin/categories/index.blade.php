@@ -20,7 +20,7 @@
         .sidebar-scroll::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-800 antialiased selection:bg-emerald-500 selection:text-white flex h-screen overflow-hidden">
+<body class="bg-slate-50 text-slate-800 antialiased selection:bg-sky-500 selection:text-white flex h-screen overflow-hidden">
 
     <!-- Sidebar Navigation -->
     @include('admin.partials.sidebar')
@@ -34,13 +34,13 @@
                 <div class="flex items-center gap-2 text-xs text-slate-400 mb-1">
                     <a href="{{ route('admin.dashboard') }}" class="hover:text-corporate">Dashboard</a>
                     <span>/</span>
-                    <span class="text-emerald-600 font-semibold">Kategori Layanan</span>
+                    <span class="text-sky-600 font-semibold">Kategori Layanan</span>
                 </div>
                 <h2 class="text-xl font-bold text-corporate">Master Kategori Layanan Perizinan &amp; Sertifikasi</h2>
             </div>
             
             <div class="flex items-center gap-4">
-                <a href="{{ route('admin.categories.create') }}" class="flex items-center gap-2 px-4 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-sm rounded-xl shadow-md shadow-emerald-600/20 transition-all">
+                <a href="{{ route('admin.categories.create') }}" class="flex items-center gap-2 px-4 py-2.5 bg-sky-600 hover:bg-sky-500 text-white font-semibold text-sm rounded-xl shadow-md shadow-sky-600/20 transition-all">
                     <i data-lucide="plus-circle" class="w-4 h-4"></i>
                     Tambah Kategori
                 </a>
@@ -52,8 +52,8 @@
 
             {{-- Alert Success --}}
             @if(session('success'))
-                <div class="mb-6 flex items-center gap-3 bg-emerald-50 border border-emerald-200 text-emerald-800 px-5 py-4 rounded-2xl shadow-sm text-sm font-medium">
-                    <i data-lucide="check-circle-2" class="w-5 h-5 text-emerald-600 shrink-0"></i>
+                <div class="mb-6 flex items-center gap-3 bg-sky-50 border border-sky-200 text-sky-800 px-5 py-4 rounded-2xl shadow-sm text-sm font-medium">
+                    <i data-lucide="check-circle-2" class="w-5 h-5 text-sky-600 shrink-0"></i>
                     <div>{{ session('success') }}</div>
                 </div>
             @endif
@@ -76,7 +76,7 @@
                             name="search" 
                             value="{{ request('search') }}" 
                             placeholder="Cari nama kategori atau deskripsi..." 
-                            class="w-full pl-10 pr-4 py-2.5 text-sm bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:border-emerald-500 focus:bg-white transition-all"
+                            class="w-full pl-10 pr-4 py-2.5 text-sm bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:border-sky-500 focus:bg-white transition-all"
                         >
                     </div>
                     <button type="submit" class="px-4 py-2.5 bg-slate-800 hover:bg-slate-700 text-white text-sm font-semibold rounded-xl transition-colors">
@@ -124,13 +124,13 @@
                                     {{ $cat->description ?: '-' }}
                                 </td>
                                 <td class="py-4 px-6 text-center">
-                                    <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-700 border border-emerald-100">
+                                    <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-sky-50 text-sky-700 border border-sky-100">
                                         <i data-lucide="layers" class="w-3.5 h-3.5"></i>
                                         {{ $cat->services_count ?? 0 }} Layanan
                                     </span>
                                 </td>
                                 <td class="py-4 px-6 text-right space-x-2 whitespace-nowrap">
-                                    <a href="{{ route('admin.categories.edit', $cat->id) }}" class="inline-flex items-center p-2 rounded-lg text-slate-600 hover:text-emerald-600 hover:bg-emerald-50 transition-colors" title="Edit Kategori">
+                                    <a href="{{ route('admin.categories.edit', $cat->id) }}" class="inline-flex items-center p-2 rounded-lg text-slate-600 hover:text-sky-600 hover:bg-sky-50 transition-colors" title="Edit Kategori">
                                         <i data-lucide="pencil" class="w-4 h-4"></i>
                                     </a>
                                     

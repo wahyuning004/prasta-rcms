@@ -20,7 +20,7 @@
         .sidebar-scroll::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-800 antialiased selection:bg-emerald-500 selection:text-white flex h-screen overflow-hidden">
+<body class="bg-slate-50 text-slate-800 antialiased selection:bg-sky-500 selection:text-white flex h-screen overflow-hidden">
 
     <!-- Sidebar Navigation -->
     @include('admin.partials.sidebar')
@@ -34,13 +34,13 @@
                 <div class="flex items-center gap-2 text-xs text-slate-400 mb-1">
                     <a href="{{ route('admin.dashboard') }}" class="hover:text-corporate">Dashboard</a>
                     <span>/</span>
-                    <span class="text-emerald-600 font-semibold">Master Layanan</span>
+                    <span class="text-sky-600 font-semibold">Master Layanan</span>
                 </div>
                 <h2 class="text-xl font-bold text-corporate">Master Layanan Perizinan &amp; Sertifikasi</h2>
             </div>
             
             <div class="flex items-center gap-4">
-                <a href="{{ route('admin.services.create') }}" class="flex items-center gap-2 px-4 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-sm rounded-xl shadow-md shadow-emerald-600/20 transition-all">
+                <a href="{{ route('admin.services.create') }}" class="flex items-center gap-2 px-4 py-2.5 bg-sky-600 hover:bg-sky-500 text-white font-semibold text-sm rounded-xl shadow-md shadow-sky-600/20 transition-all">
                     <i data-lucide="plus-circle" class="w-4 h-4"></i>
                     Tambah Layanan
                 </a>
@@ -52,8 +52,8 @@
 
             {{-- Alert Success --}}
             @if(session('success'))
-                <div class="mb-6 flex items-center gap-3 bg-emerald-50 border border-emerald-200 text-emerald-800 px-5 py-4 rounded-2xl shadow-sm text-sm font-medium">
-                    <i data-lucide="check-circle-2" class="w-5 h-5 text-emerald-600 shrink-0"></i>
+                <div class="mb-6 flex items-center gap-3 bg-sky-50 border border-sky-200 text-sky-800 px-5 py-4 rounded-2xl shadow-sm text-sm font-medium">
+                    <i data-lucide="check-circle-2" class="w-5 h-5 text-sky-600 shrink-0"></i>
                     <div>{{ session('success') }}</div>
                 </div>
             @endif
@@ -78,13 +78,13 @@
                             name="search" 
                             value="{{ request('search') }}" 
                             placeholder="Cari nama layanan atau persyaratan..." 
-                            class="w-full pl-10 pr-4 py-2.5 text-sm bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:border-emerald-500 focus:bg-white transition-all"
+                            class="w-full pl-10 pr-4 py-2.5 text-sm bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:border-sky-500 focus:bg-white transition-all"
                         >
                     </div>
 
                     <!-- Category Filter Dropdown -->
                     <div class="w-full sm:w-60">
-                        <select name="category_id" class="w-full px-3.5 py-2.5 text-sm bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:border-emerald-500 focus:bg-white transition-all">
+                        <select name="category_id" class="w-full px-3.5 py-2.5 text-sm bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:border-sky-500 focus:bg-white transition-all">
                             <option value="">Semua Kategori</option>
                             @foreach($categories as $cat)
                                 <option value="{{ $cat->id }}" {{ request('category_id') == $cat->id ? 'selected' : '' }}>
@@ -145,11 +145,11 @@
                                 </td>
                                 <td class="py-4 px-6 whitespace-nowrap">
                                     <div class="flex items-center gap-1.5 text-xs font-semibold text-slate-700">
-                                        <i data-lucide="clock" class="w-3.5 h-3.5 text-emerald-600"></i>
+                                        <i data-lucide="clock" class="w-3.5 h-3.5 text-sky-600"></i>
                                         {{ $srv->timeline_estimation ?: ($srv->estimation_time ?: '-') }}
                                     </div>
                                 </td>
-                                <td class="py-4 px-6 whitespace-nowrap font-bold text-emerald-700 text-sm">
+                                <td class="py-4 px-6 whitespace-nowrap font-bold text-sky-700 text-sm">
                                     {{ $srv->formatted_price }}
                                 </td>
                                 <td class="py-4 px-6 max-w-xs">
@@ -158,7 +158,7 @@
                                     </div>
                                 </td>
                                 <td class="py-4 px-6 text-right space-x-2 whitespace-nowrap">
-                                    <a href="{{ route('admin.services.edit', $srv->id) }}" class="inline-flex items-center p-2 rounded-lg text-slate-600 hover:text-emerald-600 hover:bg-emerald-50 transition-colors" title="Edit Layanan">
+                                    <a href="{{ route('admin.services.edit', $srv->id) }}" class="inline-flex items-center p-2 rounded-lg text-slate-600 hover:text-sky-600 hover:bg-sky-50 transition-colors" title="Edit Layanan">
                                         <i data-lucide="pencil" class="w-4 h-4"></i>
                                     </a>
                                     

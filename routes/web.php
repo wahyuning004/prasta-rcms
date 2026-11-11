@@ -14,10 +14,11 @@ use App\Http\Controllers\Staff\LegalController;
 use App\Http\Controllers\Staff\FinanceController;
 
 // ================================================================
-// ROUTE PUBLIK: Landing Page & Detail Layanan
+// ROUTE PUBLIK: Landing Page, Katalog Layanan & Detail Layanan
 // Dapat diakses tanpa login oleh siapapun
 // ================================================================
 Route::get('/', [LandingPageController::class, 'index'])->name('home');                                              // Halaman utama landing page
+Route::get('/katalog', [LandingPageController::class, 'catalog'])->name('catalog.index');                            // Halaman tersendiri Katalog Semua Layanan & Voucher Promo
 Route::get('/layanan/{slug}', [LandingPageController::class, 'showService'])->name('services.show');                 // Detail layanan berdasarkan slug
 Route::post('/layanan/konsultasi-dokumen', [LandingPageController::class, 'submitDocConsultation'])->name('services.consultation'); // Kirim form konsultasi dokumen
 

@@ -31,6 +31,23 @@ class LandingPageController extends Controller
     }
 
     /**
+     * Tampilkan halaman tersendiri Katalog Semua Layanan & Voucher Promo.
+     */
+    public function catalog(Request $request)
+    {
+        $categories = Category::withCount('services')
+            ->having('services_count', '>', 0)
+            ->orderBy('name')
+            ->get();
+
+        $services = Service::with('category')
+            ->latest()
+            ->get();
+
+        return view('catalog', compact('categories', 'services'));
+    }
+
+    /**
      * Tampilkan halaman detail layanan perizinan & sertifikasi lengkap sesuai KAK.
      */
     public function showService($slug)

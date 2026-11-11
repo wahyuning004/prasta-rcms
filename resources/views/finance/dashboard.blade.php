@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard Finance &amp; Licensing Officer - IzinYou</title>
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
+    <link rel="apple-touch-icon" href="{{ asset('images/favicon-192.png') }}">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -24,18 +26,14 @@
 
     <!-- Dark Sidebar -->
     <aside class="w-72 bg-corporate text-slate-300 flex flex-col h-full shrink-0 shadow-2xl relative z-20 border-r border-slate-800">
-        <!-- Logo Header -->
+        <!-- Logo Header (PRASTA SOLUSI INDONESIA) -->
         <div class="h-20 flex items-center px-6 border-b border-slate-800 gap-3">
-            <div class="w-10 h-10 rounded-xl bg-slate-900 flex items-center justify-center shadow-inner flex-shrink-0 border border-slate-700">
-                <svg class="w-6 h-6 text-amber-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M12 2L3 7v6c0 5.5 3.8 10.7 9 12 5.2-1.3 9-6.5 9-12V7l-9-5z"/>
-                    <path d="m9 12 2 2 4-4" stroke="#fbbf24" stroke-width="2.5"/>
-                </svg>
+            <div class="w-10 h-10 rounded-xl bg-slate-900 flex items-center justify-center shadow-inner flex-shrink-0 border border-slate-700 p-1">
+                <img src="{{ asset('images/logo-symbol-transparent.png') }}" alt="Prasta Solusi" class="w-8 h-auto object-contain">
             </div>
             <div>
-                <h1 class="font-bold text-white text-base leading-tight">IzinYou Finance</h1>
-                <p class="text-[10px] text-amber-400 font-semibold tracking-widest uppercase">&amp; Licensing Officer</p>
-                <p class="text-[9px] text-slate-400">by CV Prasta Solusi Indonesia</p>
+                <h1 class="font-extrabold text-white text-base leading-tight">PRASTA SOLUSI</h1>
+                <p class="text-[10px] text-sky-400 font-semibold tracking-widest uppercase">Finance &amp; Licensing</p>
             </div>
         </div>
 
@@ -99,7 +97,7 @@
                 <div class="flex-1 min-w-0">
                     <p class="text-sm font-bold text-white truncate">{{ $user->name }}</p>
                     <p class="text-[11px] text-amber-400 truncate flex items-center gap-1">
-                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 inline-block"></span>
+                        <span class="w-1.5 h-1.5 rounded-full bg-sky-400 inline-block"></span>
                         Finance &amp; Officer
                     </p>
                 </div>
@@ -128,10 +126,10 @@
 
             <div class="flex items-center gap-3">
                 <button onclick="document.getElementById('uploadArchiveModal').classList.remove('hidden')" class="px-3.5 py-2 bg-slate-900 hover:bg-slate-800 text-white rounded-xl text-xs font-bold flex items-center gap-1.5 shadow-sm transition-all">
-                    <i data-lucide="upload-cloud" class="w-4 h-4 text-emerald-400"></i>
+                    <i data-lucide="upload-cloud" class="w-4 h-4 text-sky-400"></i>
                     <span>Arsip Server Baru</span>
                 </button>
-                <a href="{{ route('finance.export.excel') }}" class="px-3.5 py-2 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl text-xs font-bold flex items-center gap-1.5 shadow-sm transition-all">
+                <a href="{{ route('finance.export.excel') }}" class="px-3.5 py-2 bg-sky-600 hover:bg-sky-500 text-white rounded-xl text-xs font-bold flex items-center gap-1.5 shadow-sm transition-all">
                     <i data-lucide="sheet" class="w-4 h-4"></i>
                     <span>Ekspor Excel</span>
                 </a>
@@ -141,8 +139,8 @@
         <!-- Flash Messages -->
         <div class="px-8 pt-4">
             @if (session('success'))
-                <div class="flex items-center gap-3 bg-emerald-50 border border-emerald-200 text-emerald-800 px-4 py-3 rounded-2xl text-sm font-medium shadow-sm">
-                    <i data-lucide="check-circle-2" class="w-5 h-5 text-emerald-600 flex-shrink-0"></i>
+                <div class="flex items-center gap-3 bg-sky-50 border border-sky-200 text-sky-800 px-4 py-3 rounded-2xl text-sm font-medium shadow-sm">
+                    <i data-lucide="check-circle-2" class="w-5 h-5 text-sky-600 flex-shrink-0"></i>
                     <span>{{ session('success') }}</span>
                 </div>
             @endif
@@ -170,13 +168,13 @@
                     <div class="flex justify-between items-start mb-4">
                         <div>
                             <p class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">Pembayaran Terverifikasi</p>
-                            <h3 class="text-3xl font-extrabold text-emerald-600">{{ $stats['verifiedPayments'] }}</h3>
+                            <h3 class="text-3xl font-extrabold text-sky-600">{{ $stats['verifiedPayments'] }}</h3>
                         </div>
-                        <div class="w-12 h-12 bg-emerald-50 text-emerald-600 rounded-xl flex items-center justify-center">
+                        <div class="w-12 h-12 bg-sky-50 text-sky-600 rounded-xl flex items-center justify-center">
                             <i data-lucide="check-circle" class="w-6 h-6"></i>
                         </div>
                     </div>
-                    <p class="text-xs text-emerald-700 font-medium">Invoice otomatis terbit</p>
+                    <p class="text-xs text-sky-700 font-medium">Invoice otomatis terbit</p>
                 </div>
 
                 <div class="bg-white rounded-2xl p-6 border border-slate-100 shadow-sm">
@@ -220,7 +218,7 @@
                     <div class="flex items-center gap-2">
                         <a href="{{ route('finance.dashboard') }}" class="px-3 py-1.5 rounded-xl text-xs font-semibold {{ empty($filterStatus) || $filterStatus === 'all' ? 'bg-corporate text-white' : 'bg-slate-100 text-slate-600' }}">Semua</a>
                         <a href="{{ route('finance.dashboard', ['status' => 'waiting_confirmation']) }}" class="px-3 py-1.5 rounded-xl text-xs font-semibold {{ $filterStatus === 'waiting_confirmation' ? 'bg-amber-600 text-white' : 'bg-slate-100 text-slate-600' }}">Menunggu Konfirmasi</a>
-                        <a href="{{ route('finance.dashboard', ['status' => 'success']) }}" class="px-3 py-1.5 rounded-xl text-xs font-semibold {{ $filterStatus === 'success' ? 'bg-emerald-600 text-white' : 'bg-slate-100 text-slate-600' }}">Lunas (Terverifikasi)</a>
+                        <a href="{{ route('finance.dashboard', ['status' => 'success']) }}" class="px-3 py-1.5 rounded-xl text-xs font-semibold {{ $filterStatus === 'success' ? 'bg-sky-600 text-white' : 'bg-slate-100 text-slate-600' }}">Lunas (Terverifikasi)</a>
                     </div>
                 </div>
 
@@ -262,7 +260,7 @@
                                     </td>
                                     <td class="py-4 px-6">
                                         @if($pay->status === 'success')
-                                            <span class="inline-flex items-center gap-1 bg-emerald-50 text-emerald-700 border border-emerald-200 px-2.5 py-0.5 rounded-full text-xs font-bold">
+                                            <span class="inline-flex items-center gap-1 bg-sky-50 text-sky-700 border border-sky-200 px-2.5 py-0.5 rounded-full text-xs font-bold">
                                                 <i data-lucide="check-circle" class="w-3.5 h-3.5"></i> Lunas / Terverifikasi
                                             </span>
                                         @elseif($pay->status === 'failed')
@@ -281,7 +279,7 @@
                                                 <form action="{{ route('finance.payment.verify', $pay->id) }}" method="POST" class="inline">
                                                     @csrf
                                                     <input type="hidden" name="status" value="success">
-                                                    <button type="submit" class="px-2.5 py-1.5 bg-emerald-600 hover:bg-emerald-500 text-white rounded-lg text-xs font-bold flex items-center gap-1 transition-all" title="Konfirmasi Lunas">
+                                                    <button type="submit" class="px-2.5 py-1.5 bg-sky-600 hover:bg-sky-500 text-white rounded-lg text-xs font-bold flex items-center gap-1 transition-all" title="Konfirmasi Lunas">
                                                         <i data-lucide="check" class="w-3.5 h-3.5"></i> Verifikasi Lunas
                                                     </button>
                                                 </form>
@@ -382,13 +380,13 @@
                 <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 pb-4 border-b border-slate-100">
                     <div>
                         <div class="flex items-center gap-2">
-                            <i data-lucide="folder-lock" class="w-6 h-6 text-emerald-600"></i>
+                            <i data-lucide="folder-lock" class="w-6 h-6 text-sky-600"></i>
                             <h3 class="text-lg font-bold text-corporate">Manajemen Direktori Privat Server (Internal Archives)</h3>
                         </div>
                         <p class="text-xs text-slate-500 mt-1">Penyimpanan terisolasi untuk sertifikat resmi, SK Kementerian, dan dokumen konfidensial perusahaan.</p>
                     </div>
 
-                    <button onclick="document.getElementById('uploadArchiveModal').classList.remove('hidden')" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold rounded-xl flex items-center gap-1.5 shadow-sm">
+                    <button onclick="document.getElementById('uploadArchiveModal').classList.remove('hidden')" class="px-4 py-2 bg-sky-600 hover:bg-sky-500 text-white text-xs font-bold rounded-xl flex items-center gap-1.5 shadow-sm">
                         <i data-lucide="upload" class="w-4 h-4"></i> Simpan Dokumen ke Server
                     </button>
                 </div>
@@ -397,7 +395,7 @@
                     @forelse($archives as $arc)
                         <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200/60 flex items-start justify-between gap-3">
                             <div class="flex items-start gap-3">
-                                <div class="w-10 h-10 rounded-xl bg-corporate text-emerald-400 flex items-center justify-center font-bold shrink-0">
+                                <div class="w-10 h-10 rounded-xl bg-corporate text-sky-400 flex items-center justify-center font-bold shrink-0">
                                     <i data-lucide="file-check" class="w-5 h-5"></i>
                                 </div>
                                 <div>
@@ -483,7 +481,7 @@
         <div class="bg-white rounded-3xl max-w-md w-full p-6 shadow-2xl border border-slate-100 relative">
             <div class="flex items-center justify-between pb-4 border-b border-slate-100 mb-5">
                 <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold">
+                    <div class="w-10 h-10 rounded-xl bg-sky-100 text-sky-700 flex items-center justify-center font-bold">
                         <i data-lucide="server" class="w-5 h-5"></i>
                     </div>
                     <div>
@@ -500,12 +498,12 @@
                 @csrf
                 <div>
                     <label class="block text-xs font-bold text-slate-700 mb-1">Judul Dokumen Resmi</label>
-                    <input type="text" name="title" required placeholder="Cth: SK Penetapan Izin Edar Alkes 2026" class="w-full text-xs px-3.5 py-2.5 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:outline-none focus:border-emerald-500">
+                    <input type="text" name="title" required placeholder="Cth: SK Penetapan Izin Edar Alkes 2026" class="w-full text-xs px-3.5 py-2.5 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:outline-none focus:border-sky-500">
                 </div>
 
                 <div>
                     <label class="block text-xs font-bold text-slate-700 mb-1">Kategori Dokumen</label>
-                    <select name="category" required class="w-full text-xs px-3.5 py-2.5 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:outline-none focus:border-emerald-500">
+                    <select name="category" required class="w-full text-xs px-3.5 py-2.5 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:outline-none focus:border-sky-500">
                         <option value="Sertifikat Resmi">Sertifikat Resmi Terakreditasi</option>
                         <option value="Legalitas Perusahaan">Legalitas &amp; SK Perusahaan</option>
                         <option value="Kajian Regulasi">Kajian &amp; Notulensi Audit Teknis</option>
@@ -515,14 +513,14 @@
 
                 <div>
                     <label class="block text-xs font-bold text-slate-700 mb-1">Catatan Dokumen</label>
-                    <textarea name="notes" rows="2" placeholder="Catatan keabsahan dokumen..." class="w-full text-xs p-3 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:outline-none focus:border-emerald-500"></textarea>
+                    <textarea name="notes" rows="2" placeholder="Catatan keabsahan dokumen..." class="w-full text-xs p-3 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:outline-none focus:border-sky-500"></textarea>
                 </div>
 
                 <div class="pt-4 flex items-center justify-end gap-3 border-t border-slate-100">
                     <button type="button" onclick="document.getElementById('uploadArchiveModal').classList.add('hidden')" class="px-4 py-2 text-xs font-semibold text-slate-500">
                         Batal
                     </button>
-                    <button type="submit" class="px-5 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs rounded-xl shadow-md transition-all">
+                    <button type="submit" class="px-5 py-2.5 bg-sky-600 hover:bg-sky-500 text-white font-bold text-xs rounded-xl shadow-md transition-all">
                         Simpan ke Server
                     </button>
                 </div>

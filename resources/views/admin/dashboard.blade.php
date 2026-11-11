@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard - IzinYou</title>
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
+    <link rel="apple-touch-icon" href="{{ asset('images/favicon-192.png') }}">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -22,7 +24,7 @@
         .sidebar-scroll::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-800 antialiased selection:bg-emerald-500 selection:text-white flex h-screen overflow-hidden">
+<body class="bg-slate-50 text-slate-800 antialiased selection:bg-sky-500 selection:text-white flex h-screen overflow-hidden">
 
     <!-- Sidebar -->
     @include('admin.partials.sidebar')
@@ -39,7 +41,7 @@
             <div class="flex items-center gap-4">
                 <!-- Tombol Ekspor Laporan PDF & Excel -->
                 <div class="relative group">
-                    <button class="flex items-center gap-2 px-3.5 py-2 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl text-xs font-bold shadow-sm transition-all">
+                    <button class="flex items-center gap-2 px-3.5 py-2 bg-sky-600 hover:bg-sky-500 text-white rounded-xl text-xs font-bold shadow-sm transition-all">
                         <i data-lucide="download" class="w-4 h-4"></i>
                         <span>Ekspor Laporan</span>
                         <i data-lucide="chevron-down" class="w-3.5 h-3.5"></i>
@@ -49,19 +51,19 @@
                         <a href="{{ route('admin.reports.finance.pdf') }}" target="_blank" class="flex items-center gap-2.5 px-3 py-2 text-xs text-slate-700 hover:bg-rose-50 hover:text-rose-600 font-medium">
                             <i data-lucide="file-text" class="w-4 h-4 text-rose-500"></i> Mutasi Keuangan (PDF)
                         </a>
-                        <a href="{{ route('admin.reports.finance.excel') }}" class="flex items-center gap-2.5 px-3 py-2 text-xs text-slate-700 hover:bg-emerald-50 hover:text-emerald-600 font-medium">
-                            <i data-lucide="sheet" class="w-4 h-4 text-emerald-500"></i> Mutasi Keuangan (Excel)
+                        <a href="{{ route('admin.reports.finance.excel') }}" class="flex items-center gap-2.5 px-3 py-2 text-xs text-slate-700 hover:bg-sky-50 hover:text-sky-600 font-medium">
+                            <i data-lucide="sheet" class="w-4 h-4 text-sky-500"></i> Mutasi Keuangan (Excel)
                         </a>
                         <div class="border-t border-slate-100 my-1"></div>
                         <p class="px-3 py-1 text-[10px] font-bold text-slate-400 uppercase tracking-wider">Laporan Pengendalian Mutu</p>
                         <a href="{{ route('admin.reports.quality.pdf') }}" target="_blank" class="flex items-center gap-2.5 px-3 py-2 text-xs text-slate-700 hover:bg-rose-50 hover:text-rose-600 font-medium">
                             <i data-lucide="file-text" class="w-4 h-4 text-rose-500"></i> Laporan Mutu &amp; KAK (PDF)
                         </a>
-                        <a href="{{ route('admin.reports.quality.excel') }}" class="flex items-center gap-2.5 px-3 py-2 text-xs text-slate-700 hover:bg-emerald-50 hover:text-emerald-600 font-medium">
-                            <i data-lucide="sheet" class="w-4 h-4 text-emerald-500"></i> Laporan Mutu (Excel)
+                        <a href="{{ route('admin.reports.quality.excel') }}" class="flex items-center gap-2.5 px-3 py-2 text-xs text-slate-700 hover:bg-sky-50 hover:text-sky-600 font-medium">
+                            <i data-lucide="sheet" class="w-4 h-4 text-sky-500"></i> Laporan Mutu (Excel)
                         </a>
                         <div class="border-t border-slate-100 my-1"></div>
-                        <a href="{{ route('admin.reports.index') }}" class="flex items-center justify-between px-3 py-2 text-xs text-emerald-700 font-bold hover:bg-emerald-50">
+                        <a href="{{ route('admin.reports.index') }}" class="flex items-center justify-between px-3 py-2 text-xs text-sky-700 font-bold hover:bg-sky-50">
                             <span>Buka Pusat Laporan Lengkap</span>
                             <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
                         </a>
@@ -71,7 +73,7 @@
                 <!-- Search -->
                 <div class="relative hidden md:block">
                     <i data-lucide="search" class="w-4 h-4 text-slate-400 absolute left-3 top-1/2 transform -translate-y-1/2"></i>
-                    <input type="text" placeholder="Cari klien, pesanan..." class="pl-10 pr-4 py-2 bg-slate-100 border-transparent rounded-full text-sm focus:bg-white focus:border-emerald-500 focus:ring-2 focus:ring-emerald-200 outline-none w-56 transition-all">
+                    <input type="text" placeholder="Cari klien, pesanan..." class="pl-10 pr-4 py-2 bg-slate-100 border-transparent rounded-full text-sm focus:bg-white focus:border-sky-500 focus:ring-2 focus:ring-sky-200 outline-none w-56 transition-all">
                 </div>
                 
                 <!-- Notifications -->
@@ -90,18 +92,18 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                     <!-- Card 1 -->
                     <div class="bg-white rounded-2xl p-6 border border-slate-100 shadow-sm relative overflow-hidden group">
-                        <div class="absolute right-0 top-0 w-24 h-24 bg-emerald-50 rounded-bl-full -mr-4 -mt-4 opacity-50 group-hover:scale-110 transition-transform"></div>
+                        <div class="absolute right-0 top-0 w-24 h-24 bg-sky-50 rounded-bl-full -mr-4 -mt-4 opacity-50 group-hover:scale-110 transition-transform"></div>
                         <div class="flex justify-between items-start mb-4">
                             <div>
                                 <p class="text-sm font-semibold text-slate-500 mb-1">Pengajuan & Projek</p>
                                 <h3 class="text-3xl font-extrabold text-corporate">{{ $stats['totalOrders'] ?? 24 }}</h3>
                             </div>
-                            <div class="w-12 h-12 bg-emerald-100 text-emerald-600 rounded-xl flex items-center justify-center">
+                            <div class="w-12 h-12 bg-sky-100 text-sky-600 rounded-xl flex items-center justify-center">
                                 <i data-lucide="activity" class="w-6 h-6"></i>
                             </div>
                         </div>
                         <div class="flex items-center gap-1.5 text-sm">
-                            <span class="text-emerald-600 font-medium flex items-center"><i data-lucide="trending-up" class="w-3 h-3 mr-1"></i> Aktif</span>
+                            <span class="text-sky-600 font-medium flex items-center"><i data-lucide="trending-up" class="w-3 h-3 mr-1"></i> Aktif</span>
                             <span class="text-slate-400">di sistem IZINYOU</span>
                         </div>
                     </div>
@@ -154,7 +156,7 @@
                             </div>
                         </div>
                         <div class="flex items-center gap-1.5 text-sm">
-                            <span class="text-emerald-600 font-medium flex items-center"><i data-lucide="check-circle" class="w-3 h-3 mr-1"></i> Terproses</span>
+                            <span class="text-sky-600 font-medium flex items-center"><i data-lucide="check-circle" class="w-3 h-3 mr-1"></i> Terproses</span>
                         </div>
                     </div>
                 </div>
@@ -164,7 +166,7 @@
                     <div class="lg:col-span-1 bg-white rounded-2xl border border-slate-100 shadow-sm p-6 flex flex-col">
                         <div class="flex justify-between items-center mb-6">
                             <h3 class="font-bold text-corporate text-lg">Layanan Populer</h3>
-                            <button class="text-slate-400 hover:text-emerald-600"><i data-lucide="more-horizontal" class="w-5 h-5"></i></button>
+                            <button class="text-slate-400 hover:text-sky-600"><i data-lucide="more-horizontal" class="w-5 h-5"></i></button>
                         </div>
                         <div class="flex-1 relative min-h-[250px] w-full flex items-center justify-center">
                             <canvas id="popularServicesChart"></canvas>
@@ -193,7 +195,7 @@
                     <div class="lg:col-span-2 bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden flex flex-col">
                         <div class="p-6 border-b border-slate-100 flex justify-between items-center bg-white">
                             <h3 class="font-bold text-corporate text-lg">Pesanan Terbaru</h3>
-                            <a href="#" class="text-sm font-semibold text-emerald-600 hover:text-emerald-700 flex items-center gap-1">Lihat Semua <i data-lucide="chevron-right" class="w-4 h-4"></i></a>
+                            <a href="#" class="text-sm font-semibold text-sky-600 hover:text-sky-700 flex items-center gap-1">Lihat Semua <i data-lucide="chevron-right" class="w-4 h-4"></i></a>
                         </div>
                         
                         <div class="overflow-x-auto flex-1">
@@ -232,7 +234,7 @@
                                             </span>
                                         </td>
                                         <td class="py-4 px-6 text-right">
-                                            <button class="p-1.5 bg-emerald-50 text-emerald-600 hover:bg-emerald-100 rounded-lg transition-colors" title="Verifikasi">
+                                            <button class="p-1.5 bg-sky-50 text-sky-600 hover:bg-sky-100 rounded-lg transition-colors" title="Verifikasi">
                                                 <i data-lucide="check-circle" class="w-4 h-4"></i>
                                             </button>
                                         </td>
@@ -245,7 +247,7 @@
                                         </td>
                                         <td class="py-4 px-6">
                                             <div class="flex items-center gap-3">
-                                                <div class="w-8 h-8 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center font-bold text-xs">KF</div>
+                                                <div class="w-8 h-8 rounded-full bg-sky-100 text-sky-600 flex items-center justify-center font-bold text-xs">KF</div>
                                                 <div>
                                                     <p class="font-semibold text-corporate text-sm">CV Kosmetik Famindo</p>
                                                     <p class="text-xs text-slate-500">Siti Rahma</p>
@@ -285,7 +287,7 @@
                                             <span class="text-sm font-medium text-slate-700">Sertifikasi Halal</span>
                                         </td>
                                         <td class="py-4 px-6">
-                                            <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-emerald-100 text-emerald-700">
+                                            <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-sky-100 text-sky-700">
                                                 Selesai
                                             </span>
                                         </td>

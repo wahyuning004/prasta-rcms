@@ -3,17 +3,14 @@
 @endphp
 <!-- Sidebar Admin -->
 <aside class="w-72 bg-corporate text-slate-300 flex flex-col h-full shrink-0 shadow-2xl relative z-20 transition-transform duration-300 border-r border-slate-800">
-    <!-- Logo -->
+    <!-- Logo PRASTA SOLUSI -->
     <a href="{{ route('admin.dashboard') }}" class="h-20 flex items-center px-6 border-b border-slate-800 gap-3 group">
-        <div class="w-10 h-10 rounded-xl bg-slate-900 flex items-center justify-center shadow-inner flex-shrink-0 border border-slate-700 group-hover:border-emerald-500/50 transition-colors">
-            <svg class="w-6 h-6 text-emerald-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M12 2L3 7v6c0 5.5 3.8 10.7 9 12 5.2-1.3 9-6.5 9-12V7l-9-5z"/>
-                <path d="m9 12 2 2 4-4" stroke="#d4af37" stroke-width="2.5"/>
-            </svg>
+        <div class="w-10 h-10 rounded-xl bg-slate-900 flex items-center justify-center shadow-inner flex-shrink-0 border border-slate-700 p-1 group-hover:border-sky-500/50 transition-colors">
+            <img src="{{ asset('images/logo-symbol-transparent.png') }}" alt="Prasta Solusi" class="w-8 h-auto object-contain">
         </div>
         <div>
-            <h1 class="font-bold text-white text-base leading-tight">IzinYou Admin</h1>
-            <p class="text-[10px] text-gold tracking-widest uppercase">by CV Prasta Solusi Indonesia</p>
+            <h1 class="font-extrabold text-white text-base leading-tight">PRASTA SOLUSI</h1>
+            <p class="text-[10px] text-sky-400 font-semibold tracking-widest uppercase">Admin Portal &bull; RCMS</p>
         </div>
     </a>
 
@@ -24,8 +21,8 @@
         <nav class="space-y-1">
             <!-- Dashboard Ringkasan -->
             <a href="{{ route('admin.dashboard') }}" 
-               class="flex items-center gap-3 px-3 py-2.5 rounded-lg group transition-colors {{ request()->routeIs('admin.dashboard') ? 'bg-emerald-600/10 text-emerald-400 font-semibold' : 'text-slate-400 hover:bg-slate-800 hover:text-white' }}">
-                <i data-lucide="layout-dashboard" class="w-5 h-5 {{ request()->routeIs('admin.dashboard') ? 'text-emerald-400' : 'text-slate-400 group-hover:text-emerald-400' }}"></i>
+               class="flex items-center gap-3 px-3 py-2.5 rounded-lg group transition-colors {{ request()->routeIs('admin.dashboard') ? 'bg-sky-600/10 text-sky-400 font-semibold' : 'text-slate-400 hover:bg-slate-800 hover:text-white' }}">
+                <i data-lucide="layout-dashboard" class="w-5 h-5 {{ request()->routeIs('admin.dashboard') ? 'text-sky-400' : 'text-slate-400 group-hover:text-sky-400' }}"></i>
                 <span class="font-medium text-sm">Dashboard</span>
             </a>
 
@@ -34,15 +31,15 @@
             
             <!-- Kategori Layanan -->
             <a href="{{ route('admin.categories.index') }}" 
-               class="flex items-center gap-3 px-3 py-2.5 rounded-lg group transition-colors {{ request()->routeIs('admin.categories.*') ? 'bg-emerald-600/10 text-emerald-400 font-semibold' : 'text-slate-400 hover:bg-slate-800 hover:text-white' }}">
-                <i data-lucide="tags" class="w-5 h-5 {{ request()->routeIs('admin.categories.*') ? 'text-emerald-400' : 'text-slate-400 group-hover:text-emerald-400' }}"></i>
+               class="flex items-center gap-3 px-3 py-2.5 rounded-lg group transition-colors {{ request()->routeIs('admin.categories.*') ? 'bg-sky-600/10 text-sky-400 font-semibold' : 'text-slate-400 hover:bg-slate-800 hover:text-white' }}">
+                <i data-lucide="tags" class="w-5 h-5 {{ request()->routeIs('admin.categories.*') ? 'text-sky-400' : 'text-slate-400 group-hover:text-sky-400' }}"></i>
                 <span class="font-medium text-sm">Kategori Layanan</span>
             </a>
             
             <!-- Master Layanan Perizinan & Sertifikasi -->
             <a href="{{ route('admin.services.index') }}" 
-               class="flex items-center gap-3 px-3 py-2.5 rounded-lg group transition-colors {{ request()->routeIs('admin.services.*') ? 'bg-emerald-600/10 text-emerald-400 font-semibold' : 'text-slate-400 hover:bg-slate-800 hover:text-white' }}">
-                <i data-lucide="award" class="w-5 h-5 {{ request()->routeIs('admin.services.*') ? 'text-emerald-400' : 'text-slate-400 group-hover:text-emerald-400' }}"></i>
+               class="flex items-center gap-3 px-3 py-2.5 rounded-lg group transition-colors {{ request()->routeIs('admin.services.*') ? 'bg-sky-600/10 text-sky-400 font-semibold' : 'text-slate-400 hover:bg-slate-800 hover:text-white' }}">
+                <i data-lucide="award" class="w-5 h-5 {{ request()->routeIs('admin.services.*') ? 'text-sky-400' : 'text-slate-400 group-hover:text-sky-400' }}"></i>
                 <span class="font-medium text-sm">Layanan Perizinan</span>
             </a>
 
@@ -50,8 +47,8 @@
             
             <!-- Manajemen Pengguna Staf -->
             <a href="{{ route('admin.users.index') }}" 
-               class="flex items-center gap-3 px-3 py-2.5 rounded-lg group transition-colors {{ request()->routeIs('admin.users.*') ? 'bg-emerald-600/10 text-emerald-400 font-semibold' : 'text-slate-400 hover:bg-slate-800 hover:text-white' }}">
-                <i data-lucide="user-cog" class="w-5 h-5 {{ request()->routeIs('admin.users.*') ? 'text-emerald-400' : 'text-slate-400 group-hover:text-emerald-400' }}"></i>
+               class="flex items-center gap-3 px-3 py-2.5 rounded-lg group transition-colors {{ request()->routeIs('admin.users.*') ? 'bg-sky-600/10 text-sky-400 font-semibold' : 'text-slate-400 hover:bg-slate-800 hover:text-white' }}">
+                <i data-lucide="user-cog" class="w-5 h-5 {{ request()->routeIs('admin.users.*') ? 'text-sky-400' : 'text-slate-400 group-hover:text-sky-400' }}"></i>
                 <span class="font-medium text-sm">Manajemen Staf</span>
             </a>
 
@@ -75,7 +72,7 @@
                     <i data-lucide="git-merge" class="w-5 h-5"></i>
                     <span class="font-medium text-sm">Pelacakan Projek</span>
                 </div>
-                <span class="bg-emerald-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">3 Aktif</span>
+                <span class="bg-sky-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">3 Aktif</span>
             </a>
             
             <!-- Transaksi Pembayaran -->
@@ -86,8 +83,8 @@
             
             <!-- Ekspor Laporan PDF & Excel -->
             <a href="{{ route('admin.reports.index') }}" 
-               class="flex items-center gap-3 px-3 py-2.5 rounded-lg group transition-colors {{ request()->routeIs('admin.reports.*') ? 'bg-emerald-600/10 text-emerald-400 font-semibold' : 'text-slate-400 hover:bg-slate-800 hover:text-white' }}">
-                <i data-lucide="file-bar-chart" class="w-5 h-5 {{ request()->routeIs('admin.reports.*') ? 'text-emerald-400' : 'text-slate-400 group-hover:text-emerald-400' }}"></i>
+               class="flex items-center gap-3 px-3 py-2.5 rounded-lg group transition-colors {{ request()->routeIs('admin.reports.*') ? 'bg-sky-600/10 text-sky-400 font-semibold' : 'text-slate-400 hover:bg-slate-800 hover:text-white' }}">
+                <i data-lucide="file-bar-chart" class="w-5 h-5 {{ request()->routeIs('admin.reports.*') ? 'text-sky-400' : 'text-slate-400 group-hover:text-sky-400' }}"></i>
                 <span class="font-medium text-sm">Ekspor Laporan</span>
             </a>
         </nav>
@@ -96,12 +93,12 @@
     <!-- User Profile (Bottom) -->
     <div class="p-4 border-t border-slate-800">
         <div class="flex items-center gap-3 p-2 rounded-lg bg-slate-800/50 border border-slate-700">
-            <div class="w-10 h-10 rounded-full bg-slate-700 flex items-center justify-center text-emerald-400 font-bold shrink-0">
+            <div class="w-10 h-10 rounded-full bg-slate-700 flex items-center justify-center text-sky-400 font-bold shrink-0">
                 {{ strtoupper(substr($currentUser->name ?? 'A', 0, 1)) }}
             </div>
             <div class="flex-1 min-w-0">
                 <p class="text-sm font-bold text-white truncate">{{ $currentUser->name ?? 'Admin Prasta' }}</p>
-                <p class="text-[11px] text-emerald-400 truncate">{{ $currentUser->getRoleLabel() }}</p>
+                <p class="text-[11px] text-sky-400 truncate">{{ $currentUser->getRoleLabel() }}</p>
             </div>
             <form action="{{ route('logout') }}" method="POST" class="inline">
                 @csrf

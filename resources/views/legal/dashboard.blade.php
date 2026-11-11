@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard Legal &amp; Regulatory Specialist - IzinYou</title>
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
+    <link rel="apple-touch-icon" href="{{ asset('images/favicon-192.png') }}">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -20,22 +22,18 @@
         .sidebar-scroll::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-800 antialiased selection:bg-emerald-600 selection:text-white flex h-screen overflow-hidden">
+<body class="bg-slate-50 text-slate-800 antialiased selection:bg-sky-600 selection:text-white flex h-screen overflow-hidden">
 
     <!-- Dark Sidebar -->
     <aside class="w-72 bg-corporate text-slate-300 flex flex-col h-full shrink-0 shadow-2xl relative z-20 border-r border-slate-800">
-        <!-- Logo Header -->
+        <!-- Logo Header (PRASTA SOLUSI INDONESIA) -->
         <div class="h-20 flex items-center px-6 border-b border-slate-800 gap-3">
-            <div class="w-10 h-10 rounded-xl bg-slate-900 flex items-center justify-center shadow-inner flex-shrink-0 border border-slate-700">
-                <svg class="w-6 h-6 text-emerald-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M12 2L3 7v6c0 5.5 3.8 10.7 9 12 5.2-1.3 9-6.5 9-12V7l-9-5z"/>
-                    <path d="m9 12 2 2 4-4" stroke="#d4af37" stroke-width="2.5"/>
-                </svg>
+            <div class="w-10 h-10 rounded-xl bg-slate-900 flex items-center justify-center shadow-inner flex-shrink-0 border border-slate-700 p-1">
+                <img src="{{ asset('images/logo-symbol-transparent.png') }}" alt="Prasta Solusi" class="w-8 h-auto object-contain">
             </div>
             <div>
-                <h1 class="font-bold text-white text-base leading-tight">IzinYou Legal</h1>
-                <p class="text-[10px] text-emerald-400 font-semibold tracking-widest uppercase">Regulatory Specialist</p>
-                <p class="text-[9px] text-slate-400">by CV Prasta Solusi Indonesia</p>
+                <h1 class="font-extrabold text-white text-base leading-tight">PRASTA SOLUSI</h1>
+                <p class="text-[10px] text-sky-400 font-semibold tracking-widest uppercase">Legal Specialist Panel</p>
             </div>
         </div>
 
@@ -44,7 +42,7 @@
             <p class="px-2 text-xs font-semibold text-slate-500 uppercase tracking-wider mb-4">Divisi Legalitas &amp; Teknis</p>
             
             <nav class="space-y-1.5">
-                <a href="#overview" class="flex items-center gap-3 px-3 py-2.5 bg-emerald-600/15 text-emerald-400 rounded-xl group transition-all font-medium text-sm">
+                <a href="#overview" class="flex items-center gap-3 px-3 py-2.5 bg-sky-600/15 text-sky-400 rounded-xl group transition-all font-medium text-sm">
                     <i data-lucide="layout-dashboard" class="w-5 h-5"></i>
                     <span>Dashboard Legalitas</span>
                 </a>
@@ -64,7 +62,7 @@
                         <i data-lucide="clipboard-check" class="w-5 h-5"></i>
                         <span>Checksheet Regulasi</span>
                     </div>
-                    <span class="bg-emerald-500/20 text-emerald-300 text-[10px] font-bold px-2 py-0.5 rounded-full">SOP 2026</span>
+                    <span class="bg-sky-500/20 text-sky-300 text-[10px] font-bold px-2 py-0.5 rounded-full">SOP 2026</span>
                 </a>
 
                 <a href="#berita-acara" class="flex items-center justify-between px-3 py-2.5 text-slate-400 hover:bg-slate-800 hover:text-white rounded-xl group transition-all font-medium text-sm">
@@ -77,7 +75,7 @@
 
                 <div class="pt-6">
                     <div class="p-4 rounded-2xl bg-gradient-to-br from-slate-800 to-slate-900 border border-slate-700/60 space-y-2">
-                        <div class="flex items-center gap-2 text-emerald-400 text-xs font-bold">
+                        <div class="flex items-center gap-2 text-sky-400 text-xs font-bold">
                             <i data-lucide="shield" class="w-4 h-4"></i>
                             <span>Standar Terakreditasi</span>
                         </div>
@@ -94,13 +92,13 @@
         <!-- User Profile (Bottom) -->
         <div class="p-4 border-t border-slate-800">
             <div class="flex items-center gap-3 p-2.5 rounded-xl bg-slate-800/60 border border-slate-700/80">
-                <div class="w-10 h-10 rounded-full bg-emerald-900/60 text-emerald-300 border border-emerald-500/30 flex items-center justify-center font-bold">
+                <div class="w-10 h-10 rounded-full bg-sky-900/60 text-sky-300 border border-sky-500/30 flex items-center justify-center font-bold">
                     {{ strtoupper(substr($user->name ?? 'L', 0, 1)) }}
                 </div>
                 <div class="flex-1 min-w-0">
                     <p class="text-sm font-bold text-white truncate">{{ $user->name }}</p>
-                    <p class="text-[11px] text-emerald-400 truncate flex items-center gap-1">
-                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 inline-block"></span>
+                    <p class="text-[11px] text-sky-400 truncate flex items-center gap-1">
+                        <span class="w-1.5 h-1.5 rounded-full bg-sky-400 inline-block"></span>
                         Legal &amp; Regulatory
                     </p>
                 </div>
@@ -122,14 +120,14 @@
             <div>
                 <div class="flex items-center gap-2">
                     <h2 class="text-xl font-bold text-corporate">Dashboard Legal &amp; Regulatory Specialist</h2>
-                    <span class="bg-emerald-100 text-emerald-800 text-[11px] font-bold px-2.5 py-0.5 rounded-full">Sistem IZINYOU</span>
+                    <span class="bg-sky-100 text-sky-800 text-[11px] font-bold px-2.5 py-0.5 rounded-full">Sistem IZINYOU</span>
                 </div>
                 <p class="text-xs text-slate-500 mt-0.5">Kajian kepatuhan dokumen teknis, checksheet standar kementerian, dan penerbitan BAK.</p>
             </div>
 
             <div class="flex items-center gap-3">
                 <span class="text-xs text-slate-500 font-medium bg-slate-100 px-3 py-1.5 rounded-xl flex items-center gap-1.5">
-                    <i data-lucide="shield-check" class="w-4 h-4 text-emerald-600"></i> Auditor Bersertifikat
+                    <i data-lucide="shield-check" class="w-4 h-4 text-sky-600"></i> Auditor Bersertifikat
                 </span>
             </div>
         </header>
@@ -137,8 +135,8 @@
         <!-- Flash Messages -->
         <div class="px-8 pt-4">
             @if (session('success'))
-                <div class="flex items-center gap-3 bg-emerald-50 border border-emerald-200 text-emerald-800 px-4 py-3 rounded-2xl text-sm font-medium shadow-sm">
-                    <i data-lucide="check-circle-2" class="w-5 h-5 text-emerald-600 flex-shrink-0"></i>
+                <div class="flex items-center gap-3 bg-sky-50 border border-sky-200 text-sky-800 px-4 py-3 rounded-2xl text-sm font-medium shadow-sm">
+                    <i data-lucide="check-circle-2" class="w-5 h-5 text-sky-600 flex-shrink-0"></i>
                     <span>{{ session('success') }}</span>
                 </div>
             @endif
@@ -166,13 +164,13 @@
                     <div class="flex justify-between items-start mb-4">
                         <div>
                             <p class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">Dokumen Valid (Disetujui)</p>
-                            <h3 class="text-3xl font-extrabold text-emerald-600">{{ $stats['approvedDocs'] }}</h3>
+                            <h3 class="text-3xl font-extrabold text-sky-600">{{ $stats['approvedDocs'] }}</h3>
                         </div>
-                        <div class="w-12 h-12 bg-emerald-50 text-emerald-600 rounded-xl flex items-center justify-center">
+                        <div class="w-12 h-12 bg-sky-50 text-sky-600 rounded-xl flex items-center justify-center">
                             <i data-lucide="check-circle" class="w-6 h-6"></i>
                         </div>
                     </div>
-                    <p class="text-xs text-emerald-700 font-medium">Lolos audit teknis internal</p>
+                    <p class="text-xs text-sky-700 font-medium">Lolos audit teknis internal</p>
                 </div>
 
                 <div class="bg-white rounded-2xl p-6 border border-slate-100 shadow-sm">
@@ -207,7 +205,7 @@
                 <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 pb-4 border-b border-slate-100">
                     <div>
                         <div class="flex items-center gap-2">
-                            <i data-lucide="file-search" class="w-6 h-6 text-emerald-600"></i>
+                            <i data-lucide="file-search" class="w-6 h-6 text-sky-600"></i>
                             <h3 class="text-lg font-bold text-corporate">Antrean Kajian Berkas Teknis &amp; Legalitas Klien</h3>
                         </div>
                         <p class="text-xs text-slate-500 mt-1">Verifikasi dokumen persyaratan izin edar, sertifikasi halal, dan sertifikat CDOB.</p>
@@ -216,7 +214,7 @@
                     <div class="flex items-center gap-2">
                         <a href="{{ route('legal.dashboard') }}" class="px-3 py-1.5 rounded-xl text-xs font-semibold {{ empty($filterStatus) || $filterStatus === 'all' ? 'bg-corporate text-white' : 'bg-slate-100 text-slate-600' }}">Semua</a>
                         <a href="{{ route('legal.dashboard', ['status' => 'uploaded']) }}" class="px-3 py-1.5 rounded-xl text-xs font-semibold {{ $filterStatus === 'uploaded' ? 'bg-amber-600 text-white' : 'bg-slate-100 text-slate-600' }}">Menunggu Review</a>
-                        <a href="{{ route('legal.dashboard', ['status' => 'approved']) }}" class="px-3 py-1.5 rounded-xl text-xs font-semibold {{ $filterStatus === 'approved' ? 'bg-emerald-600 text-white' : 'bg-slate-100 text-slate-600' }}">Disetujui (Valid)</a>
+                        <a href="{{ route('legal.dashboard', ['status' => 'approved']) }}" class="px-3 py-1.5 rounded-xl text-xs font-semibold {{ $filterStatus === 'approved' ? 'bg-sky-600 text-white' : 'bg-slate-100 text-slate-600' }}">Disetujui (Valid)</a>
                         <a href="{{ route('legal.dashboard', ['status' => 'rejected']) }}" class="px-3 py-1.5 rounded-xl text-xs font-semibold {{ $filterStatus === 'rejected' ? 'bg-rose-600 text-white' : 'bg-slate-100 text-slate-600' }}">Perlu Revisi</a>
                     </div>
                 </div>
@@ -238,7 +236,7 @@
                                 <tr class="hover:bg-slate-50/60 transition-colors">
                                     <td class="py-4 px-6">
                                         <div class="flex items-center gap-2.5">
-                                            <i data-lucide="file-text" class="w-5 h-5 text-emerald-600 shrink-0"></i>
+                                            <i data-lucide="file-text" class="w-5 h-5 text-sky-600 shrink-0"></i>
                                             <div>
                                                 <p class="font-bold text-corporate text-xs">{{ basename($doc->file_path) }}</p>
                                                 <p class="text-[11px] text-slate-400">{{ date('d M Y, H:i', strtotime($doc->created_at)) }}</p>
@@ -254,7 +252,7 @@
                                     </td>
                                     <td class="py-4 px-6">
                                         @if($doc->status === 'approved')
-                                            <span class="inline-flex items-center gap-1 bg-emerald-50 text-emerald-700 border border-emerald-200 px-2.5 py-0.5 rounded-full text-xs font-bold">
+                                            <span class="inline-flex items-center gap-1 bg-sky-50 text-sky-700 border border-sky-200 px-2.5 py-0.5 rounded-full text-xs font-bold">
                                                 <i data-lucide="check" class="w-3.5 h-3.5"></i> Valid / Disetujui
                                             </span>
                                         @elseif($doc->status === 'rejected')
@@ -273,7 +271,7 @@
                                     <td class="py-4 px-6 text-right">
                                         <div class="flex items-center justify-end gap-2">
                                             <!-- Tombol Verifikasi / Ubah Status -->
-                                            <button onclick="openVerifyModal({{ json_encode($doc) }})" class="px-2.5 py-1.5 bg-emerald-600 hover:bg-emerald-500 text-white rounded-lg text-xs font-bold flex items-center gap-1 transition-all">
+                                            <button onclick="openVerifyModal({{ json_encode($doc) }})" class="px-2.5 py-1.5 bg-sky-600 hover:bg-sky-500 text-white rounded-lg text-xs font-bold flex items-center gap-1 transition-all">
                                                 <i data-lucide="check-square" class="w-3.5 h-3.5"></i> Verifikasi
                                             </button>
 
@@ -301,7 +299,7 @@
                 <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 pb-4 border-b border-slate-100">
                     <div>
                         <div class="flex items-center gap-2">
-                            <i data-lucide="clipboard-check" class="w-6 h-6 text-emerald-600"></i>
+                            <i data-lucide="clipboard-check" class="w-6 h-6 text-sky-600"></i>
                             <h3 class="text-lg font-bold text-corporate">Checksheet Kepatuhan Regulasi Standar Industri</h3>
                         </div>
                         <p class="text-xs text-slate-500 mt-1">Audit kesesuaian dokumen terhadap standar SOP Kemenkes, BPOM, Halal BPJPH, dan CDOB.</p>
@@ -313,22 +311,22 @@
                     <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200/60 space-y-3">
                         <div class="flex items-center justify-between">
                             <div class="flex items-center gap-2">
-                                <span class="w-8 h-8 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold text-xs">KM</span>
+                                <span class="w-8 h-8 rounded-lg bg-sky-100 text-sky-700 flex items-center justify-center font-bold text-xs">KM</span>
                                 <h4 class="font-bold text-corporate text-sm">SOP Kemenkes (Permenkes 62/2017)</h4>
                             </div>
-                            <span class="text-xs font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-100">Alkes &amp; PKRT</span>
+                            <span class="text-xs font-bold text-sky-600 bg-sky-50 px-2 py-0.5 rounded-full border border-sky-100">Alkes &amp; PKRT</span>
                         </div>
                         <div class="space-y-2 text-xs text-slate-700 pt-2">
                             <label class="flex items-center gap-2 cursor-pointer">
-                                <input type="checkbox" checked class="w-4 h-4 text-emerald-600 rounded">
+                                <input type="checkbox" checked class="w-4 h-4 text-sky-600 rounded">
                                 <span>Izin Distribusi / Sertifikat CPAKB / CPPKRT masih berlaku</span>
                             </label>
                             <label class="flex items-center gap-2 cursor-pointer">
-                                <input type="checkbox" checked class="w-4 h-4 text-emerald-600 rounded">
+                                <input type="checkbox" checked class="w-4 h-4 text-sky-600 rounded">
                                 <span>Uji Laboratorium &amp; Certificate of Analysis (CoA) terakreditasi</span>
                             </label>
                             <label class="flex items-center gap-2 cursor-pointer">
-                                <input type="checkbox" checked class="w-4 h-4 text-emerald-600 rounded">
+                                <input type="checkbox" checked class="w-4 h-4 text-sky-600 rounded">
                                 <span>Penandaan &amp; Brosur Informasi Penggunaan Bahasa Indonesia</span>
                             </label>
                         </div>
@@ -419,7 +417,7 @@
         <div class="bg-white rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl border border-slate-100 relative">
             <div class="flex items-center justify-between pb-4 border-b border-slate-100 mb-6">
                 <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold">
+                    <div class="w-10 h-10 rounded-xl bg-sky-100 text-sky-700 flex items-center justify-center font-bold">
                         <i data-lucide="shield-check" class="w-5 h-5"></i>
                     </div>
                     <div>
@@ -436,7 +434,7 @@
                 @csrf
                 <div>
                     <label class="block text-xs font-bold text-slate-700 mb-1.5">Keputusan Status Verifikasi Teknis <span class="text-rose-500">*</span></label>
-                    <select name="status" id="verifyStatusSelect" required class="w-full text-xs px-3.5 py-2.5 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:outline-none focus:border-emerald-500">
+                    <select name="status" id="verifyStatusSelect" required class="w-full text-xs px-3.5 py-2.5 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:outline-none focus:border-sky-500">
                         <option value="approved">Valid / Disetujui (Lolos Kepatuhan Standar)</option>
                         <option value="rejected">Perlu Perbaikan Dokumen (Revisi Klien)</option>
                         <option value="uploaded">Menunggu Kajian Teknis Lanjutan</option>
@@ -445,14 +443,14 @@
 
                 <div>
                     <label class="block text-xs font-bold text-slate-700 mb-1.5">Catatan Kajian / Rekomendasi Legalitas <span class="text-rose-500">*</span></label>
-                    <textarea name="notes" id="verifyNotes" rows="4" required class="w-full text-xs p-3.5 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:outline-none focus:border-emerald-500"></textarea>
+                    <textarea name="notes" id="verifyNotes" rows="4" required class="w-full text-xs p-3.5 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:outline-none focus:border-sky-500"></textarea>
                 </div>
 
                 <div class="pt-4 flex items-center justify-end gap-3 border-t border-slate-100">
                     <button type="button" onclick="document.getElementById('verifyModal').classList.add('hidden')" class="px-4 py-2 text-xs font-semibold text-slate-500">
                         Batal
                     </button>
-                    <button type="submit" class="px-5 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs rounded-xl shadow-md transition-all">
+                    <button type="submit" class="px-5 py-2.5 bg-sky-600 hover:bg-sky-500 text-white font-bold text-xs rounded-xl shadow-md transition-all">
                         Simpan Keputusan Verifikasi
                     </button>
                 </div>

@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard Klien - IzinYou</title>
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
+    <link rel="apple-touch-icon" href="{{ asset('images/favicon-192.png') }}">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -20,22 +22,18 @@
         .sidebar-scroll::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-800 antialiased selection:bg-emerald-500 selection:text-white flex h-screen overflow-hidden">
+<body class="bg-slate-50 text-slate-800 antialiased selection:bg-sky-500 selection:text-white flex h-screen overflow-hidden">
 
     <!-- Sidebar -->
     <aside class="w-72 bg-corporate text-slate-300 flex flex-col h-full shrink-0 shadow-2xl relative z-20 border-r border-slate-800">
-        <!-- Logo Header -->
+        <!-- Logo Header (PRASTA SOLUSI INDONESIA) -->
         <div class="h-20 flex items-center px-6 border-b border-slate-800 gap-3">
-            <div class="w-10 h-10 rounded-xl bg-slate-900 flex items-center justify-center shadow-inner flex-shrink-0 border border-slate-700">
-                <svg class="w-6 h-6 text-emerald-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M12 2L3 7v6c0 5.5 3.8 10.7 9 12 5.2-1.3 9-6.5 9-12V7l-9-5z"/>
-                    <path d="m9 12 2 2 4-4" stroke="#d4af37" stroke-width="2.5"/>
-                </svg>
+            <div class="w-10 h-10 rounded-xl bg-slate-900 flex items-center justify-center shadow-inner flex-shrink-0 border border-slate-700 p-1">
+                <img src="{{ asset('images/logo-symbol-transparent.png') }}" alt="Prasta Solusi" class="w-8 h-auto object-contain">
             </div>
             <div>
-                <h1 class="font-bold text-white text-base leading-tight">IzinYou Klien</h1>
-                <p class="text-[10px] text-gold font-semibold tracking-widest uppercase">Portal Klien Mitra</p>
-                <p class="text-[9px] text-slate-400">by CV Prasta Solusi Indonesia</p>
+                <h1 class="font-extrabold text-white text-base leading-tight">PRASTA SOLUSI</h1>
+                <p class="text-[10px] text-sky-400 font-semibold tracking-widest uppercase">Klien Portal &bull; Mitra</p>
             </div>
         </div>
 
@@ -44,7 +42,7 @@
             <p class="px-2 text-xs font-semibold text-slate-500 uppercase tracking-wider mb-4">Menu Klien</p>
             
             <nav class="space-y-1.5">
-                <a href="#overview" class="flex items-center gap-3 px-3 py-2.5 bg-emerald-600/15 text-emerald-400 rounded-xl group transition-all font-medium text-sm">
+                <a href="#overview" class="flex items-center gap-3 px-3 py-2.5 bg-sky-600/15 text-sky-400 rounded-xl group transition-all font-medium text-sm">
                     <i data-lucide="layout-dashboard" class="w-5 h-5"></i>
                     <span>Dashboard Saya</span>
                 </a>
@@ -55,7 +53,7 @@
                         <span>Pelacakan Projek</span>
                     </div>
                     @if($activeOrder)
-                        <span class="bg-emerald-500/20 text-emerald-300 text-[10px] font-bold px-2 py-0.5 rounded-full">Progres Aktif</span>
+                        <span class="bg-sky-500/20 text-sky-300 text-[10px] font-bold px-2 py-0.5 rounded-full">Progres Aktif</span>
                     @endif
                 </a>
 
@@ -91,12 +89,12 @@
 
                 <div class="pt-6">
                     <div class="p-4 rounded-2xl bg-gradient-to-br from-slate-800 to-slate-900 border border-slate-700/60 text-center">
-                        <div class="w-9 h-9 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center mx-auto mb-2">
+                        <div class="w-9 h-9 rounded-full bg-sky-500/20 text-sky-400 flex items-center justify-center mx-auto mb-2">
                             <i data-lucide="headphones" class="w-5 h-5"></i>
                         </div>
                         <h4 class="text-xs font-bold text-white mb-1">Butuh Bantuan Cepat?</h4>
                         <p class="text-[11px] text-slate-400 leading-tight mb-3">Tim konsultan kami siap mendampingi proses perizinan &amp; sertifikasi Anda.</p>
-                        <a href="#konsultasi" class="block w-full py-2 bg-emerald-600 hover:bg-emerald-500 text-white rounded-lg text-xs font-bold transition-all shadow-md">
+                        <a href="#konsultasi" class="block w-full py-2 bg-sky-600 hover:bg-sky-500 text-white rounded-lg text-xs font-bold transition-all shadow-md">
                             Tanya Konsultan
                         </a>
                     </div>
@@ -113,8 +111,8 @@
                 <div class="flex-1 min-w-0">
                     <p class="text-sm font-bold text-white truncate">{{ $user->name }}</p>
                     <p class="text-[11px] text-amber-400 truncate">{{ $user->company_name ?? 'Klien Perusahaan' }}</p>
-                    <button onclick="document.getElementById('twoFactorModal').classList.remove('hidden')" class="flex items-center gap-1 text-[10px] text-emerald-400 hover:underline mt-0.5">
-                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+                    <button onclick="document.getElementById('twoFactorModal').classList.remove('hidden')" class="flex items-center gap-1 text-[10px] text-sky-400 hover:underline mt-0.5">
+                        <span class="w-1.5 h-1.5 rounded-full bg-sky-400"></span>
                         <span>2FA WhatsApp Aktif</span>
                     </button>
                 </div>
@@ -135,16 +133,16 @@
             <div>
                 <div class="flex items-center gap-2">
                     <h2 class="text-xl font-bold text-corporate">Portal Klien Mitra</h2>
-                    <span class="bg-emerald-100 text-emerald-800 text-[11px] font-bold px-2.5 py-0.5 rounded-full">{{ $user->company_name ?? 'Klien Mitra IzinYou' }}</span>
+                    <span class="bg-sky-100 text-sky-800 text-[11px] font-bold px-2.5 py-0.5 rounded-full">{{ $user->company_name ?? 'Klien Mitra IzinYou' }}</span>
                 </div>
                 <p class="text-xs text-slate-500 mt-0.5">Pantau status izin edar, sertifikasi, dan dokumen kepatuhan industri Anda.</p>
             </div>
             
             <div class="flex items-center gap-3">
                 <!-- Indikator 2-Step Verification WhatsApp -->
-                <button onclick="document.getElementById('twoFactorModal').classList.remove('hidden')" class="hidden sm:flex items-center gap-1.5 px-3 py-1.5 bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 text-emerald-800 rounded-xl text-xs font-semibold transition-all" title="Status Keamanan Akun">
-                    <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-                    <i data-lucide="shield-check" class="w-3.5 h-3.5 text-emerald-600"></i>
+                <button onclick="document.getElementById('twoFactorModal').classList.remove('hidden')" class="hidden sm:flex items-center gap-1.5 px-3 py-1.5 bg-sky-50 hover:bg-sky-100 border border-sky-200 text-sky-800 rounded-xl text-xs font-semibold transition-all" title="Status Keamanan Akun">
+                    <span class="w-2 h-2 rounded-full bg-sky-500 animate-pulse"></span>
+                    <i data-lucide="shield-check" class="w-3.5 h-3.5 text-sky-600"></i>
                     <span>2FA WhatsApp Aktif</span>
                 </button>
 
@@ -155,7 +153,7 @@
                 </button>
 
                 <a href="#konsultasi" class="px-4 py-2 bg-corporate hover:bg-slate-800 text-white rounded-xl text-xs font-bold flex items-center gap-1.5 shadow-sm transition-all">
-                    <i data-lucide="message-square-plus" class="w-4 h-4 text-emerald-400"></i>
+                    <i data-lucide="message-square-plus" class="w-4 h-4 text-sky-400"></i>
                     <span>Ajukan Konsultasi</span>
                 </a>
             </div>
@@ -164,8 +162,8 @@
         <!-- Flash Messages -->
         <div class="px-8 pt-4">
             @if (session('success'))
-                <div class="flex items-center gap-3 bg-emerald-50 border border-emerald-200 text-emerald-800 px-4 py-3 rounded-2xl text-sm font-medium shadow-sm">
-                    <i data-lucide="check-circle-2" class="w-5 h-5 text-emerald-600 flex-shrink-0"></i>
+                <div class="flex items-center gap-3 bg-sky-50 border border-sky-200 text-sky-800 px-4 py-3 rounded-2xl text-sm font-medium shadow-sm">
+                    <i data-lucide="check-circle-2" class="w-5 h-5 text-sky-600 flex-shrink-0"></i>
                     <span>{{ session('success') }}</span>
                 </div>
             @endif
@@ -184,17 +182,17 @@
                 <!-- 1. Statistik Ringkasan Klien -->
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                     <!-- Card 1 -->
-                    <div class="bg-white rounded-2xl p-6 border border-slate-100 shadow-sm relative overflow-hidden group hover:border-emerald-200 transition-all">
+                    <div class="bg-white rounded-2xl p-6 border border-slate-100 shadow-sm relative overflow-hidden group hover:border-sky-200 transition-all">
                         <div class="flex justify-between items-start mb-4">
                             <div>
                                 <p class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">Projek / Izin Aktif</p>
                                 <h3 class="text-3xl font-extrabold text-corporate">{{ $stats['ordersCount'] ?? 0 }}</h3>
                             </div>
-                            <div class="w-12 h-12 bg-emerald-50 text-emerald-600 rounded-xl flex items-center justify-center">
+                            <div class="w-12 h-12 bg-sky-50 text-sky-600 rounded-xl flex items-center justify-center">
                                 <i data-lucide="folder-kanban" class="w-6 h-6"></i>
                             </div>
                         </div>
-                        <p class="text-xs text-emerald-700 font-medium">Dalam pendampingan perizinan</p>
+                        <p class="text-xs text-sky-700 font-medium">Dalam pendampingan perizinan</p>
                     </div>
 
                     <!-- Card 2 -->
@@ -245,7 +243,7 @@
                     <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 pb-4 border-b border-slate-100">
                         <div>
                             <div class="flex items-center gap-2">
-                                <i data-lucide="git-merge" class="w-6 h-6 text-emerald-600"></i>
+                                <i data-lucide="git-merge" class="w-6 h-6 text-sky-600"></i>
                                 <h3 class="text-lg font-bold text-corporate">Pelacakan Tahapan Projek & Sertifikasi</h3>
                             </div>
                             <p class="text-xs text-slate-500 mt-1">Status transparan tahapan permohonan sertifikasi perusahaan Anda.</p>
@@ -255,7 +253,7 @@
                                 <span class="text-xs font-bold font-mono bg-slate-900 text-white px-3 py-1 rounded-lg">
                                     {{ $activeOrder->order_number }}
                                 </span>
-                                <p class="text-[11px] text-slate-400 mt-1">Status: <span class="capitalize font-semibold text-emerald-600">{{ $activeOrder->status }}</span></p>
+                                <p class="text-[11px] text-slate-400 mt-1">Status: <span class="capitalize font-semibold text-sky-600">{{ $activeOrder->status }}</span></p>
                             </div>
                         @endif
                     </div>
@@ -267,29 +265,29 @@
                             <div class="relative">
                                 <!-- Line connector -->
                                 <div class="absolute top-5 left-6 right-6 h-1 bg-slate-200 -z-0 hidden md:block">
-                                    <div class="h-1 bg-emerald-500 w-2/3"></div>
+                                    <div class="h-1 bg-sky-500 w-2/3"></div>
                                 </div>
 
                                 <div class="grid grid-cols-1 md:grid-cols-4 gap-6 relative z-10">
                                     <!-- Step 1 -->
                                     <div class="flex md:flex-col items-center gap-3 md:text-center">
-                                        <div class="w-10 h-10 rounded-full bg-emerald-500 text-white flex items-center justify-center font-bold text-sm shadow-md shrink-0">
+                                        <div class="w-10 h-10 rounded-full bg-sky-500 text-white flex items-center justify-center font-bold text-sm shadow-md shrink-0">
                                             <i data-lucide="check" class="w-5 h-5"></i>
                                         </div>
                                         <div>
                                             <p class="text-xs font-bold text-corporate">Verifikasi Dokumen</p>
-                                            <p class="text-[11px] text-emerald-600 font-medium">Selesai</p>
+                                            <p class="text-[11px] text-sky-600 font-medium">Selesai</p>
                                         </div>
                                     </div>
 
                                     <!-- Step 2 -->
                                     <div class="flex md:flex-col items-center gap-3 md:text-center">
-                                        <div class="w-10 h-10 rounded-full bg-emerald-500 text-white flex items-center justify-center font-bold text-sm shadow-md shrink-0">
+                                        <div class="w-10 h-10 rounded-full bg-sky-500 text-white flex items-center justify-center font-bold text-sm shadow-md shrink-0">
                                             <i data-lucide="check" class="w-5 h-5"></i>
                                         </div>
                                         <div>
                                             <p class="text-xs font-bold text-corporate">Pengajuan Instansi</p>
-                                            <p class="text-[11px] text-emerald-600 font-medium">Diproses Kemenkes/BPOM</p>
+                                            <p class="text-[11px] text-sky-600 font-medium">Diproses Kemenkes/BPOM</p>
                                         </div>
                                     </div>
 
@@ -323,7 +321,7 @@
                             <h4 class="text-xs font-bold uppercase tracking-wider text-slate-500 mb-3">Catatan Riwayat Tahapan Terinci:</h4>
                             @forelse ($myTrackings as $track)
                                 <div class="flex items-start gap-4 p-4 rounded-xl bg-slate-50 border border-slate-100">
-                                    <div class="w-8 h-8 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center shrink-0 mt-0.5">
+                                    <div class="w-8 h-8 rounded-lg bg-sky-100 text-sky-700 flex items-center justify-center shrink-0 mt-0.5">
                                         <i data-lucide="check-circle" class="w-4 h-4"></i>
                                     </div>
                                     <div class="flex-1 min-w-0">
@@ -354,12 +352,12 @@
                     <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
                         <div>
                             <div class="flex items-center gap-2">
-                                <i data-lucide="folder-check" class="w-6 h-6 text-emerald-600"></i>
+                                <i data-lucide="folder-check" class="w-6 h-6 text-sky-600"></i>
                                 <h3 class="text-lg font-bold text-corporate">Dokumen &amp; Berkas Perizinan Anda</h3>
                             </div>
                             <p class="text-xs text-slate-500 mt-1">Daftar berkas perizinan yang telah diunggah dan status validasinya.</p>
                         </div>
-                        <span class="text-xs font-semibold bg-emerald-50 text-emerald-700 px-3 py-1.5 rounded-full">
+                        <span class="text-xs font-semibold bg-sky-50 text-sky-700 px-3 py-1.5 rounded-full">
                             {{ $myDocuments->count() }} Berkas Terunggah
                         </span>
                     </div>
@@ -380,7 +378,7 @@
                                     <tr class="hover:bg-slate-50/80 transition-colors">
                                         <td class="py-4 px-4 font-mono text-xs text-slate-700">
                                             <div class="flex items-center gap-2">
-                                                <i data-lucide="file-text" class="w-4 h-4 text-emerald-600 shrink-0"></i>
+                                                <i data-lucide="file-text" class="w-4 h-4 text-sky-600 shrink-0"></i>
                                                 <span class="font-semibold text-corporate truncate max-w-[220px]" title="{{ basename($doc->file_path) }}">
                                                     {{ basename($doc->file_path) }}
                                                 </span>
@@ -394,7 +392,7 @@
                                         </td>
                                         <td class="py-4 px-4">
                                             @if($doc->status === 'approved')
-                                                <span class="inline-flex items-center gap-1 bg-emerald-50 text-emerald-700 border border-emerald-200 px-2.5 py-1 rounded-full text-xs font-semibold">
+                                                <span class="inline-flex items-center gap-1 bg-sky-50 text-sky-700 border border-sky-200 px-2.5 py-1 rounded-full text-xs font-semibold">
                                                     <i data-lucide="check" class="w-3.5 h-3.5"></i> Valid / Disetujui
                                                 </span>
                                             @elseif($doc->status === 'rejected')
@@ -428,7 +426,7 @@
                     <!-- Form Ajukan Konsultasi -->
                     <div class="bg-white rounded-3xl p-6 border border-slate-200/80 shadow-sm lg:col-span-1">
                         <div class="flex items-center gap-2 mb-3">
-                            <i data-lucide="help-circle" class="w-5 h-5 text-emerald-600"></i>
+                            <i data-lucide="help-circle" class="w-5 h-5 text-sky-600"></i>
                             <h3 class="text-base font-bold text-corporate">Ajukan Pertanyaan Perizinan &amp; Sertifikasi</h3>
                         </div>
                         <p class="text-xs text-slate-500 mb-5 leading-relaxed">
@@ -439,16 +437,16 @@
                             @csrf
                             <div>
                                 <label class="block text-xs font-semibold text-slate-700 mb-1.5">Topik / Subjek Pertanyaan</label>
-                                <input type="text" name="subject" required placeholder="Contoh: Syarat Izin Edar Alkes Elektromedis" class="w-full text-xs bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 focus:outline-none focus:border-emerald-500 focus:bg-white transition-colors">
+                                <input type="text" name="subject" required placeholder="Contoh: Syarat Izin Edar Alkes Elektromedis" class="w-full text-xs bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 focus:outline-none focus:border-sky-500 focus:bg-white transition-colors">
                             </div>
 
                             <div>
                                 <label class="block text-xs font-semibold text-slate-700 mb-1.5">Detail Pertanyaan</label>
-                                <textarea name="message" rows="4" required placeholder="Jelaskan jenis produk, fasilitas, atau kendala perizinan yang sedang dihadapi..." class="w-full text-xs bg-slate-50 border border-slate-200 rounded-xl p-3 focus:outline-none focus:border-emerald-500 focus:bg-white transition-colors"></textarea>
+                                <textarea name="message" rows="4" required placeholder="Jelaskan jenis produk, fasilitas, atau kendala perizinan yang sedang dihadapi..." class="w-full text-xs bg-slate-50 border border-slate-200 rounded-xl p-3 focus:outline-none focus:border-sky-500 focus:bg-white transition-colors"></textarea>
                             </div>
 
                             <button type="submit" class="w-full py-2.5 px-4 bg-corporate hover:bg-slate-800 text-white font-bold rounded-xl text-xs flex items-center justify-center gap-2 transition-all shadow-md">
-                                <i data-lucide="send" class="w-4 h-4 text-emerald-400"></i>
+                                <i data-lucide="send" class="w-4 h-4 text-sky-400"></i>
                                 Kirim Pertanyaan Konsultasi
                             </button>
                         </form>
@@ -458,7 +456,7 @@
                     <div class="bg-white rounded-3xl p-6 border border-slate-200/80 shadow-sm lg:col-span-2">
                         <div class="flex items-center justify-between mb-5">
                             <div class="flex items-center gap-2">
-                                <i data-lucide="messages-square" class="w-5 h-5 text-emerald-600"></i>
+                                <i data-lucide="messages-square" class="w-5 h-5 text-sky-600"></i>
                                 <h3 class="text-base font-bold text-corporate">Riwayat Tanya-Jawab Konsultasi</h3>
                             </div>
                             <span class="text-xs text-slate-400">Total: {{ $myConsultations->count() }} Sesi</span>
@@ -474,7 +472,7 @@
                                                 {{ \Carbon\Carbon::parse($item->created_at)->format('d M Y, H:i') }}
                                             </span>
                                             @if($item->status === 'responded')
-                                                <span class="bg-emerald-100 text-emerald-800 text-[10px] font-bold px-2 py-0.5 rounded-full">Dijawab</span>
+                                                <span class="bg-sky-100 text-sky-800 text-[10px] font-bold px-2 py-0.5 rounded-full">Dijawab</span>
                                             @else
                                                 <span class="bg-amber-100 text-amber-800 text-[10px] font-bold px-2 py-0.5 rounded-full">Menunggu</span>
                                             @endif
@@ -484,12 +482,12 @@
                                     <p class="text-xs text-slate-600 leading-relaxed">{{ $item->message }}</p>
 
                                     @if($item->response)
-                                        <div class="bg-emerald-50/70 p-3 rounded-xl border border-emerald-100 text-xs text-emerald-900 leading-relaxed">
-                                            <div class="flex items-center gap-1.5 font-bold text-emerald-800 mb-1">
-                                                <i data-lucide="badge-check" class="w-4 h-4 text-emerald-600"></i>
+                                        <div class="bg-sky-50/70 p-3 rounded-xl border border-sky-100 text-xs text-sky-900 leading-relaxed">
+                                            <div class="flex items-center gap-1.5 font-bold text-sky-800 mb-1">
+                                                <i data-lucide="badge-check" class="w-4 h-4 text-sky-600"></i>
                                                 <span>Tanggapan Tim Konsultan IzinYou:</span>
                                             </div>
-                                            <p class="text-emerald-950">{{ $item->response }}</p>
+                                            <p class="text-sky-950">{{ $item->response }}</p>
                                         </div>
                                     @endif
                                 </div>
@@ -515,7 +513,7 @@
                     </div>
 
                     <!-- Kupon Promo Diskon Tersedia Banner -->
-                    <div class="mb-6 p-4 rounded-2xl bg-gradient-to-r from-amber-500/10 via-emerald-500/10 to-indigo-500/10 border border-amber-200/70 flex flex-col md:flex-row items-center justify-between gap-4">
+                    <div class="mb-6 p-4 rounded-2xl bg-gradient-to-r from-amber-500/10 via-sky-500/10 to-indigo-500/10 border border-amber-200/70 flex flex-col md:flex-row items-center justify-between gap-4">
                         <div class="flex items-center gap-3">
                             <div class="w-10 h-10 rounded-xl bg-amber-500 text-white flex items-center justify-center font-bold shrink-0 shadow-md">
                                 <i data-lucide="tag" class="w-5 h-5"></i>
@@ -527,9 +525,9 @@
                         </div>
                         <div class="flex flex-wrap items-center gap-2">
                             @foreach ($promos as $p)
-                                <button type="button" onclick="selectPromoCode('{{ $p->code }}')" class="group flex items-center gap-1.5 px-3 py-1.5 bg-white border border-amber-300 rounded-xl shadow-sm hover:border-emerald-500 transition-all text-left">
-                                    <span class="font-mono text-xs font-extrabold text-corporate group-hover:text-emerald-600">{{ $p->code }}</span>
-                                    <span class="text-[10px] font-bold text-emerald-600 bg-emerald-50 px-1.5 py-0.5 rounded">
+                                <button type="button" onclick="selectPromoCode('{{ $p->code }}')" class="group flex items-center gap-1.5 px-3 py-1.5 bg-white border border-amber-300 rounded-xl shadow-sm hover:border-sky-500 transition-all text-left">
+                                    <span class="font-mono text-xs font-extrabold text-corporate group-hover:text-sky-600">{{ $p->code }}</span>
+                                    <span class="text-[10px] font-bold text-sky-600 bg-sky-50 px-1.5 py-0.5 rounded">
                                         {{ $p->discount_amount > 0 ? 'Potongan Rp ' . number_format($p->discount_amount, 0, ',', '.') : 'Diskon ' . $p->discount_percentage . '%' }}
                                     </span>
                                 </button>
@@ -542,9 +540,9 @@
                             @php
                                 $price = (float)($srv->price ?? $srv->cost ?? 3500000);
                             @endphp
-                            <div class="p-4 rounded-xl bg-slate-50 border border-slate-100 hover:border-emerald-300 hover:shadow-md transition-all flex flex-col justify-between">
+                            <div class="p-4 rounded-xl bg-slate-50 border border-slate-100 hover:border-sky-300 hover:shadow-md transition-all flex flex-col justify-between">
                                 <div>
-                                    <div class="w-8 h-8 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold mb-2.5">
+                                    <div class="w-8 h-8 rounded-lg bg-sky-100 text-sky-700 flex items-center justify-center font-bold mb-2.5">
                                         <i data-lucide="shield-check" class="w-4 h-4"></i>
                                     </div>
                                     <h4 class="font-bold text-corporate text-xs mb-1 line-clamp-2">{{ $srv->name }}</h4>
@@ -561,7 +559,7 @@
                                     </div>
 
                                     <button onclick="openCheckoutModal({{ json_encode($srv) }})" class="mt-2.5 w-full py-1.5 bg-corporate hover:bg-slate-800 text-white rounded-lg text-xs font-bold flex items-center justify-center gap-1.5 transition-all shadow-sm">
-                                        <i data-lucide="shopping-cart" class="w-3.5 h-3.5 text-emerald-400"></i>
+                                        <i data-lucide="shopping-cart" class="w-3.5 h-3.5 text-sky-400"></i>
                                         <span>Pesan Layanan</span>
                                     </button>
                                 </div>
@@ -596,7 +594,7 @@
             <div class="mb-4 shrink-0">
                 <div class="relative">
                     <i data-lucide="search" class="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2"></i>
-                    <input type="text" id="faqSearchInput" onkeyup="filterFaq()" placeholder="Cari pertanyaan, regulasi, alur izin..." class="w-full pl-9 pr-4 py-2 text-xs bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:outline-none focus:border-emerald-500">
+                    <input type="text" id="faqSearchInput" onkeyup="filterFaq()" placeholder="Cari pertanyaan, regulasi, alur izin..." class="w-full pl-9 pr-4 py-2 text-xs bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:outline-none focus:border-sky-500">
                 </div>
             </div>
 
@@ -604,11 +602,11 @@
             <div class="flex-1 overflow-y-auto space-y-3 pr-1 sidebar-scroll text-xs">
                 
                 <!-- Alur Step by Step -->
-                <div class="p-4 rounded-2xl bg-emerald-50 border border-emerald-100 mb-4">
-                    <h4 class="font-bold text-emerald-900 text-xs mb-2 flex items-center gap-1.5">
-                        <i data-lucide="git-merge" class="w-4 h-4 text-emerald-600"></i> Alur Pengajuan Layanan Perizinan:
+                <div class="p-4 rounded-2xl bg-sky-50 border border-sky-100 mb-4">
+                    <h4 class="font-bold text-sky-900 text-xs mb-2 flex items-center gap-1.5">
+                        <i data-lucide="git-merge" class="w-4 h-4 text-sky-600"></i> Alur Pengajuan Layanan Perizinan:
                     </h4>
-                    <ol class="list-decimal list-inside space-y-1 text-emerald-800 text-[11px] leading-relaxed">
+                    <ol class="list-decimal list-inside space-y-1 text-sky-800 text-[11px] leading-relaxed">
                         <li><strong>Pilih Layanan:</strong> Tentukan jenis izin edar/sertifikasi &amp; masukkan kupon promo.</li>
                         <li><strong>Unggah Dokumen Teknis:</strong> Masukkan berkas persyaratan perizinan sesuai SOP kementerian.</li>
                         <li><strong>Kajian Teknis:</strong> Tim Legal &amp; Regulatory Specialist memeriksa kepatuhan berkas.</li>
@@ -661,7 +659,7 @@
 
             <div class="pt-4 border-t border-slate-100 flex items-center justify-between text-xs shrink-0">
                 <span class="text-slate-400">Butuh bantuan konsultasi khusus?</span>
-                <a href="#konsultasi" onclick="document.getElementById('helpCenterModal').classList.add('hidden')" class="font-bold text-emerald-600 hover:underline">
+                <a href="#konsultasi" onclick="document.getElementById('helpCenterModal').classList.add('hidden')" class="font-bold text-sky-600 hover:underline">
                     Kirim Pertanyaan ke Konsultan &rarr;
                 </a>
             </div>
@@ -673,7 +671,7 @@
         <div class="bg-white rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl border border-slate-100 relative">
             <div class="flex items-center justify-between pb-4 border-b border-slate-100 mb-5">
                 <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 rounded-xl bg-corporate text-emerald-400 flex items-center justify-center font-bold">
+                    <div class="w-10 h-10 rounded-xl bg-corporate text-sky-400 flex items-center justify-center font-bold">
                         <i data-lucide="shopping-bag" class="w-5 h-5"></i>
                     </div>
                     <div>
@@ -696,13 +694,13 @@
                         <span>Biaya Layanan Normal:</span>
                         <strong class="text-corporate" id="checkoutNormalPrice">Rp 0</strong>
                     </div>
-                    <div class="flex justify-between text-emerald-600 font-semibold" id="discountRow" style="display: none;">
+                    <div class="flex justify-between text-sky-600 font-semibold" id="discountRow" style="display: none;">
                         <span>Potongan Kupon Promo:</span>
                         <span id="checkoutDiscountAmount">- Rp 0</span>
                     </div>
                     <div class="pt-2 border-t border-slate-200 flex justify-between text-sm font-extrabold text-corporate">
                         <span>Total Pembayaran:</span>
-                        <span class="text-emerald-600" id="checkoutFinalPrice">Rp 0</span>
+                        <span class="text-sky-600" id="checkoutFinalPrice">Rp 0</span>
                     </div>
                 </div>
 
@@ -715,7 +713,7 @@
                     <div class="flex items-center gap-2">
                         <div class="relative flex-1">
                             <i data-lucide="tag" class="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2"></i>
-                            <input type="text" name="promo_code" id="checkoutPromoInput" placeholder="Contoh: PRASMAS25" class="w-full pl-9 pr-3 py-2 text-xs font-mono uppercase bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:outline-none focus:border-emerald-500">
+                            <input type="text" name="promo_code" id="checkoutPromoInput" placeholder="Contoh: PRASMAS25" class="w-full pl-9 pr-3 py-2 text-xs font-mono uppercase bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:outline-none focus:border-sky-500">
                         </div>
                         <button type="button" onclick="calculateCheckoutDiscount()" class="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-white font-bold text-xs rounded-xl transition-all">
                             Terapkan
@@ -740,7 +738,7 @@
                     <button type="button" onclick="document.getElementById('checkoutModal').classList.add('hidden')" class="px-4 py-2 text-xs font-semibold text-slate-500">
                         Batal
                     </button>
-                    <button type="submit" class="px-5 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs rounded-xl shadow-md transition-all flex items-center gap-1.5">
+                    <button type="submit" class="px-5 py-2.5 bg-sky-600 hover:bg-sky-500 text-white font-bold text-xs rounded-xl shadow-md transition-all flex items-center gap-1.5">
                         <i data-lucide="check" class="w-4 h-4"></i> Konfirmasi &amp; Ajukan Projek
                     </button>
                 </div>
@@ -755,12 +753,12 @@
                 <i data-lucide="x" class="w-5 h-5"></i>
             </button>
 
-            <div class="w-16 h-16 rounded-2xl bg-emerald-100 text-emerald-600 flex items-center justify-center mx-auto mb-4 border border-emerald-200 shadow-sm">
+            <div class="w-16 h-16 rounded-2xl bg-sky-100 text-sky-600 flex items-center justify-center mx-auto mb-4 border border-sky-200 shadow-sm">
                 <i data-lucide="shield-check" class="w-8 h-8"></i>
             </div>
 
             <h3 class="text-lg font-bold text-corporate mb-1">Verifikasi 2-Langkah WhatsApp</h3>
-            <p class="text-xs font-semibold text-emerald-600 bg-emerald-50 py-1 px-3 rounded-full inline-block mb-4 border border-emerald-100">
+            <p class="text-xs font-semibold text-sky-600 bg-sky-50 py-1 px-3 rounded-full inline-block mb-4 border border-sky-100">
                 Status: Aktif &amp; Terlindungi
             </p>
 
@@ -775,7 +773,7 @@
                 </div>
                 <div class="flex justify-between text-slate-600">
                     <span>Enkripsi Sesi:</span>
-                    <strong class="text-emerald-700">SHA-256 Protected</strong>
+                    <strong class="text-sky-700">SHA-256 Protected</strong>
                 </div>
             </div>
 
@@ -842,7 +840,7 @@
                 document.getElementById('checkoutDiscountAmount').innerText = '- Rp ' + discount.toLocaleString('id-ID');
                 document.getElementById('checkoutFinalPrice').innerText = 'Rp ' + finalPrice.toLocaleString('id-ID');
                 document.getElementById('couponFeedback').innerText = 'Kupon ' + promo.code + ' berhasil diterapkan!';
-                document.getElementById('couponFeedback').className = 'text-[10px] text-emerald-600 font-bold mt-1';
+                document.getElementById('couponFeedback').className = 'text-[10px] text-sky-600 font-bold mt-1';
             } else if (inputCode !== '') {
                 document.getElementById('discountRow').style.display = 'none';
                 document.getElementById('checkoutFinalPrice').innerText = 'Rp ' + currentServicePrice.toLocaleString('id-ID');

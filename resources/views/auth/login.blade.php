@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - IzinYou</title>
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
+    <link rel="apple-touch-icon" href="{{ asset('images/favicon-192.png') }}">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -25,33 +27,32 @@
             transition: all 0.2s ease;
         }
         .input-field:focus {
-            box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.15);
+            box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.15);
         }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-800 antialiased selection:bg-emerald-500 selection:text-white relative min-h-screen flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+<body class="bg-slate-50 text-slate-800 antialiased selection:bg-sky-500 selection:text-white relative min-h-screen flex flex-col justify-center py-12 sm:px-6 lg:px-8">
 
     <!-- Decorative Background -->
     <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-slate-200 via-slate-50 to-slate-50 z-0"></div>
-    <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-emerald-100 rounded-full mix-blend-multiply filter blur-3xl opacity-40 -translate-y-1/2 translate-x-1/3"></div>
+    <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-sky-100 rounded-full mix-blend-multiply filter blur-3xl opacity-40 -translate-y-1/2 translate-x-1/3"></div>
     <div class="absolute bottom-0 left-0 w-[400px] h-[400px] bg-blue-100 rounded-full mix-blend-multiply filter blur-3xl opacity-30 translate-y-1/3 -translate-x-1/4"></div>
 
     <!-- Header: Logo + Judul -->
     <div class="relative sm:mx-auto sm:w-full sm:max-w-md z-10">
-        <!-- Logo Bulat Besar -->
-        <a href="/" class="flex flex-col items-center mb-8 group cursor-pointer">
+        <!-- Logo Prasta Solusi Indonesia -->
+        <a href="/" class="flex flex-col items-center mb-6 group cursor-pointer">
             <div class="animate-float">
-                <div class="w-24 h-24 rounded-2xl bg-corporate shadow-2xl border-2 border-slate-700/60 flex items-center justify-center ring-4 ring-emerald-100 group-hover:ring-emerald-300 transition-all duration-300">
-                    <svg class="w-14 h-14 text-emerald-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M12 2L3 7v6c0 5.5 3.8 10.7 9 12 5.2-1.3 9-6.5 9-12V7l-9-5z"/>
-                        <path d="m9 12 2 2 4-4" stroke="#d4af37" stroke-width="2.5"/>
-                    </svg>
+                <div class="w-20 h-20 rounded-2xl bg-white shadow-xl border border-sky-100 flex items-center justify-center ring-4 ring-sky-50 group-hover:ring-sky-200 transition-all duration-300 p-2">
+                    <img src="{{ asset('images/logo-symbol-transparent.png') }}" alt="Prasta Solusi Indonesia" class="w-16 h-auto object-contain">
                 </div>
             </div>
             <div class="mt-4 text-center">
-                <h1 class="font-extrabold text-3xl text-corporate tracking-tight leading-tight">IzinYou</h1>
-                <p class="text-xs text-emerald-600 font-semibold tracking-wider uppercase mt-1">Platform Perizinan & Sertifikasi Bisnis</p>
-                <p class="text-[11px] text-slate-400 mt-0.5">by CV Prasta Solusi Indonesia</p>
+                <h1 class="font-black text-2xl text-slate-900 tracking-tight leading-tight flex items-center justify-center gap-1.5">
+                    PRASTA <span class="text-sky-600">SOLUSI</span>
+                </h1>
+                <p class="text-xs text-sky-600 font-bold tracking-widest uppercase mt-1">INDONESIA &bull; RCMS</p>
+                <p class="text-[11px] text-slate-400 mt-0.5">Platform Perizinan &amp; Sertifikasi (IzinYou)</p>
             </div>
         </a>
 
@@ -93,7 +94,7 @@
 
             {{-- Alert Success --}}
             @if (session('success'))
-                <div class="mb-6 flex items-center gap-3 bg-emerald-50 border border-emerald-200 text-emerald-700 px-4 py-3 rounded-2xl text-sm font-medium">
+                <div class="mb-6 flex items-center gap-3 bg-sky-50 border border-sky-200 text-sky-700 px-4 py-3 rounded-2xl text-sm font-medium">
                     <i data-lucide="check-circle-2" class="w-5 h-5 flex-shrink-0"></i>
                     {{ session('success') }}
                 </div>
@@ -119,7 +120,7 @@
                             autocomplete="username" 
                             required 
                             value="{{ old('email', old('login')) }}"
-                            class="input-field block w-full pl-11 pr-4 py-3 sm:text-sm border rounded-xl bg-slate-50 border-slate-200 focus:outline-none focus:border-emerald-500 focus:bg-white transition-colors @error('email') border-rose-400 bg-rose-50 @enderror"
+                            class="input-field block w-full pl-11 pr-4 py-3 sm:text-sm border rounded-xl bg-slate-50 border-slate-200 focus:outline-none focus:border-sky-500 focus:bg-white transition-colors @error('email') border-rose-400 bg-rose-50 @enderror"
                             placeholder="email@perusahaan.com atau 081234567890"
                         >
                     </div>
@@ -143,7 +144,7 @@
                             type="password" 
                             autocomplete="current-password" 
                             required 
-                            class="input-field block w-full pl-11 pr-12 py-3 sm:text-sm border rounded-xl bg-slate-50 border-slate-200 focus:outline-none focus:border-emerald-500 focus:bg-white transition-colors"
+                            class="input-field block w-full pl-11 pr-12 py-3 sm:text-sm border rounded-xl bg-slate-50 border-slate-200 focus:outline-none focus:border-sky-500 focus:bg-white transition-colors"
                             placeholder="••••••••"
                         >
                         {{-- Toggle Show/Hide Password --}}
@@ -156,12 +157,12 @@
                 {{-- Remember Me & Lupa Password --}}
                 <div class="flex items-center justify-between">
                     <div class="flex items-center gap-2">
-                        <input id="remember-me" name="remember-me" type="checkbox" class="h-4 w-4 text-emerald-600 focus:ring-emerald-500 border-slate-300 rounded cursor-pointer">
+                        <input id="remember-me" name="remember-me" type="checkbox" class="h-4 w-4 text-sky-600 focus:ring-sky-500 border-slate-300 rounded cursor-pointer">
                         <label for="remember-me" class="text-sm text-slate-600 cursor-pointer select-none">
                             Ingat Saya
                         </label>
                     </div>
-                    <a href="#" class="text-sm font-semibold text-emerald-600 hover:text-emerald-500 transition-colors">
+                    <a href="#" class="text-sm font-semibold text-sky-600 hover:text-sky-500 transition-colors">
                         Lupa password?
                     </a>
                 </div>
@@ -175,17 +176,17 @@
                 </div>
 
                 {{-- 2FA WhatsApp Security Badge --}}
-                <div class="p-3 bg-emerald-50/70 border border-emerald-200/80 rounded-xl flex items-center justify-between gap-3 text-xs text-emerald-800">
+                <div class="p-3 bg-sky-50/70 border border-sky-200/80 rounded-xl flex items-center justify-between gap-3 text-xs text-sky-800">
                     <div class="flex items-center gap-2">
-                        <div class="w-7 h-7 rounded-lg bg-emerald-600 text-white flex items-center justify-center shrink-0">
+                        <div class="w-7 h-7 rounded-lg bg-sky-600 text-white flex items-center justify-center shrink-0">
                             <i data-lucide="shield-check" class="w-4 h-4"></i>
                         </div>
                         <div>
                             <p class="font-bold">Keamanan Akun Berlapis (2FA)</p>
-                            <p class="text-[11px] text-emerald-600">Verifikasi WhatsApp OTP otomatis saat masuk/transaksi</p>
+                            <p class="text-[11px] text-sky-600">Verifikasi WhatsApp OTP otomatis saat masuk/transaksi</p>
                         </div>
                     </div>
-                    <button type="button" onclick="document.getElementById('otpModalLogin').classList.remove('hidden')" class="px-2.5 py-1 bg-white hover:bg-emerald-100 text-emerald-700 font-semibold border border-emerald-300 rounded-lg text-[11px] transition shrink-0">
+                    <button type="button" onclick="document.getElementById('otpModalLogin').classList.remove('hidden')" class="px-2.5 py-1 bg-white hover:bg-sky-100 text-sky-700 font-semibold border border-sky-300 rounded-lg text-[11px] transition shrink-0">
                         Info
                     </button>
                 </div>
@@ -195,7 +196,7 @@
                     <button 
                         type="submit" 
                         id="submitBtn"
-                        class="w-full flex justify-center items-center gap-2 py-3.5 px-4 border border-transparent rounded-xl shadow-md text-sm font-bold text-white bg-corporate hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500 transition-all duration-300 active:scale-[0.98]"
+                        class="w-full flex justify-center items-center gap-2 py-3.5 px-4 border border-transparent rounded-xl shadow-md text-sm font-bold text-white bg-sky-600 hover:bg-sky-500 shadow-lg shadow-sky-600/25 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500 transition-all duration-300 active:scale-[0.98]"
                     >
                         <i data-lucide="log-in" class="w-4 h-4"></i>
                         Masuk Sistem
@@ -206,7 +207,7 @@
             {{-- Register Link --}}
             <div class="mt-6 text-center text-sm">
                 <span class="text-slate-500">Belum punya akun klien?</span>
-                <a href="{{ route('register') }}" class="font-bold text-emerald-600 hover:text-emerald-500 ml-1 transition-colors">Daftar Sekarang</a>
+                <a href="{{ route('register') }}" class="font-bold text-sky-600 hover:text-sky-500 ml-1 transition-colors">Daftar Sekarang</a>
             </div>
 
             {{-- Info Divider --}}
@@ -239,7 +240,7 @@
                 const val = emailInput.value.trim();
                 // Jika diawali angka atau format nomor telepon
                 if (/^[0-9+]/.test(val)) {
-                    loginIconWrapper.innerHTML = '<i data-lucide="phone-call" class="h-5 w-5 text-emerald-600"></i>';
+                    loginIconWrapper.innerHTML = '<i data-lucide="phone-call" class="h-5 w-5 text-sky-600"></i>';
                 } else {
                     loginIconWrapper.innerHTML = '<i data-lucide="mail" class="h-5 w-5 text-slate-400"></i>';
                 }
@@ -280,7 +281,7 @@
                 <i data-lucide="x" class="w-5 h-5"></i>
             </button>
             <div class="flex items-center gap-3 mb-4">
-                <div class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-600 flex items-center justify-center">
+                <div class="w-10 h-10 rounded-xl bg-sky-100 text-sky-600 flex items-center justify-center">
                     <i data-lucide="message-square" class="w-5 h-5"></i>
                 </div>
                 <div>
@@ -293,15 +294,15 @@
             </p>
             <div class="space-y-2.5 text-xs text-slate-700 mb-6 bg-slate-50 p-3.5 rounded-xl border border-slate-100">
                 <div class="flex items-start gap-2">
-                    <i data-lucide="check" class="w-4 h-4 text-emerald-600 mt-0.5 shrink-0"></i>
+                    <i data-lucide="check" class="w-4 h-4 text-sky-600 mt-0.5 shrink-0"></i>
                     <span>Kode unik 6-digit dikirim via WhatsApp Gateway resmi</span>
                 </div>
                 <div class="flex items-start gap-2">
-                    <i data-lucide="check" class="w-4 h-4 text-emerald-600 mt-0.5 shrink-0"></i>
+                    <i data-lucide="check" class="w-4 h-4 text-sky-600 mt-0.5 shrink-0"></i>
                     <span>Kedaluwarsa otomatis dalam 5 menit demi mencegah intersepsi</span>
                 </div>
                 <div class="flex items-start gap-2">
-                    <i data-lucide="check" class="w-4 h-4 text-emerald-600 mt-0.5 shrink-0"></i>
+                    <i data-lucide="check" class="w-4 h-4 text-sky-600 mt-0.5 shrink-0"></i>
                     <span>Tervalidasi langsung dengan nomor penanggung jawab teknis</span>
                 </div>
             </div>

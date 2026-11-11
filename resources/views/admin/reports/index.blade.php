@@ -20,7 +20,7 @@
         .sidebar-scroll::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-800 antialiased selection:bg-emerald-500 selection:text-white flex h-screen overflow-hidden">
+<body class="bg-slate-50 text-slate-800 antialiased selection:bg-sky-500 selection:text-white flex h-screen overflow-hidden">
 
     <!-- Sidebar Navigation -->
     @include('admin.partials.sidebar')
@@ -34,7 +34,7 @@
                 <div class="flex items-center gap-2 text-xs text-slate-400 mb-1">
                     <a href="{{ route('admin.dashboard') }}" class="hover:text-corporate">Dashboard</a>
                     <span>/</span>
-                    <span class="text-emerald-600 font-semibold">Pusat Laporan</span>
+                    <span class="text-sky-600 font-semibold">Pusat Laporan</span>
                 </div>
                 <h2 class="text-xl font-bold text-corporate">Ekspor Rekapitulasi Data Keuangan &amp; Laporan Mutu</h2>
             </div>
@@ -42,7 +42,7 @@
             <div class="flex items-center gap-2">
                 <span class="text-xs text-slate-400 font-medium">Format Tersedia:</span>
                 <span class="bg-rose-100 text-rose-700 font-bold text-xs px-2.5 py-1 rounded-lg">PDF</span>
-                <span class="bg-emerald-100 text-emerald-700 font-bold text-xs px-2.5 py-1 rounded-lg">Excel (CSV)</span>
+                <span class="bg-sky-100 text-sky-700 font-bold text-xs px-2.5 py-1 rounded-lg">Excel (CSV)</span>
             </div>
         </header>
 
@@ -56,10 +56,10 @@
                 <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-100 shadow-sm relative overflow-hidden flex flex-col justify-between">
                     <div>
                         <div class="flex items-center justify-between mb-4">
-                            <div class="w-12 h-12 rounded-2xl bg-emerald-100 text-emerald-700 flex items-center justify-center">
+                            <div class="w-12 h-12 rounded-2xl bg-sky-100 text-sky-700 flex items-center justify-center">
                                 <i data-lucide="wallet" class="w-6 h-6"></i>
                             </div>
-                            <span class="text-xs font-bold text-emerald-600 bg-emerald-50 px-3 py-1 rounded-full border border-emerald-100">
+                            <span class="text-xs font-bold text-sky-600 bg-sky-50 px-3 py-1 rounded-full border border-sky-100">
                                 Real-Time Database
                             </span>
                         </div>
@@ -80,7 +80,7 @@
                             </div>
                             <div class="flex justify-between text-slate-600">
                                 <span>Projek Tuntas (Completed):</span>
-                                <strong class="text-emerald-600 font-bold">{{ $stats['completedOrders'] }} Berhasil</strong>
+                                <strong class="text-sky-600 font-bold">{{ $stats['completedOrders'] }} Berhasil</strong>
                             </div>
                         </div>
                     </div>
@@ -90,7 +90,7 @@
                             <i data-lucide="file-text" class="w-4 h-4"></i>
                             Ekspor PDF
                         </a>
-                        <a href="{{ route('admin.reports.finance.excel') }}" class="flex items-center justify-center gap-2 py-3 px-4 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-bold shadow-md transition-all">
+                        <a href="{{ route('admin.reports.finance.excel') }}" class="flex items-center justify-center gap-2 py-3 px-4 bg-sky-600 hover:bg-sky-700 text-white rounded-xl text-xs font-bold shadow-md transition-all">
                             <i data-lucide="sheet" class="w-4 h-4"></i>
                             Ekspor Excel
                         </a>
@@ -127,7 +127,7 @@
                             </div>
                             <div class="flex justify-between text-slate-600">
                                 <span>Pemenuhan SLA Target:</span>
-                                <strong class="text-emerald-600 font-bold">98.4% Tepat Waktu</strong>
+                                <strong class="text-sky-600 font-bold">98.4% Tepat Waktu</strong>
                             </div>
                         </div>
                     </div>
@@ -137,7 +137,7 @@
                             <i data-lucide="file-text" class="w-4 h-4"></i>
                             Ekspor PDF
                         </a>
-                        <a href="{{ route('admin.reports.quality.excel') }}" class="flex items-center justify-center gap-2 py-3 px-4 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-bold shadow-md transition-all">
+                        <a href="{{ route('admin.reports.quality.excel') }}" class="flex items-center justify-center gap-2 py-3 px-4 bg-sky-600 hover:bg-sky-700 text-white rounded-xl text-xs font-bold shadow-md transition-all">
                             <i data-lucide="sheet" class="w-4 h-4"></i>
                             Ekspor Excel
                         </a>
@@ -186,7 +186,7 @@
                                     </td>
                                     <td class="py-4 px-6">
                                         <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold
-                                            @if($trx->order_status === 'completed') bg-emerald-50 text-emerald-700 border border-emerald-200
+                                            @if($trx->order_status === 'completed') bg-sky-50 text-sky-700 border border-sky-200
                                             @elseif($trx->order_status === 'processing') bg-blue-50 text-blue-700 border border-blue-200
                                             @else bg-amber-50 text-amber-700 border border-amber-200
                                             @endif">
@@ -195,7 +195,7 @@
                                     </td>
                                     <td class="py-4 px-6">
                                         @if($trx->payment_status === 'success')
-                                            <span class="text-xs font-bold text-emerald-600 flex items-center gap-1">
+                                            <span class="text-xs font-bold text-sky-600 flex items-center gap-1">
                                                 <i data-lucide="check-circle" class="w-3.5 h-3.5"></i> Terverifikasi
                                             </span>
                                         @else

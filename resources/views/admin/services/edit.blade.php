@@ -20,7 +20,7 @@
         .sidebar-scroll::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-800 antialiased selection:bg-emerald-500 selection:text-white flex h-screen overflow-hidden">
+<body class="bg-slate-50 text-slate-800 antialiased selection:bg-sky-500 selection:text-white flex h-screen overflow-hidden">
 
     <!-- Sidebar Navigation -->
     @include('admin.partials.sidebar')
@@ -36,7 +36,7 @@
                     <span>/</span>
                     <a href="{{ route('admin.services.index') }}" class="hover:text-corporate">Layanan Perizinan</a>
                     <span>/</span>
-                    <span class="text-emerald-600 font-semibold">Edit Layanan</span>
+                    <span class="text-sky-600 font-semibold">Edit Layanan</span>
                 </div>
                 <h2 class="text-xl font-bold text-corporate">Edit Layanan: {{ $service->name }}</h2>
             </div>
@@ -77,7 +77,7 @@
                                 name="category_id" 
                                 id="category_id" 
                                 required
-                                class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-emerald-500 focus:bg-white transition-all @error('category_id') border-rose-400 bg-rose-50 @enderror"
+                                class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-sky-500 focus:bg-white transition-all @error('category_id') border-rose-400 bg-rose-50 @enderror"
                             >
                                 <option value="">-- Pilih Kategori --</option>
                                 @foreach($categories as $cat)
@@ -99,7 +99,7 @@
                                 id="timeline_estimation" 
                                 value="{{ old('timeline_estimation', $service->timeline_estimation ?: $service->estimation_time) }}"
                                 placeholder="Cth: 14 Hari Kerja / 1-2 Bulan"
-                                class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-emerald-500 focus:bg-white transition-all"
+                                class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-sky-500 focus:bg-white transition-all"
                             >
                         </div>
                     </div>
@@ -115,7 +115,7 @@
                             id="name" 
                             required 
                             value="{{ old('name', $service->name) }}"
-                            class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-emerald-500 focus:bg-white transition-all @error('name') border-rose-400 bg-rose-50 @enderror"
+                            class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-sky-500 focus:bg-white transition-all @error('name') border-rose-400 bg-rose-50 @enderror"
                         >
                     </div>
 
@@ -130,7 +130,7 @@
                                 name="slug" 
                                 id="slug" 
                                 value="{{ old('slug', $service->slug) }}"
-                                class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm font-mono focus:outline-none focus:border-emerald-500 focus:bg-white transition-all"
+                                class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm font-mono focus:outline-none focus:border-sky-500 focus:bg-white transition-all"
                             >
                         </div>
 
@@ -149,7 +149,7 @@
                                     min="0"
                                     required 
                                     value="{{ old('price', (int) ($service->price ?: $service->cost ?: 0)) }}"
-                                    class="w-full pl-12 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm font-bold text-emerald-700 focus:outline-none focus:border-emerald-500 focus:bg-white transition-all @error('price') border-rose-400 bg-rose-50 @enderror"
+                                    class="w-full pl-12 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm font-bold text-sky-700 focus:outline-none focus:border-sky-500 focus:bg-white transition-all @error('price') border-rose-400 bg-rose-50 @enderror"
                                 >
                             </div>
                         </div>
@@ -165,7 +165,7 @@
                             name="requirements_info" 
                             id="requirements_info" 
                             rows="4" 
-                            class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-emerald-500 focus:bg-white transition-all"
+                            class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-sky-500 focus:bg-white transition-all"
                         >{{ old('requirements_info', $service->requirements_info ?: $service->requirements_summary) }}</textarea>
                     </div>
 
@@ -178,7 +178,7 @@
                             name="description" 
                             id="description" 
                             rows="4" 
-                            class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-emerald-500 focus:bg-white transition-all"
+                            class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-sky-500 focus:bg-white transition-all"
                         >{{ old('description', $service->description) }}</textarea>
                     </div>
 
@@ -187,7 +187,7 @@
                         <a href="{{ route('admin.services.index') }}" class="px-5 py-2.5 rounded-xl border border-slate-200 text-slate-600 font-semibold text-sm hover:bg-slate-50 transition-colors">
                             Batal
                         </a>
-                        <button type="submit" class="px-6 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-sm rounded-xl shadow-md shadow-emerald-600/20 transition-all flex items-center gap-2">
+                        <button type="submit" class="px-6 py-2.5 bg-sky-600 hover:bg-sky-500 text-white font-bold text-sm rounded-xl shadow-md shadow-sky-600/20 transition-all flex items-center gap-2">
                             <i data-lucide="check" class="w-4 h-4"></i>
                             Perbarui Layanan
                         </button>

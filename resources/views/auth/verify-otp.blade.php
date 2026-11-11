@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Verifikasi OTP WhatsApp - IzinYou</title>
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
+    <link rel="apple-touch-icon" href="{{ asset('images/favicon-192.png') }}">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -20,32 +22,31 @@
         }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-800 antialiased selection:bg-emerald-500 selection:text-white relative min-h-screen flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+<body class="bg-slate-50 text-slate-800 antialiased selection:bg-sky-500 selection:text-white relative min-h-screen flex flex-col justify-center py-12 sm:px-6 lg:px-8">
     
     <!-- Background Gradient & Accents -->
     <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-slate-200 via-slate-50 to-slate-50 z-0"></div>
-    <div class="absolute top-0 right-0 -mr-20 -mt-20 w-[450px] h-[450px] bg-emerald-100 rounded-full mix-blend-multiply filter blur-3xl opacity-50"></div>
+    <div class="absolute top-0 right-0 -mr-20 -mt-20 w-[450px] h-[450px] bg-sky-100 rounded-full mix-blend-multiply filter blur-3xl opacity-50"></div>
     <div class="absolute bottom-0 left-0 -ml-20 -mb-20 w-[350px] h-[350px] bg-blue-100 rounded-full mix-blend-multiply filter blur-3xl opacity-50"></div>
     
     <div class="relative sm:mx-auto sm:w-full sm:max-w-md z-10 px-4 sm:px-0">
         
-        <!-- Logo Brand -->
+        <!-- Logo Brand (PRASTA SOLUSI INDONESIA) -->
         <a href="/" class="flex flex-col justify-center items-center gap-2 mb-6 group cursor-pointer hover:scale-105 transition-transform text-center">
-            <div class="w-16 h-16 rounded-2xl bg-corporate flex items-center justify-center shadow-xl border border-slate-700/60 ring-4 ring-emerald-100 group-hover:ring-emerald-300 transition-all duration-300">
-                <svg class="w-9 h-9 text-emerald-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M12 2L3 7v6c0 5.5 3.8 10.7 9 12 5.2-1.3 9-6.5 9-12V7l-9-5z"/>
-                    <path d="m9 12 2 2 4-4" stroke="#d4af37" stroke-width="2.5"/>
-                </svg>
+            <div class="w-16 h-16 rounded-2xl bg-white shadow-xl border border-sky-100 flex items-center justify-center ring-4 ring-sky-50 group-hover:ring-sky-200 transition-all duration-300 p-2">
+                <img src="{{ asset('images/logo-symbol-transparent.png') }}" alt="Prasta Solusi Indonesia" class="w-12 h-auto object-contain">
             </div>
             <div>
-                <h1 class="font-extrabold text-2xl text-corporate tracking-tight">IzinYou</h1>
-                <p class="text-[11px] text-slate-500 font-medium">Platform Resmi by CV Prasta Solusi Indonesia</p>
+                <h1 class="font-black text-2xl text-slate-900 tracking-tight">
+                    PRASTA <span class="text-sky-600">SOLUSI</span> INDONESIA
+                </h1>
+                <p class="text-[11px] text-slate-500 font-medium">Platform Resmi Perizinan &amp; Sertifikasi (IzinYou)</p>
             </div>
         </a>
 
         <!-- Header Card -->
         <div class="text-center mb-6">
-            <div class="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-emerald-500/10 text-emerald-600 mb-3 border border-emerald-500/20">
+            <div class="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-sky-500/10 text-sky-600 mb-3 border border-sky-500/20">
                 <i data-lucide="message-square-code" class="w-7 h-7"></i>
             </div>
             <h2 class="text-2xl font-extrabold text-corporate">
@@ -53,7 +54,7 @@
             </h2>
             <p class="mt-2 text-sm text-slate-600 leading-relaxed max-w-sm mx-auto">
                 Kami telah mengirimkan 6 digit kode verifikasi ke nomor WhatsApp Anda:
-                <strong class="text-emerald-700 block text-base mt-1 tracking-wide font-mono bg-emerald-50 py-1 px-3 rounded-lg border border-emerald-100 inline-block">
+                <strong class="text-sky-700 block text-base mt-1 tracking-wide font-mono bg-sky-50 py-1 px-3 rounded-lg border border-sky-100 inline-block">
                     {{ $phone ?? (isset($user) ? $user->phone : 'Nomor WhatsApp') }}
                 </strong>
             </p>
@@ -64,8 +65,8 @@
             
             {{-- Alert Success --}}
             @if (session('success'))
-                <div class="mb-5 flex items-start gap-3 bg-emerald-50 border border-emerald-200 text-emerald-800 px-4 py-3 rounded-2xl text-xs sm:text-sm font-medium">
-                    <i data-lucide="check-circle-2" class="w-5 h-5 text-emerald-600 flex-shrink-0 mt-0.5"></i>
+                <div class="mb-5 flex items-start gap-3 bg-sky-50 border border-sky-200 text-sky-800 px-4 py-3 rounded-2xl text-xs sm:text-sm font-medium">
+                    <i data-lucide="check-circle-2" class="w-5 h-5 text-sky-600 flex-shrink-0 mt-0.5"></i>
                     <div>{{ session('success') }}</div>
                 </div>
             @endif
@@ -132,7 +133,7 @@
                     <button 
                         type="submit" 
                         id="verifyBtn"
-                        class="w-full flex justify-center items-center gap-2 py-3.5 px-4 border border-transparent rounded-xl shadow-md text-sm font-bold text-white bg-emerald-600 hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500 transition-all duration-300 active:scale-[0.98]"
+                        class="w-full flex justify-center items-center gap-2 py-3.5 px-4 border border-transparent rounded-xl shadow-md text-sm font-bold text-white bg-sky-600 hover:bg-sky-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500 transition-all duration-300 active:scale-[0.98]"
                     >
                         <i data-lucide="check-check" class="w-4 h-4"></i>
                         Verifikasi &amp; Aktifkan Akun
@@ -150,7 +151,7 @@
                     <button 
                         type="submit" 
                         id="resendBtn"
-                        class="text-sm font-bold text-corporate hover:text-emerald-600 transition-colors inline-flex items-center gap-1.5 disabled:opacity-50 disabled:cursor-not-allowed"
+                        class="text-sm font-bold text-corporate hover:text-sky-600 transition-colors inline-flex items-center gap-1.5 disabled:opacity-50 disabled:cursor-not-allowed"
                     >
                         <i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i>
                         <span id="resendText">Kirim Ulang Kode OTP</span>

@@ -20,7 +20,7 @@
         .sidebar-scroll::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-800 antialiased selection:bg-emerald-500 selection:text-white flex h-screen overflow-hidden">
+<body class="bg-slate-50 text-slate-800 antialiased selection:bg-sky-500 selection:text-white flex h-screen overflow-hidden">
 
     <!-- Sidebar Navigation -->
     @include('admin.partials.sidebar')
@@ -36,7 +36,7 @@
                     <span>/</span>
                     <a href="{{ route('admin.categories.index') }}" class="hover:text-corporate">Kategori Layanan</a>
                     <span>/</span>
-                    <span class="text-emerald-600 font-semibold">Tambah Baru</span>
+                    <span class="text-sky-600 font-semibold">Tambah Baru</span>
                 </div>
                 <h2 class="text-xl font-bold text-corporate">Tambah Kategori Layanan Baru</h2>
             </div>
@@ -78,7 +78,7 @@
                             required 
                             value="{{ old('name') }}"
                             placeholder="Cth: Alat Kesehatan (Alkes)"
-                            class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-emerald-500 focus:bg-white transition-all @error('name') border-rose-400 bg-rose-50 @enderror"
+                            class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-sky-500 focus:bg-white transition-all @error('name') border-rose-400 bg-rose-50 @enderror"
                         >
                         <p class="text-[11px] text-slate-400 mt-1">Nama kelompok bidang perizinan atau sertifikasi.</p>
                     </div>
@@ -94,7 +94,7 @@
                             id="slug" 
                             value="{{ old('slug') }}"
                             placeholder="Cth: alat-kesehatan"
-                            class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm font-mono focus:outline-none focus:border-emerald-500 focus:bg-white transition-all @error('slug') border-rose-400 bg-rose-50 @enderror"
+                            class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm font-mono focus:outline-none focus:border-sky-500 focus:bg-white transition-all @error('slug') border-rose-400 bg-rose-50 @enderror"
                         >
                         <p class="text-[11px] text-slate-400 mt-1">Digunakan untuk rute URL ramah SEO. Jika dikosongkan, akan dibuat otomatis dari nama kategori.</p>
                     </div>
@@ -109,7 +109,7 @@
                             id="description" 
                             rows="4" 
                             placeholder="Jelaskan cakupan perizinan dan sertifikasi pada kategori ini..."
-                            class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-emerald-500 focus:bg-white transition-all"
+                            class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-sky-500 focus:bg-white transition-all"
                         >{{ old('description') }}</textarea>
                     </div>
 
@@ -118,7 +118,7 @@
                         <a href="{{ route('admin.categories.index') }}" class="px-5 py-2.5 rounded-xl border border-slate-200 text-slate-600 font-semibold text-sm hover:bg-slate-50 transition-colors">
                             Batal
                         </a>
-                        <button type="submit" class="px-6 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-sm rounded-xl shadow-md shadow-emerald-600/20 transition-all flex items-center gap-2">
+                        <button type="submit" class="px-6 py-2.5 bg-sky-600 hover:bg-sky-500 text-white font-bold text-sm rounded-xl shadow-md shadow-sky-600/20 transition-all flex items-center gap-2">
                             <i data-lucide="save" class="w-4 h-4"></i>
                             Simpan Kategori
                         </button>

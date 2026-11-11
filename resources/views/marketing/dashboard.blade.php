@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard Marketing &amp; Client Relations - IzinYou</title>
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
+    <link rel="apple-touch-icon" href="{{ asset('images/favicon-192.png') }}">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -24,18 +26,14 @@
 
     <!-- Dark Sidebar -->
     <aside class="w-72 bg-corporate text-slate-300 flex flex-col h-full shrink-0 shadow-2xl relative z-20 border-r border-slate-800">
-        <!-- Logo Header -->
+        <!-- Logo Header (PRASTA SOLUSI INDONESIA) -->
         <div class="h-20 flex items-center px-6 border-b border-slate-800 gap-3">
-            <div class="w-10 h-10 rounded-xl bg-slate-900 flex items-center justify-center shadow-inner flex-shrink-0 border border-slate-700">
-                <svg class="w-6 h-6 text-indigo-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M12 2L3 7v6c0 5.5 3.8 10.7 9 12 5.2-1.3 9-6.5 9-12V7l-9-5z"/>
-                    <path d="m9 12 2 2 4-4" stroke="#818cf8" stroke-width="2.5"/>
-                </svg>
+            <div class="w-10 h-10 rounded-xl bg-slate-900 flex items-center justify-center shadow-inner flex-shrink-0 border border-slate-700 p-1">
+                <img src="{{ asset('images/logo-symbol-transparent.png') }}" alt="Prasta Solusi" class="w-8 h-auto object-contain">
             </div>
             <div>
-                <h1 class="font-bold text-white text-base leading-tight">IzinYou Marketing</h1>
-                <p class="text-[10px] text-indigo-400 font-semibold tracking-widest uppercase">Client Relations Panel</p>
-                <p class="text-[9px] text-slate-400">by CV Prasta Solusi Indonesia</p>
+                <h1 class="font-extrabold text-white text-base leading-tight">PRASTA SOLUSI</h1>
+                <p class="text-[10px] text-sky-400 font-semibold tracking-widest uppercase">Client Relations Panel</p>
             </div>
         </div>
 
@@ -96,7 +94,7 @@
                 <div class="flex-1 min-w-0">
                     <p class="text-sm font-bold text-white truncate">{{ $user->name }}</p>
                     <p class="text-[11px] text-indigo-400 truncate flex items-center gap-1">
-                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 inline-block"></span>
+                        <span class="w-1.5 h-1.5 rounded-full bg-sky-400 inline-block"></span>
                         Marketing &amp; CR
                     </p>
                 </div>
@@ -134,8 +132,8 @@
         <!-- Flash Messages -->
         <div class="px-8 pt-4">
             @if (session('success'))
-                <div class="flex items-center gap-3 bg-emerald-50 border border-emerald-200 text-emerald-800 px-4 py-3 rounded-2xl text-sm font-medium shadow-sm">
-                    <i data-lucide="check-circle-2" class="w-5 h-5 text-emerald-600 flex-shrink-0"></i>
+                <div class="flex items-center gap-3 bg-sky-50 border border-sky-200 text-sky-800 px-4 py-3 rounded-2xl text-sm font-medium shadow-sm">
+                    <i data-lucide="check-circle-2" class="w-5 h-5 text-sky-600 flex-shrink-0"></i>
                     <span>{{ session('success') }}</span>
                 </div>
             @endif
@@ -171,11 +169,11 @@
                             <p class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">Kupon Promo Aktif</p>
                             <h3 class="text-3xl font-extrabold text-corporate">{{ $stats['activePromos'] }}</h3>
                         </div>
-                        <div class="w-12 h-12 bg-emerald-50 text-emerald-600 rounded-xl flex items-center justify-center">
+                        <div class="w-12 h-12 bg-sky-50 text-sky-600 rounded-xl flex items-center justify-center">
                             <i data-lucide="tag" class="w-6 h-6"></i>
                         </div>
                     </div>
-                    <p class="text-xs text-emerald-600 font-medium">{{ $stats['totalPromosUsed'] }} transaksi terpakai</p>
+                    <p class="text-xs text-sky-600 font-medium">{{ $stats['totalPromosUsed'] }} transaksi terpakai</p>
                 </div>
 
                 <div class="bg-white rounded-2xl p-6 border border-slate-100 shadow-sm">
@@ -197,9 +195,9 @@
                     <div class="flex justify-between items-start mb-4">
                         <div>
                             <p class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">Status Keamanan</p>
-                            <h3 class="text-xl font-extrabold text-emerald-600">RBAC Aktif</h3>
+                            <h3 class="text-xl font-extrabold text-sky-600">RBAC Aktif</h3>
                         </div>
-                        <div class="w-12 h-12 bg-emerald-50 text-emerald-600 rounded-xl flex items-center justify-center">
+                        <div class="w-12 h-12 bg-sky-50 text-sky-600 rounded-xl flex items-center justify-center">
                             <i data-lucide="shield-check" class="w-6 h-6"></i>
                         </div>
                     </div>
@@ -221,7 +219,7 @@
                     <div class="flex items-center gap-2">
                         <a href="{{ route('marketing.dashboard') }}" class="px-3 py-1.5 rounded-xl text-xs font-semibold {{ empty($statusFilter) || $statusFilter === 'all' ? 'bg-corporate text-white' : 'bg-slate-100 text-slate-600' }}">Semua</a>
                         <a href="{{ route('marketing.dashboard', ['status' => 'pending']) }}" class="px-3 py-1.5 rounded-xl text-xs font-semibold {{ $statusFilter === 'pending' ? 'bg-indigo-600 text-white' : 'bg-slate-100 text-slate-600' }}">Menunggu Respons</a>
-                        <a href="{{ route('marketing.dashboard', ['status' => 'responded']) }}" class="px-3 py-1.5 rounded-xl text-xs font-semibold {{ $statusFilter === 'responded' ? 'bg-emerald-600 text-white' : 'bg-slate-100 text-slate-600' }}">Selesai Dijawab</a>
+                        <a href="{{ route('marketing.dashboard', ['status' => 'responded']) }}" class="px-3 py-1.5 rounded-xl text-xs font-semibold {{ $statusFilter === 'responded' ? 'bg-sky-600 text-white' : 'bg-slate-100 text-slate-600' }}">Selesai Dijawab</a>
                     </div>
                 </div>
 
@@ -235,7 +233,7 @@
                                         @if($item->status === 'pending')
                                             <span class="bg-amber-100 text-amber-800 text-[10px] font-bold px-2 py-0.5 rounded-full">Butuh Respons</span>
                                         @else
-                                            <span class="bg-emerald-100 text-emerald-800 text-[10px] font-bold px-2 py-0.5 rounded-full">Telah Dijawab</span>
+                                            <span class="bg-sky-100 text-sky-800 text-[10px] font-bold px-2 py-0.5 rounded-full">Telah Dijawab</span>
                                         @endif
                                     </div>
                                     <p class="text-xs text-slate-500 mt-0.5">
@@ -245,7 +243,7 @@
 
                                 <div class="flex items-center gap-2">
                                     @if($item->phone)
-                                        <a href="https://wa.me/{{ preg_replace('/[^0-9]/', '', $item->phone) }}?text=Halo%20{{ urlencode($item->client_name) }},%20kami%20dari%20Tim%20Marketing%20IzinYou%20(CV%20Prasta%20Solusi%20Indonesia)%20menghubungi%20Anda%20terkait%20konsultasi%20{{ urlencode($item->subject) }}." target="_blank" class="px-3 py-1.5 bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold rounded-xl flex items-center gap-1.5 transition-all shadow-sm">
+                                        <a href="https://wa.me/{{ preg_replace('/[^0-9]/', '', $item->phone) }}?text=Halo%20{{ urlencode($item->client_name) }},%20kami%20dari%20Tim%20Marketing%20IzinYou%20(CV%20Prasta%20Solusi%20Indonesia)%20menghubungi%20Anda%20terkait%20konsultasi%20{{ urlencode($item->subject) }}." target="_blank" class="px-3 py-1.5 bg-sky-600 hover:bg-sky-500 text-white text-xs font-bold rounded-xl flex items-center gap-1.5 transition-all shadow-sm">
                                             <i data-lucide="phone-forwarded" class="w-3.5 h-3.5"></i>
                                             Live Chat WA
                                         </a>
@@ -307,7 +305,7 @@
                                         {{ $promo->code }}
                                     </span>
                                     @if($promo->is_active)
-                                        <span class="text-[10px] font-bold bg-emerald-100 text-emerald-800 px-2.5 py-0.5 rounded-full">Aktif</span>
+                                        <span class="text-[10px] font-bold bg-sky-100 text-sky-800 px-2.5 py-0.5 rounded-full">Aktif</span>
                                     @else
                                         <span class="text-[10px] font-bold bg-slate-200 text-slate-600 px-2.5 py-0.5 rounded-full">Non-Aktif</span>
                                     @endif
@@ -348,7 +346,7 @@
                                     @method('PUT')
                                     <input type="hidden" name="quota" value="{{ $promo->quota }}">
                                     <input type="hidden" name="is_active" value="{{ $promo->is_active ? 0 : 1 }}">
-                                    <button type="submit" class="text-xs font-semibold {{ $promo->is_active ? 'text-amber-600 hover:text-amber-700' : 'text-emerald-600 hover:text-emerald-700' }}">
+                                    <button type="submit" class="text-xs font-semibold {{ $promo->is_active ? 'text-amber-600 hover:text-amber-700' : 'text-sky-600 hover:text-sky-700' }}">
                                         {{ $promo->is_active ? 'Nonaktifkan' : 'Aktifkan' }}
                                     </button>
                                 </form>
@@ -414,7 +412,7 @@
                                     </td>
                                     <td class="py-4 px-6">
                                         @if($rev->status === 'published')
-                                            <span class="inline-flex items-center gap-1 text-[11px] font-bold text-emerald-700 bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200">
+                                            <span class="inline-flex items-center gap-1 text-[11px] font-bold text-sky-700 bg-sky-50 px-2.5 py-0.5 rounded-full border border-sky-200">
                                                 <i data-lucide="eye" class="w-3 h-3"></i> Tampil di Beranda
                                             </span>
                                             @if($rev->is_featured)
@@ -432,7 +430,7 @@
                                                 @csrf
                                                 <input type="hidden" name="status" value="{{ $rev->status === 'published' ? 'pending' : 'published' }}">
                                                 <input type="hidden" name="is_featured" value="{{ $rev->is_featured ? 0 : 1 }}">
-                                                <button type="submit" class="px-2.5 py-1 text-xs font-bold rounded-lg {{ $rev->status === 'published' ? 'bg-slate-100 text-slate-600 hover:bg-slate-200' : 'bg-emerald-600 text-white hover:bg-emerald-500' }}">
+                                                <button type="submit" class="px-2.5 py-1 text-xs font-bold rounded-lg {{ $rev->status === 'published' ? 'bg-slate-100 text-slate-600 hover:bg-slate-200' : 'bg-sky-600 text-white hover:bg-sky-500' }}">
                                                     {{ $rev->status === 'published' ? 'Tarik Publikasi' : 'Setujui & Publikasikan' }}
                                                 </button>
                                             </form>

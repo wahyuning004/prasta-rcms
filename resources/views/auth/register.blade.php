@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pendaftaran Klien - IzinYou</title>
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
+    <link rel="apple-touch-icon" href="{{ asset('images/favicon-192.png') }}">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -23,23 +25,22 @@
         }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-800 antialiased selection:bg-emerald-500 selection:text-white relative min-h-screen flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+<body class="bg-slate-50 text-slate-800 antialiased selection:bg-sky-500 selection:text-white relative min-h-screen flex flex-col justify-center py-12 sm:px-6 lg:px-8">
     <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-slate-200 via-slate-50 to-slate-50 z-0"></div>
-    <div class="absolute top-0 right-0 -mr-20 -mt-20 w-[450px] h-[450px] bg-emerald-100 rounded-full mix-blend-multiply filter blur-3xl opacity-50"></div>
+    <div class="absolute top-0 right-0 -mr-20 -mt-20 w-[450px] h-[450px] bg-sky-100 rounded-full mix-blend-multiply filter blur-3xl opacity-50"></div>
     <div class="absolute bottom-0 left-0 -ml-20 -mb-20 w-[350px] h-[350px] bg-blue-100 rounded-full mix-blend-multiply filter blur-3xl opacity-50"></div>
     
     <div class="relative sm:mx-auto sm:w-full sm:max-w-2xl z-10 px-4 sm:px-0">
-        <!-- Logo Brand -->
+        <!-- Logo Brand (PRASTA SOLUSI INDONESIA) -->
         <a href="/" class="flex flex-col justify-center items-center gap-2 mb-6 group cursor-pointer hover:scale-105 transition-transform text-center">
-            <div class="w-16 h-16 rounded-2xl bg-corporate flex items-center justify-center shadow-xl border border-slate-700/60 ring-4 ring-emerald-100 group-hover:ring-emerald-300 transition-all duration-300">
-                <svg class="w-9 h-9 text-emerald-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M12 2L3 7v6c0 5.5 3.8 10.7 9 12 5.2-1.3 9-6.5 9-12V7l-9-5z"/>
-                    <path d="m9 12 2 2 4-4" stroke="#d4af37" stroke-width="2.5"/>
-                </svg>
+            <div class="w-16 h-16 rounded-2xl bg-white shadow-xl border border-sky-100 flex items-center justify-center ring-4 ring-sky-50 group-hover:ring-sky-200 transition-all duration-300 p-2">
+                <img src="{{ asset('images/logo-symbol-transparent.png') }}" alt="Prasta Solusi Indonesia" class="w-12 h-auto object-contain">
             </div>
             <div>
-                <h1 class="font-extrabold text-2xl text-corporate tracking-tight">IzinYou</h1>
-                <p class="text-[11px] text-slate-500 font-medium">Platform Resmi by CV Prasta Solusi Indonesia</p>
+                <h1 class="font-black text-2xl text-slate-900 tracking-tight">
+                    PRASTA <span class="text-sky-600">SOLUSI</span> INDONESIA
+                </h1>
+                <p class="text-[11px] text-slate-500 font-medium">Platform Resmi Perizinan &amp; Sertifikasi (IzinYou)</p>
             </div>
         </a>
 
@@ -90,7 +91,7 @@
                                 maxlength="100"
                                 autocomplete="name"
                                 value="{{ old('name') }}"
-                                class="input-field block w-full pl-11 pr-4 py-3 sm:text-sm border rounded-xl bg-slate-50 border-slate-200 focus:outline-none focus:border-emerald-500 focus:bg-white transition-colors @error('name') border-rose-400 bg-rose-50 @enderror" 
+                                class="input-field block w-full pl-11 pr-4 py-3 sm:text-sm border rounded-xl bg-slate-50 border-slate-200 focus:outline-none focus:border-sky-500 focus:bg-white transition-colors @error('name') border-rose-400 bg-rose-50 @enderror" 
                                 placeholder="Cth: Budi Santoso"
                             >
                         </div>
@@ -116,7 +117,7 @@
                                 required 
                                 maxlength="150"
                                 value="{{ old('company') }}"
-                                class="input-field block w-full pl-11 pr-4 py-3 sm:text-sm border rounded-xl bg-slate-50 border-slate-200 focus:outline-none focus:border-emerald-500 focus:bg-white transition-colors @error('company') border-rose-400 bg-rose-50 @enderror" 
+                                class="input-field block w-full pl-11 pr-4 py-3 sm:text-sm border rounded-xl bg-slate-50 border-slate-200 focus:outline-none focus:border-sky-500 focus:bg-white transition-colors @error('company') border-rose-400 bg-rose-50 @enderror" 
                                 placeholder="Cth: PT Makmur Sentosa"
                             >
                         </div>
@@ -145,7 +146,7 @@
                                 required 
                                 maxlength="255"
                                 value="{{ old('email') }}"
-                                class="input-field block w-full pl-11 pr-4 py-3 sm:text-sm border rounded-xl bg-slate-50 border-slate-200 focus:outline-none focus:border-emerald-500 focus:bg-white transition-colors @error('email') border-rose-400 bg-rose-50 @enderror" 
+                                class="input-field block w-full pl-11 pr-4 py-3 sm:text-sm border rounded-xl bg-slate-50 border-slate-200 focus:outline-none focus:border-sky-500 focus:bg-white transition-colors @error('email') border-rose-400 bg-rose-50 @enderror" 
                                 placeholder="pic@perusahaan.com"
                             >
                         </div>
@@ -159,11 +160,11 @@
                     <div>
                         <label for="phone" class="block text-sm font-semibold text-slate-700 mb-1.5 flex items-center justify-between">
                             <span>Nomor WhatsApp (HP) <span class="text-rose-500">*</span></span>
-                            <span class="text-[10px] text-emerald-700 font-bold bg-emerald-100/70 px-2 py-0.5 rounded-full border border-emerald-200">Wajib Angka (08xx)</span>
+                            <span class="text-[10px] text-sky-700 font-bold bg-sky-100/70 px-2 py-0.5 rounded-full border border-sky-200">Wajib Angka (08xx)</span>
                         </label>
                         <div class="relative rounded-xl shadow-sm">
                             <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none">
-                                <i data-lucide="phone-call" class="h-5 w-5 text-emerald-600"></i>
+                                <i data-lucide="phone-call" class="h-5 w-5 text-sky-600"></i>
                             </div>
                             <input 
                                 id="phone" 
@@ -175,7 +176,7 @@
                                 autocomplete="tel"
                                 required 
                                 value="{{ old('phone') }}"
-                                class="input-field block w-full pl-11 pr-4 py-3 sm:text-sm border rounded-xl bg-slate-50 border-slate-200 focus:outline-none focus:border-emerald-500 focus:bg-white transition-colors @error('phone') border-rose-400 bg-rose-50 @enderror" 
+                                class="input-field block w-full pl-11 pr-4 py-3 sm:text-sm border rounded-xl bg-slate-50 border-slate-200 focus:outline-none focus:border-sky-500 focus:bg-white transition-colors @error('phone') border-rose-400 bg-rose-50 @enderror" 
                                 placeholder="Cth: 081234567890"
                             >
                         </div>
@@ -208,7 +209,7 @@
                                 type="password" 
                                 autocomplete="new-password"
                                 required 
-                                class="input-field block w-full pl-11 pr-11 py-3 sm:text-sm border rounded-xl bg-slate-50 border-slate-200 focus:outline-none focus:border-emerald-500 focus:bg-white transition-colors @error('password') border-rose-400 bg-rose-50 @enderror" 
+                                class="input-field block w-full pl-11 pr-11 py-3 sm:text-sm border rounded-xl bg-slate-50 border-slate-200 focus:outline-none focus:border-sky-500 focus:bg-white transition-colors @error('password') border-rose-400 bg-rose-50 @enderror" 
                                 placeholder="Minimal 8 karakter"
                             >
                             <button type="button" id="togglePasswordBtn" class="absolute inset-y-0 right-0 pr-3.5 flex items-center text-slate-400 hover:text-slate-600 focus:outline-none">
@@ -247,7 +248,7 @@
                                 type="password" 
                                 autocomplete="new-password"
                                 required 
-                                class="input-field block w-full pl-11 pr-11 py-3 sm:text-sm border rounded-xl bg-slate-50 border-slate-200 focus:outline-none focus:border-emerald-500 focus:bg-white transition-colors" 
+                                class="input-field block w-full pl-11 pr-11 py-3 sm:text-sm border rounded-xl bg-slate-50 border-slate-200 focus:outline-none focus:border-sky-500 focus:bg-white transition-colors" 
                                 placeholder="Ulangi password"
                             >
                             <button type="button" id="toggleConfirmBtn" class="absolute inset-y-0 right-0 pr-3.5 flex items-center text-slate-400 hover:text-slate-600 focus:outline-none">
@@ -261,9 +262,9 @@
 
                 <!-- Persetujuan Syarat & Ketentuan -->
                 <div class="flex items-start gap-2.5 pt-1">
-                    <input id="terms" name="terms" type="checkbox" required class="h-4 w-4 mt-0.5 text-emerald-600 focus:ring-emerald-500 border-slate-300 rounded cursor-pointer">
+                    <input id="terms" name="terms" type="checkbox" required class="h-4 w-4 mt-0.5 text-sky-600 focus:ring-sky-500 border-slate-300 rounded cursor-pointer">
                     <label for="terms" class="text-xs sm:text-sm text-slate-600 cursor-pointer select-none">
-                        Saya menyetujui seluruh <a href="#" class="text-emerald-600 font-bold hover:underline">Syarat & Ketentuan</a> serta <a href="#" class="text-emerald-600 font-bold hover:underline">Kebijakan Privasi</a> operasional portal IzinYou.
+                        Saya menyetujui seluruh <a href="#" class="text-sky-600 font-bold hover:underline">Syarat & Ketentuan</a> serta <a href="#" class="text-sky-600 font-bold hover:underline">Kebijakan Privasi</a> operasional portal IzinYou.
                     </label>
                 </div>
 
@@ -276,17 +277,17 @@
                 </div>
 
                 <!-- Indikator Verifikasi 2 Langkah (OTP WhatsApp) -->
-                <div class="p-3.5 rounded-2xl bg-emerald-50 border border-emerald-200/80 flex items-center justify-between gap-3">
+                <div class="p-3.5 rounded-2xl bg-sky-50 border border-sky-200/80 flex items-center justify-between gap-3">
                     <div class="flex items-center gap-2.5">
-                        <div class="w-8 h-8 rounded-lg bg-emerald-600 text-white flex items-center justify-center font-bold text-xs shrink-0 shadow-sm">
+                        <div class="w-8 h-8 rounded-lg bg-sky-600 text-white flex items-center justify-center font-bold text-xs shrink-0 shadow-sm">
                             <i data-lucide="shield-check" class="w-4 h-4"></i>
                         </div>
                         <div>
-                            <p class="text-xs font-bold text-emerald-950">Proteksi Verifikasi 2-Langkah WhatsApp</p>
-                            <p class="text-[11px] text-emerald-700">Kode OTP 6-digit dikirimkan instan ke nomor WhatsApp untuk aktivasi akun baru.</p>
+                            <p class="text-xs font-bold text-sky-950">Proteksi Verifikasi 2-Langkah WhatsApp</p>
+                            <p class="text-[11px] text-sky-700">Kode OTP 6-digit dikirimkan instan ke nomor WhatsApp untuk aktivasi akun baru.</p>
                         </div>
                     </div>
-                    <button type="button" onclick="document.getElementById('otpInfoModal').classList.remove('hidden')" class="text-xs font-bold text-emerald-800 hover:text-emerald-900 underline shrink-0">
+                    <button type="button" onclick="document.getElementById('otpInfoModal').classList.remove('hidden')" class="text-xs font-bold text-sky-800 hover:text-sky-900 underline shrink-0">
                         Detail 2FA
                     </button>
                 </div>
@@ -296,7 +297,7 @@
                     <button 
                         type="submit" 
                         id="registerBtn"
-                        class="w-full flex justify-center items-center gap-2 py-3.5 px-4 border border-transparent rounded-xl shadow-md text-sm font-bold text-white bg-emerald-600 hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500 transition-all duration-300 active:scale-[0.98]"
+                        class="w-full flex justify-center items-center gap-2 py-3.5 px-4 border border-transparent rounded-xl shadow-md text-sm font-bold text-white bg-sky-600 hover:bg-sky-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500 transition-all duration-300 active:scale-[0.98]"
                     >
                         <i data-lucide="user-plus" class="w-4 h-4"></i>
                         Daftar &amp; Kirim Kode OTP WhatsApp
@@ -307,7 +308,7 @@
             <div class="mt-6 pt-6 border-t border-slate-100 text-center">
                 <p class="text-sm text-slate-600">
                     Sudah memiliki akun terdaftar?
-                    <a href="{{ route('login') }}" class="font-bold text-corporate hover:text-emerald-600 transition-colors ml-1">Masuk di sini &rarr;</a>
+                    <a href="{{ route('login') }}" class="font-bold text-corporate hover:text-sky-600 transition-colors ml-1">Masuk di sini &rarr;</a>
                 </p>
             </div>
         </div>
@@ -327,7 +328,7 @@
                 <i data-lucide="x" class="w-5 h-5"></i>
             </button>
 
-            <div class="w-16 h-16 rounded-2xl bg-emerald-100 text-emerald-600 flex items-center justify-center mx-auto mb-4 border border-emerald-200 shadow-sm">
+            <div class="w-16 h-16 rounded-2xl bg-sky-100 text-sky-600 flex items-center justify-center mx-auto mb-4 border border-sky-200 shadow-sm">
                 <i data-lucide="message-square-code" class="w-8 h-8"></i>
             </div>
 
@@ -336,20 +337,20 @@
 
             <div class="text-left text-xs text-slate-600 space-y-3 bg-slate-50 p-4 rounded-2xl border border-slate-200/60 mb-5">
                 <div class="flex items-start gap-2.5">
-                    <span class="w-5 h-5 rounded-full bg-emerald-600 text-white font-bold flex items-center justify-center text-[10px] shrink-0 mt-0.5">1</span>
+                    <span class="w-5 h-5 rounded-full bg-sky-600 text-white font-bold flex items-center justify-center text-[10px] shrink-0 mt-0.5">1</span>
                     <p>Setelah form pendaftaran dikirimkan, sistem IzinYou meng-generate 6 digit kode token OTP acak dengan masa berlaku 10 menit.</p>
                 </div>
                 <div class="flex items-start gap-2.5">
-                    <span class="w-5 h-5 rounded-full bg-emerald-600 text-white font-bold flex items-center justify-center text-[10px] shrink-0 mt-0.5">2</span>
+                    <span class="w-5 h-5 rounded-full bg-sky-600 text-white font-bold flex items-center justify-center text-[10px] shrink-0 mt-0.5">2</span>
                     <p>Token OTP dikirimkan secara instan melalui WhatsApp Gateway resmi ke nomor HP yang Anda masukkan.</p>
                 </div>
                 <div class="flex items-start gap-2.5">
-                    <span class="w-5 h-5 rounded-full bg-emerald-600 text-white font-bold flex items-center justify-center text-[10px] shrink-0 mt-0.5">3</span>
+                    <span class="w-5 h-5 rounded-full bg-sky-600 text-white font-bold flex items-center justify-center text-[10px] shrink-0 mt-0.5">3</span>
                     <p>Masukkan token pada layar verifikasi untuk memvalidasi kepemilikan nomor dan mengaktifkan akun klien Anda.</p>
                 </div>
             </div>
 
-            <button onclick="document.getElementById('otpInfoModal').classList.add('hidden')" class="w-full py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs rounded-xl shadow-md transition-all">
+            <button onclick="document.getElementById('otpInfoModal').classList.add('hidden')" class="w-full py-2.5 bg-sky-600 hover:bg-sky-500 text-white font-bold text-xs rounded-xl shadow-md transition-all">
                 Saya Mengerti
             </button>
         </div>
@@ -533,9 +534,9 @@
                 passwordStrengthText.className = 'font-bold text-amber-500 text-[11px]';
             } else {
                 passwordStrengthBar.style.width = '100%';
-                passwordStrengthBar.className = 'h-full bg-emerald-500 transition-all duration-300';
+                passwordStrengthBar.className = 'h-full bg-sky-500 transition-all duration-300';
                 passwordStrengthText.textContent = 'Sangat Kuat';
-                passwordStrengthText.className = 'font-bold text-emerald-600 text-[11px]';
+                passwordStrengthText.className = 'font-bold text-sky-600 text-[11px]';
             }
         }
 
@@ -551,13 +552,13 @@
             passwordMatchStatus.classList.remove('hidden');
             if (pwd === confirm) {
                 passwordMatchStatus.textContent = '✓ Konfirmasi password cocok';
-                passwordMatchStatus.className = 'text-xs mt-1.5 font-semibold text-emerald-600';
+                passwordMatchStatus.className = 'text-xs mt-1.5 font-semibold text-sky-600';
                 passwordConfirmInput.classList.remove('border-rose-400', 'bg-rose-50');
-                passwordConfirmInput.classList.add('border-emerald-400');
+                passwordConfirmInput.classList.add('border-sky-400');
             } else {
                 passwordMatchStatus.textContent = '✕ Konfirmasi password tidak cocok';
                 passwordMatchStatus.className = 'text-xs mt-1.5 font-semibold text-rose-500';
-                passwordConfirmInput.classList.remove('border-emerald-400');
+                passwordConfirmInput.classList.remove('border-sky-400');
                 passwordConfirmInput.classList.add('border-rose-400', 'bg-rose-50');
             }
         }
