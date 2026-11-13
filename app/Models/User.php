@@ -7,15 +7,40 @@ use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\Hidden;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-#[Fillable(['name', 'email', 'password', 'role', 'phone', 'company_name', 'address', 'otp_code', 'otp_expires_at'])]
+#[Fillable(['name', 'email', 'password', 'role', 'phone', 'company_name', 'pic_position', 'nib', 'npwp', 'business_field', 'address', 'otp_code', 'otp_expires_at'])]
 #[Hidden(['password', 'remember_token'])]
 class User extends Authenticatable
 {
     /** @use HasFactory<UserFactory> */
     use HasFactory, Notifiable;
+
+    /**
+     * Pesanan layanan milik pengguna.
+     */
+    public function orders(): HasMany
+    {
+        return $this->hasMany(Order::class);
+    }
+
+    /**
+     * Ulasan layanan yang dibuat oleh pengguna.
+     */
+    public function reviews(): HasMany
+    {
+        return $this->hasMany(Review::class);
+    }
+
+    /**
+     * Konsultasi gratis milik pengguna.
+     */
+    public function consultations(): HasMany
+    {
+        return $this->hasMany(FreeConsultation::class);
+    }
 
     /**
      * Get the attributes that should be cast.
@@ -56,11 +81,19 @@ class User extends Authenticatable
     }
 
     /**
-     * Check if user is Finance / Licensing Officer.
+     * Check if user is Finance staff.
      */
     public function isFinance(): bool
     {
-        return in_array(strtolower($this->role ?? ''), ['finance', 'officer', 'petugas']);
+        return strtolower($this->role ?? '') === 'finance';
+    }
+
+    /**
+     * Check if user is Document & Licensing Officer.
+     */
+    public function isOfficer(): bool
+    {
+        return in_array(strtolower($this->role ?? ''), ['officer', 'petugas']);
     }
 
     /**
@@ -105,7 +138,11 @@ class User extends Authenticatable
             return 'legal.dashboard';
         }
 
-        if ($role === 'finance' || $role === 'officer' || $role === 'petugas') {
+        if ($role === 'officer' || $role === 'petugas') {
+            return 'officer.dashboard';
+        }
+
+        if ($role === 'finance') {
             return 'finance.dashboard';
         }
 

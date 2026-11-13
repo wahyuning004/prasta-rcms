@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Auth;
 
+use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Services\WhatsAppService;
 use Illuminate\Http\Request;
@@ -20,6 +21,7 @@ class AuthController extends Controller
         if (Auth::check()) {
             return redirect()->route(Auth::user()->getDashboardRoute());
         }
+
         return view('auth.login');
     }
 
@@ -47,7 +49,7 @@ class AuthController extends Controller
                 ]);
         }
 
-        if (!$isEmail && !$isPhone) {
+        if (! $isEmail && ! $isPhone) {
             return back()
                 ->withInput($request->only('email', 'login'))
                 ->withErrors([
@@ -63,7 +65,7 @@ class AuthController extends Controller
         ]);
 
         // 3. Validasi Google reCAPTCHA v2
-        if (!$this->verifyRecaptcha($request->input('g-recaptcha-response'), $request->ip())) {
+        if (! $this->verifyRecaptcha($request->input('g-recaptcha-response'), $request->ip())) {
             return back()
                 ->withInput($request->only('email', 'login'))
                 ->withErrors([
@@ -79,8 +81,8 @@ class AuthController extends Controller
         } else {
             // Normalisasi nomor telepon untuk dicocokkan ke database
             $formattedPhone = WhatsAppService::formatPhoneNumber($rawInput); // e.g. 6281234567890
-            $localPhone     = '0' . substr($formattedPhone, 2);              // e.g. 081234567890
-            $plusPhone      = '+' . $formattedPhone;                         // e.g. +6281234567890
+            $localPhone = '0'.substr($formattedPhone, 2);              // e.g. 081234567890
+            $plusPhone = '+'.$formattedPhone;                         // e.g. +6281234567890
 
             $user = User::whereIn('phone', [$localPhone, $formattedPhone, $plusPhone, $rawInput])->first();
         }
@@ -100,10 +102,10 @@ class AuthController extends Controller
 
                 session([
                     'pending_user_id' => $user->id,
-                    'pending_phone'   => $user->phone,
-                    'pending_email'   => $user->email,
-                    'pending_name'    => $user->name,
-                    'otp_attempts'    => 0,
+                    'pending_phone' => $user->phone,
+                    'pending_email' => $user->email,
+                    'pending_name' => $user->name,
+                    'otp_attempts' => 0,
                 ]);
 
                 if (config('app.debug')) {
@@ -111,7 +113,7 @@ class AuthController extends Controller
                 }
 
                 return redirect()->route('otp.verify')
-                    ->with('warning', 'Akun Anda belum aktif. Kami telah mengirimkan 6 digit kode OTP ke nomor WhatsApp Anda (' . ($user->phone ?? 'terdaftar') . ').');
+                    ->with('warning', 'Akun Anda belum aktif. Kami telah mengirimkan 6 digit kode OTP ke nomor WhatsApp Anda ('.($user->phone ?? 'terdaftar').').');
             }
 
             // Login dan redirect ke dashboard
@@ -120,7 +122,7 @@ class AuthController extends Controller
             $targetRoute = $user->getDashboardRoute();
 
             return redirect()->intended(route($targetRoute))
-                ->with('success', 'Selamat datang kembali, ' . $user->name . '! Anda masuk sebagai ' . $user->getRoleLabel() . '.');
+                ->with('success', 'Selamat datang kembali, '.$user->name.'! Anda masuk sebagai '.$user->getRoleLabel().'.');
         }
 
         return back()
@@ -138,6 +140,7 @@ class AuthController extends Controller
         if (Auth::check()) {
             return redirect()->route(Auth::user()->getDashboardRoute());
         }
+
         return view('auth.register');
     }
 
@@ -148,16 +151,16 @@ class AuthController extends Controller
     public function register(Request $request)
     {
         // 1. Bersihkan dan rapikan input awal
-        $rawEmail   = strtolower(trim((string) $request->input('email', '')));
-        $rawPhone   = trim((string) $request->input('phone', ''));
-        $rawName    = trim(preg_replace('/\s+/', ' ', (string) $request->input('name', '')));
+        $rawEmail = strtolower(trim((string) $request->input('email', '')));
+        $rawPhone = trim((string) $request->input('phone', ''));
+        $rawName = trim(preg_replace('/\s+/', ' ', (string) $request->input('name', '')));
         $rawCompany = trim(preg_replace('/\s+/', ' ', (string) $request->input('company', '')));
 
         // Merge nilai yang sudah dirapikan ke request sebelum divalidasi
         $request->merge([
-            'email'   => $rawEmail,
-            'phone'   => $rawPhone,
-            'name'    => $rawName,
+            'email' => $rawEmail,
+            'phone' => $rawPhone,
+            'name' => $rawName,
             'company' => $rawCompany,
         ]);
 
@@ -208,18 +211,21 @@ class AuthController extends Controller
                     // Pengecekan 1: Tolak jika ada huruf alfabet (a-z, A-Z)
                     if (preg_match('/[a-zA-Z]/', $value)) {
                         $fail('Nomor WhatsApp hanya boleh berupa angka! Tidak boleh ada huruf sama sekali.');
+
                         return;
                     }
 
                     // Pengecekan 2: Tolak jika ada spasi, strip, atau karakter non-angka (selain '+' di depan)
-                    if (!preg_match('/^\+?[0-9]+$/', $value)) {
+                    if (! preg_match('/^\+?[0-9]+$/', $value)) {
                         $fail('Nomor WhatsApp hanya boleh berisi angka tanpa spasi atau simbol.');
+
                         return;
                     }
 
                     // Pengecekan 3: Format seluler Indonesia (08, 628, atau +628) dengan panjang 10-14 digit
-                    if (!preg_match('/^(?:\+62|62|0)8[1-9][0-9]{7,11}$/', $value)) {
+                    if (! preg_match('/^(?:\+62|62|0)8[1-9][0-9]{7,11}$/', $value)) {
                         $fail('Format nomor WhatsApp tidak valid. Harus nomor seluler Indonesia yang diawali 08, 628, atau +628 dengan 10–14 digit angka.');
+
                         return;
                     }
                 },
@@ -238,27 +244,27 @@ class AuthController extends Controller
             // Persetujuan Terms & Conditions
             'terms' => ['accepted'],
         ], [
-            'name.required'      => 'Nama lengkap PIC wajib diisi.',
-            'name.min'           => 'Nama lengkap PIC minimal 3 karakter.',
-            'name.max'           => 'Nama lengkap PIC maksimal 100 karakter.',
-            'name.regex'         => 'Nama lengkap PIC hanya boleh berisi huruf dan tanda baca nama (titik, koma, petik tunggal, strip).',
-            'company.required'   => 'Nama perusahaan wajib diisi.',
-            'company.min'        => 'Nama perusahaan minimal 3 karakter.',
-            'company.max'        => 'Nama perusahaan maksimal 150 karakter.',
-            'company.regex'      => 'Nama perusahaan harus valid dan mengandung huruf.',
-            'email.required'     => 'Alamat email wajib diisi.',
-            'email.email'        => 'Format alamat email tidak valid.',
-            'email.regex'        => 'Format alamat email tidak valid atau domain tidak lengkap.',
-            'phone.required'     => 'Nomor WhatsApp wajib diisi.',
-            'password.required'  => 'Password wajib diisi.',
-            'password.min'       => 'Password minimal terdiri dari 8 karakter.',
-            'password.regex'     => 'Password harus mengandung kombinasi huruf dan angka.',
-            'password.confirmed'=> 'Konfirmasi password tidak cocok dengan password.',
-            'terms.accepted'     => 'Anda harus menyetujui Syarat & Ketentuan untuk melanjutkan pendaftaran.',
+            'name.required' => 'Nama lengkap PIC wajib diisi.',
+            'name.min' => 'Nama lengkap PIC minimal 3 karakter.',
+            'name.max' => 'Nama lengkap PIC maksimal 100 karakter.',
+            'name.regex' => 'Nama lengkap PIC hanya boleh berisi huruf dan tanda baca nama (titik, koma, petik tunggal, strip).',
+            'company.required' => 'Nama perusahaan wajib diisi.',
+            'company.min' => 'Nama perusahaan minimal 3 karakter.',
+            'company.max' => 'Nama perusahaan maksimal 150 karakter.',
+            'company.regex' => 'Nama perusahaan harus valid dan mengandung huruf.',
+            'email.required' => 'Alamat email wajib diisi.',
+            'email.email' => 'Format alamat email tidak valid.',
+            'email.regex' => 'Format alamat email tidak valid atau domain tidak lengkap.',
+            'phone.required' => 'Nomor WhatsApp wajib diisi.',
+            'password.required' => 'Password wajib diisi.',
+            'password.min' => 'Password minimal terdiri dari 8 karakter.',
+            'password.regex' => 'Password harus mengandung kombinasi huruf dan angka.',
+            'password.confirmed' => 'Konfirmasi password tidak cocok dengan password.',
+            'terms.accepted' => 'Anda harus menyetujui Syarat & Ketentuan untuk melanjutkan pendaftaran.',
         ]);
 
         // 3. Validasi Google reCAPTCHA v2
-        if (!$this->verifyRecaptcha($request->input('g-recaptcha-response'), $request->ip())) {
+        if (! $this->verifyRecaptcha($request->input('g-recaptcha-response'), $request->ip())) {
             return back()
                 ->withInput($request->except('password', 'password_confirmation'))
                 ->withErrors([
@@ -268,12 +274,12 @@ class AuthController extends Controller
 
         // 4. Normalisasi format nomor telepon ke format konsisten Indonesia (08xxxxxxxxx)
         $formattedPhone = WhatsAppService::formatPhoneNumber($rawPhone); // 628xxxxxxxx
-        $localPhone     = '0' . substr($formattedPhone, 2);             // 08xxxxxxxx
-        $plusPhone      = '+' . $formattedPhone;                        // +628xxxxxxxx
+        $localPhone = '0'.substr($formattedPhone, 2);             // 08xxxxxxxx
+        $plusPhone = '+'.$formattedPhone;                        // +628xxxxxxxx
 
         // 5. Validasi Keunikan Email & Nomor WhatsApp terhadap akun yang sudah aktif (Verified)
         $existingEmailUser = User::where('email', $rawEmail)->first();
-        if ($existingEmailUser && !is_null($existingEmailUser->email_verified_at)) {
+        if ($existingEmailUser && ! is_null($existingEmailUser->email_verified_at)) {
             return back()
                 ->withInput($request->except('password', 'password_confirmation'))
                 ->withErrors([
@@ -282,7 +288,7 @@ class AuthController extends Controller
         }
 
         $existingPhoneUser = User::whereIn('phone', [$localPhone, $formattedPhone, $plusPhone])->first();
-        if ($existingPhoneUser && !is_null($existingPhoneUser->email_verified_at)) {
+        if ($existingPhoneUser && ! is_null($existingPhoneUser->email_verified_at)) {
             return back()
                 ->withInput($request->except('password', 'password_confirmation'))
                 ->withErrors([
@@ -306,25 +312,25 @@ class AuthController extends Controller
         if ($existingEmailUser && is_null($existingEmailUser->email_verified_at)) {
             // Pengguna mencoba daftar ulang karena OTP sebelumnya expired / salah input
             $user = $existingEmailUser;
-            $user->name           = $validated['name'];
-            $user->company_name   = $validated['company'];
-            $user->phone          = $localPhone;
-            $user->password       = Hash::make($validated['password']);
-            $user->otp_code       = $otp;
+            $user->name = $validated['name'];
+            $user->company_name = $validated['company'];
+            $user->phone = $localPhone;
+            $user->password = Hash::make($validated['password']);
+            $user->otp_code = $otp;
             $user->otp_expires_at = now()->addMinutes(10);
             $user->save();
         } else {
             // Pendaftaran baru
             $user = User::create([
-                'name'              => $validated['name'],
-                'company_name'      => $validated['company'],
-                'email'             => $rawEmail,
-                'phone'             => $localPhone,
-                'password'          => Hash::make($validated['password']),
-                'role'              => 'klien',
+                'name' => $validated['name'],
+                'company_name' => $validated['company'],
+                'email' => $rawEmail,
+                'phone' => $localPhone,
+                'password' => Hash::make($validated['password']),
+                'role' => 'klien',
                 'email_verified_at' => null, // Status Unverified
-                'otp_code'          => $otp,
-                'otp_expires_at'    => now()->addMinutes(10),
+                'otp_code' => $otp,
+                'otp_expires_at' => now()->addMinutes(10),
             ]);
         }
 
@@ -334,10 +340,10 @@ class AuthController extends Controller
         // 9. Simpan state sesi pendaftaran untuk halaman verifikasi OTP
         session([
             'pending_user_id' => $user->id,
-            'pending_phone'   => $user->phone,
-            'pending_email'   => $user->email,
-            'pending_name'    => $user->name,
-            'otp_attempts'    => 0,
+            'pending_phone' => $user->phone,
+            'pending_email' => $user->email,
+            'pending_name' => $user->name,
+            'otp_attempts' => 0,
             'last_otp_resend' => now()->timestamp,
         ]);
 
@@ -346,7 +352,7 @@ class AuthController extends Controller
         }
 
         return redirect()->route('otp.verify')
-            ->with('success', 'Pendaftaran berhasil! Kode OTP verifikasi 6-digit telah dikirimkan ke nomor WhatsApp Anda (' . $user->phone . ').');
+            ->with('success', 'Pendaftaran berhasil! Kode OTP verifikasi 6-digit telah dikirimkan ke nomor WhatsApp Anda ('.$user->phone.').');
     }
 
     /**
@@ -356,27 +362,28 @@ class AuthController extends Controller
     {
         $userId = session('pending_user_id');
 
-        if (!$userId) {
+        if (! $userId) {
             return redirect()->route('register')
                 ->with('error', 'Sesi pendaftaran tidak ditemukan. Silakan isi form registrasi terlebih dahulu.');
         }
 
         $user = User::find($userId);
 
-        if (!$user) {
+        if (! $user) {
             session()->forget(['pending_user_id', 'pending_phone', 'pending_email', 'pending_name', 'otp_attempts']);
+
             return redirect()->route('register')
                 ->with('error', 'Data pengguna tidak ditemukan. Silakan daftar kembali.');
         }
 
         // Jika sudah terverifikasi, arahkan ke login
-        if (!is_null($user->email_verified_at)) {
+        if (! is_null($user->email_verified_at)) {
             return redirect()->route('login')
                 ->with('info', 'Akun Anda sudah aktif. Silakan masuk dengan email/nomor WhatsApp dan password.');
         }
 
         return view('auth.verify-otp', [
-            'user'  => $user,
+            'user' => $user,
             'phone' => session('pending_phone', $user->phone),
             'email' => session('pending_email', $user->email),
         ]);
@@ -389,14 +396,14 @@ class AuthController extends Controller
     {
         $userId = session('pending_user_id', $request->input('user_id'));
 
-        if (!$userId) {
+        if (! $userId) {
             return redirect()->route('register')
                 ->with('error', 'Sesi verifikasi berakhir. Silakan daftar kembali.');
         }
 
         $user = User::find($userId);
 
-        if (!$user) {
+        if (! $user) {
             return redirect()->route('register')
                 ->with('error', 'Pengguna tidak ditemukan.');
         }
@@ -422,7 +429,7 @@ class AuthController extends Controller
         }
 
         // Validasi format OTP: Mutlak 6 digit angka
-        if (empty($otpCode) || strlen($otpCode) !== 6 || !ctype_digit($otpCode)) {
+        if (empty($otpCode) || strlen($otpCode) !== 6 || ! ctype_digit($otpCode)) {
             return back()->withErrors([
                 'otp' => 'Masukkan 6 digit kode OTP angka secara lengkap.',
             ]);
@@ -474,14 +481,14 @@ class AuthController extends Controller
     {
         $userId = session('pending_user_id', $request->input('user_id'));
 
-        if (!$userId) {
+        if (! $userId) {
             return redirect()->route('register')
                 ->with('error', 'Sesi tidak valid. Silakan lakukan pendaftaran ulang.');
         }
 
         $user = User::find($userId);
 
-        if (!$user) {
+        if (! $user) {
             return redirect()->route('register')
                 ->with('error', 'Data pengguna tidak ditemukan.');
         }
@@ -491,6 +498,7 @@ class AuthController extends Controller
         $secondsSinceLast = now()->timestamp - $lastResend;
         if ($secondsSinceLast < 60 && $lastResend > 0) {
             $waitSeconds = 60 - $secondsSinceLast;
+
             return back()->withErrors([
                 'otp' => "Harap tunggu {$waitSeconds} detik lagi sebelum meminta kode OTP baru.",
             ]);
@@ -504,7 +512,7 @@ class AuthController extends Controller
 
         // Reset attempt counter & catat waktu resend
         session([
-            'otp_attempts'    => 0,
+            'otp_attempts' => 0,
             'last_otp_resend' => now()->timestamp,
         ]);
 
@@ -515,7 +523,7 @@ class AuthController extends Controller
             session()->flash('debug_otp', $otp);
         }
 
-        return back()->with('success', 'Kode OTP baru telah berhasil dikirimkan ke WhatsApp Anda (' . $user->phone . ').');
+        return back()->with('success', 'Kode OTP baru telah berhasil dikirimkan ke WhatsApp Anda ('.$user->phone.').');
     }
 
     /**
@@ -526,6 +534,7 @@ class AuthController extends Controller
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
+
         return redirect()->route('home')->with('success', 'Anda berhasil keluar dari sistem.');
     }
 
@@ -546,17 +555,18 @@ class AuthController extends Controller
 
         try {
             $response = Http::asForm()->timeout(5)->post('https://www.google.com/recaptcha/api/siteverify', [
-                'secret'   => $secret,
+                'secret' => $secret,
                 'response' => $token,
                 'remoteip' => $ip,
             ]);
 
             if ($response->successful()) {
                 $data = $response->json();
+
                 return (bool) ($data['success'] ?? false);
             }
         } catch (\Exception $e) {
-            Log::warning('reCAPTCHA siteverify error: ' . $e->getMessage());
+            Log::warning('reCAPTCHA siteverify error: '.$e->getMessage());
             // Dalam mode testing dengan test key Google, izinkan bypass jika gagal koneksi
             if ($secret === '6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe') {
                 return true;
@@ -566,4 +576,3 @@ class AuthController extends Controller
         return false;
     }
 }
-

@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 
@@ -32,12 +31,12 @@ class ReportController extends Controller
             ->get();
 
         $stats = [
-            'totalRevenue'      => DB::table('orders')->whereIn('status', ['processing', 'completed', 'verified'])->sum('total_cost'),
-            'totalOrders'       => DB::table('orders')->count(),
-            'completedOrders'   => DB::table('orders')->where('status', 'completed')->count(),
-            'approvedDocs'      => DB::table('client_documents')->where('status', 'approved')->count(),
-            'totalDocs'         => DB::table('client_documents')->count(),
-            'avgRating'         => round(DB::table('reviews')->avg('rating') ?? 4.9, 1),
+            'totalRevenue' => DB::table('orders')->whereIn('status', ['processing', 'completed', 'verified'])->sum('total_cost'),
+            'totalOrders' => DB::table('orders')->count(),
+            'completedOrders' => DB::table('orders')->where('status', 'completed')->count(),
+            'approvedDocs' => DB::table('client_documents')->where('status', 'approved')->count(),
+            'totalDocs' => DB::table('client_documents')->count(),
+            'avgRating' => round(DB::table('reviews')->avg('rating') ?? 4.9, 1),
         ];
 
         return view('admin.reports.index', compact('transactions', 'stats'));
@@ -71,7 +70,7 @@ class ReportController extends Controller
      */
     public function exportFinanceExcel(): StreamedResponse
     {
-        $filename = 'Laporan_Mutasi_Keuangan_IZINYOU_' . date('Ymd_His') . '.csv';
+        $filename = 'Laporan_Mutasi_Keuangan_IZINYOU_'.date('Ymd_His').'.csv';
 
         $orders = DB::table('orders')
             ->leftJoin('users', 'orders.user_id', '=', 'users.id')
@@ -90,16 +89,16 @@ class ReportController extends Controller
             ->get();
 
         $headers = [
-            'Content-Type'        => 'text/csv; charset=UTF-8',
+            'Content-Type' => 'text/csv; charset=UTF-8',
             'Content-Disposition' => "attachment; filename=\"{$filename}\"",
-            'Pragma'              => 'no-cache',
-            'Cache-Control'       => 'must-revalidate, post-check=0, pre-check=0',
-            'Expires'             => '0',
+            'Pragma' => 'no-cache',
+            'Cache-Control' => 'must-revalidate, post-check=0, pre-check=0',
+            'Expires' => '0',
         ];
 
         return response()->stream(function () use ($orders) {
             $handle = fopen('php://output', 'w');
-            
+
             // UTF-8 BOM for Microsoft Excel compatibility
             fprintf($handle, chr(0xEF).chr(0xBB).chr(0xBF));
 
@@ -118,7 +117,7 @@ class ReportController extends Controller
                 'Metode Pembayaran',
                 'Nominal (IDR)',
                 'Status Projek',
-                'Status Pembayaran'
+                'Status Pembayaran',
             ]);
 
             $no = 1;
@@ -151,14 +150,14 @@ class ReportController extends Controller
     public function exportQualityPdf()
     {
         $stats = [
-            'totalDocs'      => DB::table('client_documents')->count(),
-            'approvedDocs'   => DB::table('client_documents')->where('status', 'approved')->count(),
-            'pendingDocs'    => DB::table('client_documents')->where('status', 'uploaded')->count(),
-            'rejectedDocs'   => DB::table('client_documents')->where('status', 'rejected')->count(),
-            'totalOrders'    => DB::table('orders')->count(),
-            'completedOrders'=> DB::table('orders')->where('status', 'completed')->count(),
-            'avgRating'      => round(DB::table('reviews')->avg('rating') ?? 4.9, 1),
-            'reviewsCount'   => DB::table('reviews')->count(),
+            'totalDocs' => DB::table('client_documents')->count(),
+            'approvedDocs' => DB::table('client_documents')->where('status', 'approved')->count(),
+            'pendingDocs' => DB::table('client_documents')->where('status', 'uploaded')->count(),
+            'rejectedDocs' => DB::table('client_documents')->where('status', 'rejected')->count(),
+            'totalOrders' => DB::table('orders')->count(),
+            'completedOrders' => DB::table('orders')->where('status', 'completed')->count(),
+            'avgRating' => round(DB::table('reviews')->avg('rating') ?? 4.9, 1),
+            'reviewsCount' => DB::table('reviews')->count(),
         ];
 
         $documents = DB::table('client_documents')
@@ -181,7 +180,7 @@ class ReportController extends Controller
      */
     public function exportQualityExcel(): StreamedResponse
     {
-        $filename = 'Laporan_Mutu_Layanan_IZINYOU_' . date('Ymd_His') . '.csv';
+        $filename = 'Laporan_Mutu_Layanan_IZINYOU_'.date('Ymd_His').'.csv';
 
         $documents = DB::table('client_documents')
             ->leftJoin('orders', 'client_documents.order_id', '=', 'orders.id')
@@ -200,16 +199,16 @@ class ReportController extends Controller
             ->get();
 
         $headers = [
-            'Content-Type'        => 'text/csv; charset=UTF-8',
+            'Content-Type' => 'text/csv; charset=UTF-8',
             'Content-Disposition' => "attachment; filename=\"{$filename}\"",
-            'Pragma'              => 'no-cache',
-            'Cache-Control'       => 'must-revalidate, post-check=0, pre-check=0',
-            'Expires'             => '0',
+            'Pragma' => 'no-cache',
+            'Cache-Control' => 'must-revalidate, post-check=0, pre-check=0',
+            'Expires' => '0',
         ];
 
         return response()->stream(function () use ($documents) {
             $handle = fopen('php://output', 'w');
-            
+
             fprintf($handle, chr(0xEF).chr(0xBB).chr(0xBF));
 
             fputcsv($handle, ['LAPORAN MUTU & KAJIAN KEPATUHAN STANDAR REGULASI']);
@@ -225,7 +224,7 @@ class ReportController extends Controller
                 'Berkas Teknis Diuji',
                 'Status Verifikasi Mutu',
                 'Catatan Rekomendasi Legal/Teknis',
-                'Tanggal Unggah'
+                'Tanggal Unggah',
             ]);
 
             $no = 1;

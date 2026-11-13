@@ -51,17 +51,14 @@
                 <h1 class="font-black text-2xl text-slate-900 tracking-tight leading-tight flex items-center justify-center gap-1.5">
                     PRASTA <span class="text-sky-600">SOLUSI</span>
                 </h1>
-                <p class="text-xs text-sky-600 font-bold tracking-widest uppercase mt-1">INDONESIA &bull; RCMS</p>
+                <p class="text-xs text-sky-600 font-bold tracking-widest uppercase mt-1">INDONESIA</p>
                 <p class="text-[11px] text-slate-400 mt-0.5">Platform Perizinan &amp; Sertifikasi (IzinYou)</p>
             </div>
         </a>
 
-        <h2 class="text-center text-2xl font-extrabold text-corporate">
-            Masuk ke Portal IzinYou
+        <h2 class="text-center text-xl sm:text-2xl font-extrabold text-corporate">
+            Masuk ke Akun Anda
         </h2>
-        <p class="mt-2 text-center text-sm text-slate-500">
-            Akses akun Anda untuk memantau proses perizinan dan sertifikasi
-        </p>
     </div>
 
     <!-- Form Card -->
@@ -105,9 +102,8 @@
 
                 {{-- Email / WhatsApp Phone Number --}}
                 <div>
-                    <label for="email" class="block text-sm font-semibold text-slate-700 mb-1.5 flex items-center justify-between">
-                        <span>Email atau Nomor WhatsApp</span>
-                        <span class="text-[10px] text-slate-400 font-normal">Cth: 0812xxx atau email@domain.com</span>
+                    <label for="email" class="block text-sm font-semibold text-slate-700 mb-1.5">
+                        Email atau Nomor WhatsApp
                     </label>
                     <div class="relative rounded-xl shadow-sm">
                         <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none" id="loginIconWrapper">
@@ -121,7 +117,6 @@
                             required 
                             value="{{ old('email', old('login')) }}"
                             class="input-field block w-full pl-11 pr-4 py-3 sm:text-sm border rounded-xl bg-slate-50 border-slate-200 focus:outline-none focus:border-sky-500 focus:bg-white transition-colors @error('email') border-rose-400 bg-rose-50 @enderror"
-                            placeholder="email@perusahaan.com atau 081234567890"
                         >
                     </div>
                     @error('email')
@@ -145,7 +140,6 @@
                             autocomplete="current-password" 
                             required 
                             class="input-field block w-full pl-11 pr-12 py-3 sm:text-sm border rounded-xl bg-slate-50 border-slate-200 focus:outline-none focus:border-sky-500 focus:bg-white transition-colors"
-                            placeholder="••••••••"
                         >
                         {{-- Toggle Show/Hide Password --}}
                         <button type="button" id="togglePassword" class="absolute inset-y-0 right-0 pr-3.5 flex items-center text-slate-400 hover:text-slate-700 transition-colors">
@@ -169,7 +163,9 @@
 
                 {{-- Google reCAPTCHA v2 Checkbox --}}
                 <div class="pt-2 flex flex-col items-center justify-center">
-                    <div class="g-recaptcha scale-95 sm:scale-100 origin-center" data-sitekey="{{ config('services.recaptcha.site_key', env('RECAPTCHA_SITE_KEY', '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI')) }}"></div>
+                    <div style="width: 304px; height: 78px; overflow: hidden; display: flex; align-items: flex-end; justify-content: center; border-radius: 4px;">
+                        <div class="g-recaptcha origin-bottom" data-sitekey="{{ config('services.recaptcha.site_key', env('RECAPTCHA_SITE_KEY', '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI')) }}"></div>
+                    </div>
                     @error('g-recaptcha-response')
                         <p class="text-xs text-rose-500 font-semibold mt-1 text-center">{{ $message }}</p>
                     @enderror
@@ -209,21 +205,13 @@
                 <span class="text-slate-500">Belum punya akun klien?</span>
                 <a href="{{ route('register') }}" class="font-bold text-sky-600 hover:text-sky-500 ml-1 transition-colors">Daftar Sekarang</a>
             </div>
-
-            {{-- Info Divider --}}
-            <div class="mt-6 pt-6 border-t border-slate-100">
-                <p class="text-center text-xs text-slate-400 leading-relaxed">
-                    Masuk menggunakan email & password akun yang terdaftar di sistem IzinYou.<br>
-                    Platform ini dioperasikan resmi oleh <strong>CV Prasta Solusi Indonesia</strong>.
-                </p>
-            </div>
         </div>
 
         {{-- Back to Home --}}
-        <div class="text-center mt-6">
+        <div class="text-center mt-3.5">
             <a href="/" class="text-sm text-slate-500 hover:text-corporate font-medium transition-colors inline-flex items-center gap-1.5">
                 <i data-lucide="arrow-left" class="w-4 h-4"></i>
-                Kembali ke Halaman Utama IzinYou
+                Kembali ke Halaman Utama
             </a>
         </div>
     </div>

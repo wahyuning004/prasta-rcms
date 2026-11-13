@@ -11,8 +11,7 @@ class CheckRole
     /**
      * Handle an incoming request.
      *
-     * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
-     * @param  string  ...$roles
+     * @param  Closure(Request): (Response)  $next
      */
     public function handle(Request $request, Closure $next, string ...$roles): Response
     {
@@ -39,12 +38,12 @@ class CheckRole
                     $allowedRoles[] = 'client';
                 } elseif ($roleClean === 'legal') {
                     $allowedRoles[] = 'konsultan';
-                } elseif ($roleClean === 'finance') {
+                } elseif ($roleClean === 'officer' || $roleClean === 'petugas') {
                     $allowedRoles[] = 'officer';
                     $allowedRoles[] = 'petugas';
                 } elseif (in_array($roleClean, ['staff', 'staf'])) {
                     $allowedRoles = array_merge($allowedRoles, [
-                        'marketing', 'legal', 'finance', 'officer', 'konsultan', 'petugas'
+                        'marketing', 'legal', 'finance', 'officer', 'konsultan', 'petugas',
                     ]);
                 }
             }
@@ -55,7 +54,7 @@ class CheckRole
             $dashboardRoute = $request->user()->getDashboardRoute();
 
             return redirect()->route($dashboardRoute)
-                ->with('error', 'Akses ditolak (RBAC). Akun Anda (' . $request->user()->getRoleLabel() . ') tidak memiliki izin untuk membuka halaman tersebut.');
+                ->with('error', 'Akses ditolak (RBAC). Akun Anda ('.$request->user()->getRoleLabel().') tidak memiliki izin untuk membuka halaman tersebut.');
         }
 
         return $next($request);

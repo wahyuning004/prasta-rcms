@@ -154,8 +154,7 @@
                         <i data-lucide="chevron-down" class="w-4 h-4"></i>
                     </button>
                     <div id="mobileSubmenuLayanan" class="pl-2 py-2 space-y-1 bg-slate-50 rounded-2xl mt-1 hidden max-h-72 overflow-y-auto">
-                        @php $allSvcsMobile = \App\Models\Service::orderBy('name')->get(); @endphp
-                        @foreach($allSvcsMobile as $sv)
+                        @foreach($allSvcs as $sv)
                             <a href="{{ route('services.show', $sv->slug) }}" class="flex items-center justify-between py-2 px-3 rounded-xl text-xs font-medium {{ $sv->id === $service->id ? 'bg-sky-50 text-sky-700 font-semibold' : 'text-slate-700 hover:text-sky-600 hover:bg-sky-50' }} transition">
                                 <span class="truncate">{{ $sv->name }}</span>
                                 <i data-lucide="arrow-right" class="w-3.5 h-3.5 text-slate-400 shrink-0 ml-2"></i>
@@ -187,7 +186,7 @@
             <nav class="flex items-center gap-2 text-xs text-slate-400 mb-6">
                 <a href="{{ route('home') }}" class="hover:text-sky-400 transition-colors">Beranda</a>
                 <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-slate-600"></i>
-                <a href="{{ route('home') }}#layanan" class="hover:text-sky-400 transition-colors">Layanan</a>
+                <a href="{{ route('catalog.index') }}" class="hover:text-sky-400 transition-colors">Layanan</a>
                 <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-slate-600"></i>
                 <span class="text-sky-400 font-semibold truncate max-w-xs">{{ $service->name }}</span>
             </nav>
@@ -260,10 +259,17 @@
                         <!-- CTA Actions -->
                         <div class="space-y-3">
                             @auth
-                                <a href="{{ route('dashboard') }}" class="w-full py-3.5 px-4 bg-sky-600 hover:bg-sky-500 text-white font-bold text-sm rounded-xl shadow-lg shadow-sky-600/30 transition-all flex items-center justify-center gap-2">
-                                    <i data-lucide="shopping-cart" class="w-4 h-4"></i>
-                                    Pesan Layanan di Portal
-                                </a>
+                                @if(auth()->user()->isKlien())
+                                    <a href="{{ route('klien.checkout.show', $service->slug) }}" class="w-full py-3.5 px-4 bg-sky-600 hover:bg-sky-500 text-white font-bold text-sm rounded-xl shadow-lg shadow-sky-600/30 transition-all flex items-center justify-center gap-2">
+                                        <i data-lucide="shopping-cart" class="w-4 h-4"></i>
+                                        Pesan &amp; Checkout Layanan
+                                    </a>
+                                @else
+                                    <a href="{{ route('dashboard') }}" class="w-full py-3.5 px-4 bg-sky-600 hover:bg-sky-500 text-white font-bold text-sm rounded-xl shadow-lg shadow-sky-600/30 transition-all flex items-center justify-center gap-2">
+                                        <i data-lucide="layout-dashboard" class="w-4 h-4"></i>
+                                        Buka Dashboard Staf
+                                    </a>
+                                @endif
                             @else
                                 <a href="{{ route('register') }}" class="w-full py-3.5 px-4 bg-sky-600 hover:bg-sky-500 text-white font-bold text-sm rounded-xl shadow-lg shadow-sky-600/30 transition-all flex items-center justify-center gap-2">
                                     <i data-lucide="user-plus" class="w-4 h-4"></i>
@@ -271,7 +277,12 @@
                                 </a>
                             @endauth
 
-                            <a href="https://wa.me/6282128765874?text={{ rawurlencode('Halo Konsultan IzinYou, saya ingin berkonsultasi mengenai persiapan izin: ' . $service->name) }}" target="_blank" class="w-full py-3.5 px-4 bg-slate-100 hover:bg-slate-200 text-corporate font-bold text-sm rounded-xl transition-all flex items-center justify-center gap-2">
+                            <button type="button" onclick="openDocConsultModal()" class="w-full py-3 px-4 bg-amber-50 hover:bg-amber-100 text-amber-900 border border-amber-200 font-bold text-sm rounded-xl transition-all flex items-center justify-center gap-2">
+                                <i data-lucide="help-circle" class="w-4 h-4 text-amber-600"></i>
+                                Konsultasi Lanjutan Layanan
+                            </button>
+
+                            <a href="https://wa.me/6282128765874?text={{ rawurlencode('Halo Konsultan IzinYou, saya ingin berkonsultasi mengenai persiapan izin: ' . $service->name) }}" target="_blank" class="w-full py-3 px-4 bg-slate-100 hover:bg-slate-200 text-corporate font-bold text-sm rounded-xl transition-all flex items-center justify-center gap-2">
                                 <i data-lucide="message-circle" class="w-4 h-4 text-sky-600"></i>
                                 Konsultasi Cepat via WhatsApp
                             </a>
@@ -304,6 +315,19 @@
         <div class="p-4 bg-sky-50 border border-sky-200 rounded-2xl flex items-center gap-3 text-sky-800 text-sm font-semibold">
             <i data-lucide="check-circle" class="w-5 h-5 text-sky-600 shrink-0"></i>
             {{ session('success') }}
+        </div>
+    </div>
+    @endif
+
+    @if($errors->any())
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-6">
+        <div class="p-4 bg-rose-50 border border-rose-200 rounded-2xl text-rose-800 text-sm">
+            <p class="font-bold mb-1">Pengiriman konsultasi gagal:</p>
+            <ul class="list-disc pl-5 text-xs space-y-0.5">
+                @foreach($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
         </div>
     </div>
     @endif
@@ -486,76 +510,49 @@
                         </button>
                     </div>
 
-                    @php
-                        $rawDocs = $service->requirements_info ?: $service->requirements_summary;
-                        $docLines = array_filter(array_map('trim', explode("\n", $rawDocs ?: '')));
-                        if(empty($docLines)) {
-                            $docLines = [
-                                'Akta Pendirian & Akta Perubahan Terakhir (SK Kemenkumham)',
-                                'NIB (Nomor Induk Berusaha) OSS RBA berbasis risiko',
-                                'NPWP Perusahaan & KTP Penanggung Jawab / Direktur',
-                                'Bukti Kepemilikan atau Surat Perjanjian Sewa Sarana & Gudang',
-                                'Struktur Organisasi & Surat Penunjukan Penanggung Jawab Teknis (PJT)',
-                                'Ijazah & Surat Tanda Registrasi Tenaga Teknis (STRA/STRTTK/SKK)',
-                                'Denah / Layout Tata Ruang Fasilitas & Sarana Penyimpanan (Suhu Terkontrol)',
-                                'Dokumen SOP Mutu (Penerimaan, Penyimpanan, Distribusi, Penanganan Keluhan)',
-                                'Spesifikasi Teknis Produk, Certificate of Analysis (CoA) / Hasil Uji Lab',
-                            ];
-                        }
-                    @endphp
-
-                    <!-- 3 Kategori Dokumen Checklist -->
+                    <!-- Checklist Persyaratan Dokumen Wajib & Opsional dari Database -->
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-                        <!-- Grup 1: Administrasi & Persyaratan Dasar Perusahaan -->
+                        <!-- Grup 1: Dokumen Wajib -->
                         <div class="p-6 rounded-2xl bg-slate-50 border border-slate-200/80">
                             <h4 class="text-xs font-bold text-corporate uppercase tracking-wider mb-4 flex items-center gap-2">
-                                <i data-lucide="building" class="w-4 h-4 text-sky-600"></i> Berkas Administrasi Dasar
+                                <i data-lucide="shield-alert" class="w-4 h-4 text-rose-600"></i> Dokumen Wajib ({{ $mandatoryRequirements->count() }})
                             </h4>
                             <ul class="space-y-2.5 text-xs text-slate-700">
+                                @forelse($mandatoryRequirements as $req)
                                 <li class="flex items-start gap-2.5">
                                     <div class="w-4 h-4 rounded-full bg-sky-100 text-sky-600 flex items-center justify-center shrink-0 mt-0.5">
                                         <i data-lucide="check" class="w-2.5 h-2.5 stroke-[3]"></i>
                                     </div>
-                                    <span>Akta Pendirian &amp; SK Kemenkumham</span>
-                                </li>
-                                <li class="flex items-start gap-2.5">
-                                    <div class="w-4 h-4 rounded-full bg-sky-100 text-sky-600 flex items-center justify-center shrink-0 mt-0.5">
-                                        <i data-lucide="check" class="w-2.5 h-2.5 stroke-[3]"></i>
+                                    <div>
+                                        <span class="font-semibold text-corporate">{{ $req->document_name }}</span>
+                                        <span class="ml-1.5 text-[10px] font-bold px-1.5 py-0.5 rounded bg-sky-50 text-sky-700 border border-sky-200">{{ $req->document_type ?? 'Wajib' }}</span>
                                     </div>
-                                    <span>NIB Berbasis Risiko (OSS RBA) dengan KBLI Sesuai</span>
                                 </li>
-                                <li class="flex items-start gap-2.5">
-                                    <div class="w-4 h-4 rounded-full bg-sky-100 text-sky-600 flex items-center justify-center shrink-0 mt-0.5">
-                                        <i data-lucide="check" class="w-2.5 h-2.5 stroke-[3]"></i>
-                                    </div>
-                                    <span>NPWP Badan Usaha &amp; KTP Penanggung Jawab</span>
-                                </li>
-                                <li class="flex items-start gap-2.5">
-                                    <div class="w-4 h-4 rounded-full bg-sky-100 text-sky-600 flex items-center justify-center shrink-0 mt-0.5">
-                                        <i data-lucide="check" class="w-2.5 h-2.5 stroke-[3]"></i>
-                                    </div>
-                                    <span>Bukti Kepemilikan / Sewa Gudang &amp; Kantor</span>
-                                </li>
+                                @empty
+                                <li class="text-slate-400 italic">Persyaratan dokumen wajib sedang diperbarui.</li>
+                                @endforelse
                             </ul>
                         </div>
 
-                        <!-- Grup 2: Dokumen Teknis & Sarana Khusus -->
+                        <!-- Grup 2: Dokumen Opsional / Pendukung -->
                         <div class="p-6 rounded-2xl bg-slate-50 border border-slate-200/80">
                             <h4 class="text-xs font-bold text-corporate uppercase tracking-wider mb-4 flex items-center gap-2">
-                                <i data-lucide="clipboard-list" class="w-4 h-4 text-sky-600"></i> Berkas Teknis &amp; Spesifik
+                                <i data-lucide="clipboard-list" class="w-4 h-4 text-sky-600"></i> Dokumen Opsional &amp; Pendukung ({{ $optionalRequirements->count() }})
                             </h4>
                             <ul class="space-y-2.5 text-xs text-slate-700">
-                                @foreach($docLines as $doc)
-                                    @php $clean = ltrim($doc, "•- \t"); @endphp
-                                    @if(!empty($clean))
-                                    <li class="flex items-start gap-2.5">
-                                        <div class="w-4 h-4 rounded-full bg-sky-100 text-sky-600 flex items-center justify-center shrink-0 mt-0.5">
-                                            <i data-lucide="check" class="w-2.5 h-2.5 stroke-[3]"></i>
-                                        </div>
-                                        <span>{{ $clean }}</span>
-                                    </li>
-                                    @endif
-                                @endforeach
+                                @forelse($optionalRequirements as $opt)
+                                <li class="flex items-start gap-2.5">
+                                    <div class="w-4 h-4 rounded-full bg-slate-200 text-slate-600 flex items-center justify-center shrink-0 mt-0.5">
+                                        <i data-lucide="plus" class="w-2.5 h-2.5 stroke-[3]"></i>
+                                    </div>
+                                    <div>
+                                        <span class="font-semibold text-corporate">{{ $opt->document_name }}</span>
+                                        <span class="ml-1.5 text-[10px] font-bold px-1.5 py-0.5 rounded bg-slate-200 text-slate-600">Opsional</span>
+                                    </div>
+                                </li>
+                                @empty
+                                <li class="text-slate-500">Tidak ada dokumen opsional tambahan.</li>
+                                @endforelse
                             </ul>
                         </div>
                     </div>
@@ -607,7 +604,6 @@
                             <div class="flex-1 bg-slate-50 p-5 rounded-2xl border border-slate-100">
                                 <div class="flex items-center justify-between mb-1">
                                     <h4 class="text-sm font-bold text-corporate">Audit Awal &amp; Gap Analysis Kelengkapan Berkas</h4>
-                                    <span class="text-[11px] font-semibold text-sky-600 bg-sky-50 px-2 py-0.5 rounded-full">Hari ke 1 - 3</span>
                                 </div>
                                 <p class="text-xs text-slate-600 leading-relaxed">
                                     Pemeriksaan kesesuaian data NIB KBLI, akta, sarana operasional, serta kelayakan berkas awal untuk mencegah penolakan atau revisi di kemudian hari.
@@ -624,7 +620,6 @@
                             <div class="flex-1 bg-slate-50 p-5 rounded-2xl border border-slate-100">
                                 <div class="flex items-center justify-between mb-1">
                                     <h4 class="text-sm font-bold text-corporate">Penyusunan Draf SOP Teknis &amp; Manual Mutu</h4>
-                                    <span class="text-[11px] font-semibold text-slate-600 bg-slate-200 px-2 py-0.5 rounded-full">Hari ke 4 - 10</span>
                                 </div>
                                 <p class="text-xs text-slate-600 leading-relaxed">
                                     Tim konsultan menyusun draf SOP operasional, denah sarana berstandar kementerian, dokumen Sistem Jaminan Mutu, serta validasi instrumen teknis.
@@ -641,7 +636,6 @@
                             <div class="flex-1 bg-slate-50 p-5 rounded-2xl border border-slate-100">
                                 <div class="flex items-center justify-between mb-1">
                                     <h4 class="text-sm font-bold text-corporate">Pendaftaran Akun &amp; Submit Berkas ke Portal Instansi Resmi</h4>
-                                    <span class="text-[11px] font-semibold text-slate-600 bg-slate-200 px-2 py-0.5 rounded-full">Hari ke 11 - 15</span>
                                 </div>
                                 <p class="text-xs text-slate-600 leading-relaxed">
                                     Unggah berkas resmi ke portal Kemenkes / BPOM / BPJPH / OSS RBA, penerbitan Surat Perintah Bayar (SPB) retribusi PNBP, serta verifikasi kelengkapan akun resmi.
@@ -658,7 +652,6 @@
                             <div class="flex-1 bg-slate-50 p-5 rounded-2xl border border-slate-100">
                                 <div class="flex items-center justify-between mb-1">
                                     <h4 class="text-sm font-bold text-corporate">Pendampingan Asesmen Teknis / Verifikasi Lapangan (Audit)</h4>
-                                    <span class="text-[11px] font-semibold text-slate-600 bg-slate-200 px-2 py-0.5 rounded-full">Hari ke 16 - 25</span>
                                 </div>
                                 <p class="text-xs text-slate-600 leading-relaxed">
                                     Simulasi audit internal, pendampingan saat petugas dinas/balai melakukan inspeksi sarana atau audit LPH, serta penyelesaian Corrective Action (CAPA) jika ada catatan evaluasi.
@@ -794,6 +787,58 @@
 
         </div>
 
+        <!-- Rating & Ulasan Pelanggan (Publik dari Database) -->
+        <div class="mt-12 bg-white rounded-3xl p-6 sm:p-10 shadow-sm border border-slate-200" id="ulasan-layanan">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 mb-6 border-b border-slate-100">
+                <div>
+                    <h3 class="text-xl font-extrabold text-corporate flex items-center gap-2.5">
+                        <i data-lucide="star" class="w-6 h-6 text-amber-500"></i>
+                        Rating &amp; Ulasan Pelanggan
+                    </h3>
+                    <p class="text-xs text-slate-500 mt-1">Penilaian terverifikasi dari mitra perusahaan yang telah menyelesaikan layanan ini.</p>
+                </div>
+                <div class="flex items-center gap-3 bg-amber-50 px-4 py-2.5 rounded-2xl border border-amber-200">
+                    <span class="text-2xl font-black text-corporate">{{ $publishedReviews->count() > 0 ? number_format($avgRating, 1) : '0.0' }}</span>
+                    <div>
+                        <div class="flex text-amber-400 gap-0.5">
+                            @for($s = 1; $s <= 5; $s++)
+                                <i data-lucide="star" class="w-3.5 h-3.5 {{ $s <= round($avgRating) ? 'fill-current' : 'text-slate-300' }}"></i>
+                            @endfor
+                        </div>
+                        <p class="text-[11px] text-slate-600 font-semibold">{{ $publishedReviews->count() }} Ulasan Terverifikasi</p>
+                    </div>
+                </div>
+            </div>
+
+            @if($publishedReviews->isNotEmpty())
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                    @foreach($publishedReviews as $rev)
+                        <div class="p-5 rounded-2xl bg-slate-50 border border-slate-100 flex flex-col justify-between space-y-3">
+                            <div>
+                                <div class="flex items-center justify-between gap-2 mb-2">
+                                    <div class="flex items-center gap-1 text-amber-400">
+                                        @for($i = 1; $i <= 5; $i++)
+                                            <i data-lucide="star" class="w-4 h-4 {{ $i <= $rev->rating ? 'fill-current' : 'text-slate-300' }}"></i>
+                                        @endfor
+                                    </div>
+                                    <span class="text-[11px] text-slate-400">{{ $rev->created_at?->format('d M Y') }}</span>
+                                </div>
+                                <p class="text-xs sm:text-sm text-slate-700 leading-relaxed italic">"{{ $rev->comment }}"</p>
+                            </div>
+                            <div class="pt-3 border-t border-slate-200/70">
+                                <p class="text-xs font-bold text-corporate">{{ $rev->user?->name ?? 'Pelanggan Mitra' }}</p>
+                                <p class="text-[11px] text-slate-500">{{ $rev->user?->company_name ?? 'Mitra Perusahaan' }}</p>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+            @else
+                <div class="text-center py-8 text-slate-400 text-xs sm:text-sm">
+                    Belum ada ulasan publik untuk layanan ini. Jadilah mitra pertama yang membagikan pengalaman setelah proyek selesai.
+                </div>
+            @endif
+        </div>
+
         <!-- 5. Related Services Section -->
         @if($relatedServices->isNotEmpty())
         <div class="mt-16 pt-12 border-t border-slate-200">
@@ -843,7 +888,7 @@
                 Sampaikan kendala berkas yang belum Anda miliki untuk layanan <strong>{{ $service->name }}</strong>. Tim Regulatory kami akan memberikan rekomendasi solusi teknis.
             </p>
 
-            <form action="{{ route('services.consultation') }}" method="POST" onsubmit="handleDocConsultSubmit(event)" class="space-y-4">
+            <form action="{{ route('services.consultation') }}" method="POST" class="space-y-4">
                 @csrf
                 <input type="hidden" name="service_name" value="{{ $service->name }}">
 
@@ -920,7 +965,7 @@
                     <h4 class="text-white font-bold mb-4 text-sm">Navigasi</h4>
                     <ul class="space-y-2 text-xs">
                         <li><a href="{{ route('home') }}" class="hover:text-sky-400 transition">Beranda</a></li>
-                        <li><a href="{{ route('home') }}#layanan" class="hover:text-sky-400 transition">Katalog Layanan</a></li>
+                        <li><a href="{{ route('catalog.index') }}" class="hover:text-sky-400 transition">Katalog Layanan</a></li>
                         <li><a href="{{ route('home') }}#kontak" class="hover:text-sky-400 transition">Hubungi Konsultan</a></li>
                     </ul>
                 </div>
@@ -979,23 +1024,6 @@
             if (modal) {
                 modal.classList.add('hidden'); // Sembunyikan modal
             }
-        }
-
-        // ── Handler Submit Form Konsultasi Dokumen ──
-        // Tidak benar-benar mengirim form, melainkan membuka WhatsApp langsung
-        function handleDocConsultSubmit(e) {
-            // Ambil nilai dari setiap field form
-            const name     = document.getElementById('docConsultName')?.value;
-            const phone    = document.getElementById('docConsultPhone')?.value;
-            const company  = document.getElementById('docConsultCompany')?.value || '-';
-            const category = document.getElementById('docConsultCategory')?.value;
-            const msg      = document.getElementById('docConsultMsg')?.value;
-
-            // Susun pesan WhatsApp terstruktur dan buka di tab baru agar komunikasi instan
-            const waText = encodeURIComponent(
-                `Halo Tim Legal & Marketing IzinYou (CV Prasta Solusi Indonesia),\n\nSaya ingin berkonsultasi mengenai kekurangan/kendala berkas persyaratan:\n• Layanan: {{ $service->name }}\n• PIC: ${name}\n• Perusahaan: ${company}\n• No WA: ${phone}\n• Kendala Dokumen: ${category}\n• Detail Keterangan: ${msg}`
-            );
-            window.open(`https://wa.me/6282128765874?text=${waText}`, '_blank');
         }
 
         // ── Toggle Mobile Menu untuk halaman detail layanan ──

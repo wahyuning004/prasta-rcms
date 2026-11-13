@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Service;
+use App\Services\ServiceRequirementSyncService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -25,8 +26,8 @@ class ServiceController extends Controller
             $search = $request->search;
             $query->where(function ($q) use ($search) {
                 $q->where('name', 'like', "%{$search}%")
-                  ->orWhere('description', 'like', "%{$search}%")
-                  ->orWhere('requirements_info', 'like', "%{$search}%");
+                    ->orWhere('description', 'like', "%{$search}%")
+                    ->orWhere('requirements_info', 'like', "%{$search}%");
             });
         }
 
@@ -42,6 +43,7 @@ class ServiceController extends Controller
     public function create()
     {
         $categories = Category::orderBy('name')->get();
+
         return view('admin.services.create', compact('categories'));
     }
 
@@ -51,30 +53,31 @@ class ServiceController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'category_id'         => ['required', 'exists:categories,id'],
-            'name'                => ['required', 'string', 'max:255'],
-            'slug'                => ['nullable', 'string', 'max:255', 'unique:services,slug'],
-            'description'         => ['nullable', 'string'],
-            'requirements_info'   => ['nullable', 'string'],
+            'category_id' => ['required', 'exists:categories,id'],
+            'name' => ['required', 'string', 'max:255'],
+            'slug' => ['nullable', 'string', 'max:255', 'unique:services,slug'],
+            'description' => ['nullable', 'string'],
+            'requirements_info' => ['nullable', 'string'],
             'timeline_estimation' => ['nullable', 'string', 'max:255'],
-            'price'               => ['required', 'numeric', 'min:0'],
+            'price' => ['required', 'numeric', 'min:0'],
         ], [
             'category_id.required' => 'Pilih kategori layanan yang sesuai.',
-            'category_id.exists'   => 'Kategori yang dipilih tidak valid.',
-            'name.required'        => 'Nama layanan perizinan & sertifikasi wajib diisi.',
-            'slug.unique'          => 'Slug layanan ini sudah digunakan.',
-            'price.required'       => 'Biaya estimasi layanan wajib diisi.',
-            'price.numeric'        => 'Biaya harus berupa nominal angka valid.',
+            'category_id.exists' => 'Kategori yang dipilih tidak valid.',
+            'name.required' => 'Nama layanan perizinan & sertifikasi wajib diisi.',
+            'slug.unique' => 'Slug layanan ini sudah digunakan.',
+            'price.required' => 'Biaya estimasi layanan wajib diisi.',
+            'price.numeric' => 'Biaya harus berupa nominal angka valid.',
         ]);
 
         if (empty($validated['slug'])) {
             $validated['slug'] = Str::slug($validated['name']);
         }
 
-        Service::create($validated);
+        $service = Service::create($validated);
+        app(ServiceRequirementSyncService::class)->ensureForService($service);
 
         return redirect()->route('admin.services.index')
-            ->with('success', 'Layanan perizinan & sertifikasi "' . $validated['name'] . '" berhasil ditambahkan.');
+            ->with('success', 'Layanan perizinan & sertifikasi "'.$validated['name'].'" berhasil ditambahkan.');
     }
 
     /**
@@ -83,6 +86,7 @@ class ServiceController extends Controller
     public function edit(Service $service)
     {
         $categories = Category::orderBy('name')->get();
+
         return view('admin.services.edit', compact('service', 'categories'));
     }
 
@@ -92,20 +96,20 @@ class ServiceController extends Controller
     public function update(Request $request, Service $service)
     {
         $validated = $request->validate([
-            'category_id'         => ['required', 'exists:categories,id'],
-            'name'                => ['required', 'string', 'max:255'],
-            'slug'                => ['nullable', 'string', 'max:255', 'unique:services,slug,' . $service->id],
-            'description'         => ['nullable', 'string'],
-            'requirements_info'   => ['nullable', 'string'],
+            'category_id' => ['required', 'exists:categories,id'],
+            'name' => ['required', 'string', 'max:255'],
+            'slug' => ['nullable', 'string', 'max:255', 'unique:services,slug,'.$service->id],
+            'description' => ['nullable', 'string'],
+            'requirements_info' => ['nullable', 'string'],
             'timeline_estimation' => ['nullable', 'string', 'max:255'],
-            'price'               => ['required', 'numeric', 'min:0'],
+            'price' => ['required', 'numeric', 'min:0'],
         ], [
             'category_id.required' => 'Pilih kategori layanan yang sesuai.',
-            'category_id.exists'   => 'Kategori yang dipilih tidak valid.',
-            'name.required'        => 'Nama layanan wajib diisi.',
-            'slug.unique'          => 'Slug layanan ini sudah digunakan oleh layanan lain.',
-            'price.required'       => 'Biaya estimasi layanan wajib diisi.',
-            'price.numeric'        => 'Biaya harus berupa nominal angka valid.',
+            'category_id.exists' => 'Kategori yang dipilih tidak valid.',
+            'name.required' => 'Nama layanan wajib diisi.',
+            'slug.unique' => 'Slug layanan ini sudah digunakan oleh layanan lain.',
+            'price.required' => 'Biaya estimasi layanan wajib diisi.',
+            'price.numeric' => 'Biaya harus berupa nominal angka valid.',
         ]);
 
         if (empty($validated['slug'])) {
@@ -115,7 +119,7 @@ class ServiceController extends Controller
         $service->update($validated);
 
         return redirect()->route('admin.services.index')
-            ->with('success', 'Layanan perizinan & sertifikasi "' . $service->name . '" berhasil diperbarui.');
+            ->with('success', 'Layanan perizinan & sertifikasi "'.$service->name.'" berhasil diperbarui.');
     }
 
     /**
@@ -127,6 +131,6 @@ class ServiceController extends Controller
         $service->delete();
 
         return redirect()->route('admin.services.index')
-            ->with('success', 'Layanan perizinan & sertifikasi "' . $name . '" berhasil dihapus.');
+            ->with('success', 'Layanan perizinan & sertifikasi "'.$name.'" berhasil dihapus.');
     }
 }

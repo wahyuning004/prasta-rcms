@@ -44,12 +44,9 @@
             </div>
         </a>
 
-        <h2 class="text-center text-3xl font-extrabold text-corporate tracking-tight">
-            Buat Akun Klien IzinYou
+        <h2 class="text-center text-2xl font-extrabold text-corporate tracking-tight mb-6">
+            Daftar Akun Klien
         </h2>
-        <p class="mt-2 text-center text-sm text-slate-600 mb-8 max-w-md mx-auto">
-            Daftarkan perusahaan Anda untuk mendapatkan pendampingan layanan perizinan dan sertifikasi secara transparan.
-        </p>
 
         <!-- Form Card -->
         <div class="bg-white py-10 px-6 shadow-2xl rounded-3xl sm:px-10 border border-slate-100">
@@ -92,7 +89,6 @@
                                 autocomplete="name"
                                 value="{{ old('name') }}"
                                 class="input-field block w-full pl-11 pr-4 py-3 sm:text-sm border rounded-xl bg-slate-50 border-slate-200 focus:outline-none focus:border-sky-500 focus:bg-white transition-colors @error('name') border-rose-400 bg-rose-50 @enderror" 
-                                placeholder="Cth: Budi Santoso"
                             >
                         </div>
                         <p id="nameWarning" class="text-xs text-rose-500 mt-1 font-medium hidden"></p>
@@ -118,7 +114,6 @@
                                 maxlength="150"
                                 value="{{ old('company') }}"
                                 class="input-field block w-full pl-11 pr-4 py-3 sm:text-sm border rounded-xl bg-slate-50 border-slate-200 focus:outline-none focus:border-sky-500 focus:bg-white transition-colors @error('company') border-rose-400 bg-rose-50 @enderror" 
-                                placeholder="Cth: PT Makmur Sentosa"
                             >
                         </div>
                         <p id="companyWarning" class="text-xs text-rose-500 mt-1 font-medium hidden"></p>
@@ -147,7 +142,6 @@
                                 maxlength="255"
                                 value="{{ old('email') }}"
                                 class="input-field block w-full pl-11 pr-4 py-3 sm:text-sm border rounded-xl bg-slate-50 border-slate-200 focus:outline-none focus:border-sky-500 focus:bg-white transition-colors @error('email') border-rose-400 bg-rose-50 @enderror" 
-                                placeholder="pic@perusahaan.com"
                             >
                         </div>
                         <p id="emailWarning" class="text-xs text-rose-500 mt-1 font-medium hidden"></p>
@@ -177,7 +171,6 @@
                                 required 
                                 value="{{ old('phone') }}"
                                 class="input-field block w-full pl-11 pr-4 py-3 sm:text-sm border rounded-xl bg-slate-50 border-slate-200 focus:outline-none focus:border-sky-500 focus:bg-white transition-colors @error('phone') border-rose-400 bg-rose-50 @enderror" 
-                                placeholder="Cth: 081234567890"
                             >
                         </div>
                         {{-- Real-time validation warning message --}}
@@ -185,7 +178,7 @@
                             <i data-lucide="alert-circle" class="w-3.5 h-3.5 shrink-0 text-rose-500"></i>
                             <span id="phoneWarningText">Hanya angka yang diperbolehkan! Huruf tidak dapat dimasukkan.</span>
                         </p>
-                        <p class="text-[11px] text-slate-400 mt-1" id="phoneHint">Format: 081234567890 (10–14 digit angka). OTP akan dikirim via WhatsApp.</p>
+                        <p class="text-[11px] text-slate-400 mt-1" id="phoneHint">Nomor seluler aktif (10–14 digit). Kode OTP akan dikirim via WhatsApp.</p>
                         @error('phone')
                             <p class="text-xs text-rose-500 mt-1 font-medium">{{ $message }}</p>
                         @enderror
@@ -210,7 +203,6 @@
                                 autocomplete="new-password"
                                 required 
                                 class="input-field block w-full pl-11 pr-11 py-3 sm:text-sm border rounded-xl bg-slate-50 border-slate-200 focus:outline-none focus:border-sky-500 focus:bg-white transition-colors @error('password') border-rose-400 bg-rose-50 @enderror" 
-                                placeholder="Minimal 8 karakter"
                             >
                             <button type="button" id="togglePasswordBtn" class="absolute inset-y-0 right-0 pr-3.5 flex items-center text-slate-400 hover:text-slate-600 focus:outline-none">
                                 <i data-lucide="eye" id="togglePasswordIcon" class="h-5 w-5"></i>
@@ -249,7 +241,6 @@
                                 autocomplete="new-password"
                                 required 
                                 class="input-field block w-full pl-11 pr-11 py-3 sm:text-sm border rounded-xl bg-slate-50 border-slate-200 focus:outline-none focus:border-sky-500 focus:bg-white transition-colors" 
-                                placeholder="Ulangi password"
                             >
                             <button type="button" id="toggleConfirmBtn" class="absolute inset-y-0 right-0 pr-3.5 flex items-center text-slate-400 hover:text-slate-600 focus:outline-none">
                                 <i data-lucide="eye" id="toggleConfirmIcon" class="h-5 w-5"></i>
@@ -270,25 +261,27 @@
 
                 <!-- Google reCAPTCHA v2 Checkbox Widget -->
                 <div class="pt-2 flex flex-col items-center justify-center">
-                    <div class="g-recaptcha scale-95 sm:scale-100 origin-center" data-sitekey="{{ config('services.recaptcha.site_key', env('RECAPTCHA_SITE_KEY', '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI')) }}"></div>
+                    <div style="width: 304px; height: 78px; overflow: hidden; display: flex; align-items: flex-end; justify-content: center; border-radius: 4px;">
+                        <div class="g-recaptcha origin-bottom" data-sitekey="{{ config('services.recaptcha.site_key', env('RECAPTCHA_SITE_KEY', '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI')) }}"></div>
+                    </div>
                     @error('g-recaptcha-response')
                         <p class="text-xs text-rose-500 font-semibold mt-1 text-center">{{ $message }}</p>
                     @enderror
                 </div>
 
                 <!-- Indikator Verifikasi 2 Langkah (OTP WhatsApp) -->
-                <div class="p-3.5 rounded-2xl bg-sky-50 border border-sky-200/80 flex items-center justify-between gap-3">
-                    <div class="flex items-center gap-2.5">
-                        <div class="w-8 h-8 rounded-lg bg-sky-600 text-white flex items-center justify-center font-bold text-xs shrink-0 shadow-sm">
+                <div class="p-3 bg-sky-50/70 border border-sky-200/80 rounded-xl flex items-center justify-between gap-3 text-xs text-sky-800">
+                    <div class="flex items-center gap-2">
+                        <div class="w-7 h-7 rounded-lg bg-sky-600 text-white flex items-center justify-center shrink-0">
                             <i data-lucide="shield-check" class="w-4 h-4"></i>
                         </div>
                         <div>
-                            <p class="text-xs font-bold text-sky-950">Proteksi Verifikasi 2-Langkah WhatsApp</p>
-                            <p class="text-[11px] text-sky-700">Kode OTP 6-digit dikirimkan instan ke nomor WhatsApp untuk aktivasi akun baru.</p>
+                            <p class="font-bold">Proteksi 2FA WhatsApp</p>
+                            <p class="text-[11px] text-sky-600">Kode OTP 6-digit dikirim via WhatsApp untuk aktivasi akun.</p>
                         </div>
                     </div>
-                    <button type="button" onclick="document.getElementById('otpInfoModal').classList.remove('hidden')" class="text-xs font-bold text-sky-800 hover:text-sky-900 underline shrink-0">
-                        Detail 2FA
+                    <button type="button" onclick="document.getElementById('otpInfoModal').classList.remove('hidden')" class="px-2.5 py-1 bg-white hover:bg-sky-100 text-sky-700 font-semibold border border-sky-300 rounded-lg text-[11px] transition shrink-0">
+                        Info
                     </button>
                 </div>
 
@@ -313,10 +306,10 @@
             </div>
         </div>
 
-        <div class="text-center mt-6">
+        <div class="text-center mt-3.5">
             <a href="/" class="text-sm text-slate-500 hover:text-corporate font-medium transition-colors inline-flex items-center gap-1.5">
                 <i data-lucide="arrow-left" class="w-4 h-4"></i>
-                Kembali ke Beranda IzinYou
+                Kembali ke Halaman Utama
             </a>
         </div>
     </div>

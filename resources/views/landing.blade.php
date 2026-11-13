@@ -265,8 +265,8 @@
                     
                     <!-- Floating Top-Left Badge: Pelayanan Cepat (Dijauhkan ke kiri atas agar tidak menutupi isi kartu) -->
                     <div class="absolute -top-7 -left-5 sm:-left-10 lg:-left-12 z-20 bg-white/95 backdrop-blur-md px-3.5 py-2 rounded-xl shadow-lg border border-slate-100 flex items-center gap-2.5 animate-float pointer-events-none">
-                        <div class="w-8 h-8 rounded-lg bg-emerald-50 text-emerald-500 border border-emerald-100 flex items-center justify-center shrink-0">
-                            <i data-lucide="sparkles" class="w-4 h-4 text-emerald-500"></i>
+                        <div class="w-8 h-8 rounded-lg bg-sky-50 text-sky-600 border border-sky-100 flex items-center justify-center shrink-0">
+                            <i data-lucide="sparkles" class="w-4 h-4 text-sky-500"></i>
                         </div>
                         <div>
                             <p class="text-[8.5px] font-bold text-slate-400 uppercase tracking-widest leading-none mb-0.5">PELAYANAN CEPAT</p>
@@ -281,8 +281,8 @@
                         </div>
                         <div>
                             <div class="flex items-center gap-1 mb-0.5">
-                                <i data-lucide="check-circle-2" class="w-3 h-3 text-emerald-500"></i>
-                                <span class="text-[11px] font-bold text-emerald-700">Garansi 100% Sah</span>
+                                <i data-lucide="check-circle-2" class="w-3 h-3 text-sky-500"></i>
+                                <span class="text-[11px] font-bold text-sky-700">Garansi 100% Sah</span>
                             </div>
                             <p class="text-[10px] font-black text-slate-800 leading-none">Sertifikat Resmi Terbit</p>
                         </div>
@@ -387,7 +387,7 @@
                                 <h4 id="heroCardTitle" class="font-extrabold text-sm sm:text-base text-slate-900 leading-snug">
                                     Izin Edar Alkes &amp; BPOM
                                 </h4>
-                                <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[9px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200 shrink-0">
+                                <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[9px] font-bold bg-sky-50 text-sky-700 border border-sky-200 shrink-0">
                                     Layanan Aktif
                                 </span>
                             </div>
@@ -523,32 +523,261 @@
         </div>
     </section>
 
-    <!-- 5. Section Call-to-Action ke Halaman Katalog Resmi (Katalog Dipindahkan ke Halaman Tersendiri) -->
-    <section class="py-20 bg-gradient-to-b from-white via-sky-50/40 to-slate-50 relative overflow-hidden border-t border-slate-100">
-        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-            <span class="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full text-xs font-bold bg-sky-100 text-sky-800 border border-sky-200 mb-4 shadow-sm">
-                <i data-lucide="tag" class="w-3.5 h-3.5 text-sky-600"></i>
-                Katalog Semua Layanan &amp; Voucher Promo
-            </span>
-            <h2 class="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 tracking-tight mb-4">
-                Eksplorasi Katalog Layanan &amp; Klaim Diskon
-            </h2>
-            <p class="text-slate-600 text-base sm:text-lg max-w-2xl mx-auto mb-8 font-normal leading-relaxed">
-                Lihat seluruh {{ $services->count() }}+ layanan perizinan &amp; sertifikasi resmi (BPOM, Kemenkes, Halal, SNI, CDOB, IDAK), komparasi 3 skema paket, serta klaim voucher diskon eksklusif di halaman katalog resmi kami.
-            </p>
-            <div class="flex flex-wrap items-center justify-center gap-4">
-                <a href="{{ route('catalog.index') }}" class="group px-8 py-4 bg-sky-600 hover:bg-sky-500 active:bg-sky-700 text-white font-bold text-sm sm:text-base rounded-2xl shadow-xl shadow-sky-600/25 hover:shadow-sky-600/40 transition-all duration-300 flex items-center gap-2.5">
+    <!-- 5. Section Layanan & Portofolio (Grid Dinamis dengan Filter Kategori & Modal Detail) -->
+    <section id="layanan" class="py-24 bg-slate-50 relative">
+        <div class="max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <h3 class="text-sky-600 font-bold tracking-wide uppercase text-sm mb-3">Katalog Layanan Resmi</h3>
+                <h2 class="text-3xl md:text-4xl font-extrabold text-corporate mb-4">Layanan Perizinan &amp; Sertifikasi</h2>
+                <p class="text-slate-600 text-lg">Pilihan pendampingan spesialis terakreditasi, estimasi biaya transparan, jangka waktu terukur, dan kepastian pemenuhan berkas perizinan &amp; sertifikasi bisnis Anda.</p>
+            </div>
+
+            <!-- Dynamic Services Grid Layout (Ukuran Card Lebih Ringkas & Presisi) -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5" id="servicesGrid">
+                @forelse($services->take(8) as $svc)
+                <div class="service-card bg-white rounded-2xl shadow-sm border border-slate-200/90 flex flex-col overflow-hidden hover:shadow-lg hover:border-sky-300 transition-all duration-300 group"
+                     data-category="{{ $svc->category ? $svc->category->slug : 'umum' }}"
+                     data-id="{{ $svc->id }}"
+                     data-title="{{ $svc->name }}"
+                     data-category-name="{{ $svc->category ? $svc->category->name : 'Perizinan & Sertifikasi' }}"
+                     data-time="{{ $svc->timeline_estimation ?: ($svc->estimation_time ?: '1-3 Bulan') }}"
+                     data-price="{{ $svc->formatted_price ?: ('Rp ' . number_format($svc->price ?: $svc->cost ?: 0, 0, ',', '.')) }}"
+                     data-desc="{{ $svc->description ?: 'Layanan konsultasi dan pendampingan menyeluruh dari tim ahli kami untuk memastikan kelancaran perizinan dan sertifikasi usaha Anda.' }}"
+                     data-docs="{{ $svc->requirements_info ?: $svc->requirements_summary }}"
+                >
+                    <div class="p-4 sm:p-5 flex-1 flex flex-col">
+                        <!-- Card Header & Badge -->
+                        <div class="flex items-start justify-between gap-3 mb-3">
+                            <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-sky-50 text-sky-700 border border-sky-100">
+                                <i data-lucide="tag" class="w-3 h-3 text-sky-600"></i>
+                                {{ $svc->category ? $svc->category->name : 'Perizinan' }}
+                            </span>
+                            <div class="w-8 h-8 bg-slate-50 text-slate-700 group-hover:bg-sky-600 group-hover:text-white rounded-lg flex items-center justify-center border border-slate-100 group-hover:border-sky-600 transition-all shrink-0">
+                                <i data-lucide="award" class="w-4 h-4"></i>
+                            </div>
+                        </div>
+
+                        <!-- Service Title -->
+                        <h3 class="text-sm sm:text-base font-bold text-corporate leading-snug mb-3 line-clamp-2 min-h-[2.5rem] group-hover:text-sky-700 transition-colors">
+                            {{ $svc->name }}
+                        </h3>
+                        
+                        <!-- Meta Stats (Timeline & Price) -->
+                        <div class="grid grid-cols-2 gap-2 mb-3.5 bg-slate-50/80 p-2.5 rounded-xl border border-slate-100">
+                            <div>
+                                <span class="text-[9px] font-bold text-slate-400 uppercase tracking-wider block mb-0.5">Estimasi Waktu</span>
+                                <div class="flex items-center gap-1 text-xs font-semibold text-slate-800">
+                                    <i data-lucide="clock" class="w-3.5 h-3.5 text-sky-600 shrink-0"></i> 
+                                    <span class="truncate">{{ $svc->timeline_estimation ?: ($svc->estimation_time ?: '1-3 Bulan') }}</span>
+                                </div>
+                            </div>
+                            <div>
+                                <span class="text-[9px] font-bold text-slate-400 uppercase tracking-wider block mb-0.5">Estimasi Biaya</span>
+                                <div class="flex items-center gap-1 text-xs font-bold text-sky-700">
+                                    <i data-lucide="wallet" class="w-3.5 h-3.5 text-gold shrink-0"></i> 
+                                    <span class="truncate">{{ $svc->formatted_price ?: ('Rp ' . number_format($svc->price ?: $svc->cost ?: 0, 0, ',', '.')) }}</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Termasuk / Hal yang Diperoleh (Fasilitas & Output Klien) -->
+                        <div class="flex-1 mb-4">
+                            <span class="text-[10px] font-bold text-corporate uppercase tracking-wider block mb-2 flex items-center gap-1.5">
+                                <i data-lucide="badge-check" class="w-3.5 h-3.5 text-sky-600"></i> Termasuk / Diperoleh:
+                            </span>
+                            <div class="h-28 overflow-y-auto card-scrollbar pr-1.5">
+                                @php
+                                    $svcNameLower = strtolower($svc->name);
+                                    $catSlugLower = strtolower($svc->category ? $svc->category->slug : '');
+                                    
+                                    // Poin fasilitas / output resmi yang diperoleh klien
+                                    $facilities = [
+                                        'Checklist Uji Kepatuhan Regulasi',
+                                        'Penyusunan Draf Dokumen Teknis',
+                                        'Pendampingan Verifikasi & Evaluasi',
+                                        'Sertifikat / Izin Resmi Terbit',
+                                    ];
+
+                                    if (str_contains($svcNameLower, 'halal') || str_contains($catSlugLower, 'halal')) {
+                                        $facilities = [
+                                            'Audit Sistem Jaminan Produk Halal (SJPH)',
+                                            'Penyusunan Manual Halal & Pelatihan Penyelia',
+                                            'Pendampingan Pemeriksaan LPH & Sidang Fatwa MUI',
+                                            'Sertifikat Halal Resmi BPJPH RI Terbit',
+                                        ];
+                                    } elseif (str_contains($svcNameLower, 'bpom') || str_contains($svcNameLower, 'kosmetik') || str_contains($svcNameLower, 'smkpo') || str_contains($catSlugLower, 'bpom')) {
+                                        $facilities = [
+                                            'Checklist Uji Kepatuhan CPPOB / CPKB / BPOM',
+                                            'Penyusunan Draf Dokumen Teknis & Formula Produk',
+                                            'Pendampingan Verifikasi Akun & Notifikasi',
+                                            'Nomor Izin Edar (NIE) / Sertifikat Resmi Terbit',
+                                        ];
+                                    } elseif (str_contains($svcNameLower, 'kemenkes') || str_contains($svcNameLower, 'alkes') || str_contains($svcNameLower, 'pkrt') || str_contains($catSlugLower, 'kemenkes')) {
+                                        $facilities = [
+                                            'Gap Analysis & Uji Kepatuhan Permenkes RI',
+                                            'Penyusunan Dokumen Mutu Standar & Berkas Teknis',
+                                            'Pendampingan Evaluasi Petugas Kemenkes RI',
+                                            'Sertifikat Standar / Izin Edar Alkes Terbit',
+                                        ];
+                                    } elseif (str_contains($svcNameLower, 'cdob') || str_contains($svcNameLower, 'pbf') || str_contains($catSlugLower, 'cdob')) {
+                                        $facilities = [
+                                            'Checklist Kepatuhan & Penyusunan SOP Standar CDOB',
+                                            'Pemetaan Suhu (Temperature Mapping) Gudang',
+                                            'Pendampingan Audit CAPA Petugas Balai BPOM',
+                                            'Sertifikat CDOB Resmi dari BPOM RI Terbit',
+                                        ];
+                                    } elseif (str_contains($svcNameLower, 'idak') || str_contains($svcNameLower, 'cdakb') || str_contains($catSlugLower, 'idak')) {
+                                        $facilities = [
+                                            'Penyusunan Manual Mutu CDAKB & Struktur Organisasi',
+                                            'Validasi Denah Kelayakan Gudang Distribusi',
+                                            'Pendampingan Audit Verifikasi Lapangan Kemenkes',
+                                            'Izin Distributor Alat Kesehatan (IDAK) Terbit',
+                                        ];
+                                    } elseif (str_contains($svcNameLower, 'sni') || str_contains($catSlugLower, 'sni')) {
+                                        $facilities = [
+                                            'Uji Kepatuhan Parameter Standar Mutu SNI',
+                                            'Penyusunan Dokumen SPM (Sistem Penjaminan Mutu)',
+                                            'Pendampingan Audit Pabrik & Pengambilan Sampel',
+                                            'Sertifikat SPPT SNI Resmi Terbit',
+                                        ];
+                                    }
+                                @endphp
+                                <ul class="space-y-1.5">
+                                    @foreach($facilities as $facility)
+                                    <li class="flex items-start gap-2 text-[11px] text-slate-600">
+                                        <div class="w-3.5 h-3.5 rounded-full bg-sky-100 text-sky-600 flex items-center justify-center shrink-0 mt-0.5">
+                                            <i data-lucide="check" class="w-2 h-2 stroke-[3]"></i>
+                                        </div>
+                                        <span class="leading-normal font-medium">{{ $facility }}</span>
+                                    </li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- CTA Action: 1 Tombol Utama Detail Layanan -->
+                        <div class="pt-3 border-t border-slate-100">
+                            <a 
+                                href="{{ route('services.show', $svc->slug) }}"
+                                class="w-full py-2.5 px-3 bg-sky-600 hover:bg-sky-500 active:bg-sky-700 text-white font-bold text-xs rounded-xl shadow-sm hover:shadow-md transition-all flex items-center justify-center gap-1.5 group-hover:scale-[1.01]"
+                            >
+                                <i data-lucide="file-text" class="w-3.5 h-3.5"></i>
+                                <span>Detail &amp; Alur Lengkap</span>
+                                <i data-lucide="arrow-right" class="w-3 h-3"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                @empty
+                <div class="col-span-full py-16 text-center bg-white rounded-3xl border border-slate-200">
+                    <i data-lucide="folder-search" class="w-12 h-12 text-slate-300 mx-auto mb-3"></i>
+                    <p class="font-bold text-corporate text-base">Belum ada data layanan perizinan.</p>
+                    <p class="text-xs text-slate-400 mt-1">Silakan masuk ke portal Admin untuk menambahkan master layanan.</p>
+                </div>
+                @endforelse
+            </div>
+
+            <!-- Tombol Masuk ke Halaman Katalog Layanan Lengkap -->
+            <div class="mt-12 text-center">
+                <a href="{{ route('catalog.index') }}" class="inline-flex items-center gap-3 px-8 py-4 bg-sky-600 hover:bg-sky-500 active:bg-sky-700 text-white font-bold text-sm sm:text-base rounded-2xl shadow-lg shadow-sky-600/25 hover:shadow-sky-600/40 hover:-translate-y-0.5 transition-all duration-300 group">
                     <i data-lucide="layout-grid" class="w-5 h-5"></i>
-                    <span>Buka Halaman Katalog Lengkap</span>
-                    <i data-lucide="arrow-right" class="w-4 h-4 transition-transform group-hover:translate-x-1"></i>
+                    <span>Lihat Seluruh Katalog Layanan</span>
+                    <i data-lucide="arrow-right" class="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1"></i>
                 </a>
-                <a href="https://wa.me/6282128765874?text=Halo%20Tim%20IzinYou,%20saya%20ingin%20konsultasi%20katalog%20layanan%20perizinan..." target="_blank" class="px-7 py-4 bg-white hover:bg-slate-50 text-slate-800 font-bold text-sm sm:text-base rounded-2xl border border-slate-200 shadow-sm hover:border-sky-300 transition-all flex items-center gap-2">
-                    <i data-lucide="message-circle" class="w-4 h-4 text-sky-600"></i>
-                    <span>Konsultasi Langsung via WA</span>
-                </a>
+                <p class="text-xs text-slate-500 mt-2.5 font-medium">
+                    Jelajahi {{ $services->count() }}+ pilihan layanan perizinan &amp; sertifikasi resmi kami di katalog lengkap.
+                </p>
+            </div>
+
+            <!-- Empty Filter Result Placeholder (Hidden by default) -->
+            <div id="noResults" class="hidden py-16 text-center bg-white rounded-3xl border border-slate-200 mt-4 max-w-xl mx-auto">
+                <i data-lucide="search-x" class="w-12 h-12 text-slate-300 mx-auto mb-3"></i>
+                <p class="font-bold text-corporate text-base">Tidak ada layanan pada kategori ini.</p>
+                <p class="text-xs text-slate-400 mt-1">Silakan pilih kategori perizinan lainnya atau hubungi kami langsung via WhatsApp.</p>
             </div>
         </div>
     </section>
+
+    <!-- Modal Dialog Detail Layanan (Interactive Detail Popup) -->
+    <div id="serviceDetailModal" class="fixed inset-0 z-[120] hidden items-center justify-center p-4 bg-slate-900/70 backdrop-blur-sm transition-all duration-300">
+        <div class="bg-white rounded-3xl shadow-2xl border border-slate-100 max-w-2xl w-full max-h-[90vh] flex flex-col overflow-hidden transform scale-95 transition-transform" id="modalCard">
+            <!-- Modal Header -->
+            <div class="p-6 md:p-8 border-b border-slate-100 flex items-start justify-between gap-4 bg-slate-50/60">
+                <div>
+                    <span id="modalCategory" class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-sky-100 text-sky-800 mb-2">
+                        Kategori Layanan
+                    </span>
+                    <h3 id="modalTitle" class="text-xl md:text-2xl font-extrabold text-corporate leading-tight">
+                        Judul Layanan
+                    </h3>
+                </div>
+                <button type="button" onclick="closeServiceDetailModal()" class="w-9 h-9 rounded-full bg-slate-200/80 hover:bg-slate-300 text-slate-600 flex items-center justify-center transition-colors shrink-0">
+                    <i data-lucide="x" class="w-5 h-5"></i>
+                </button>
+            </div>
+
+            <!-- Modal Body (Scrollable) -->
+            <div class="p-6 md:p-8 overflow-y-auto card-scrollbar space-y-6 flex-1">
+                <!-- Meta Info Grid -->
+                <div class="grid grid-cols-2 gap-4 bg-slate-50 p-4 rounded-2xl border border-slate-100">
+                    <div>
+                        <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-1">Estimasi Durasi</span>
+                        <div class="flex items-center gap-2 text-sm font-bold text-slate-800">
+                            <i data-lucide="clock" class="w-4 h-4 text-sky-600"></i>
+                            <span id="modalTime">-</span>
+                        </div>
+                    </div>
+                    <div>
+                        <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-1">Estimasi Anggaran</span>
+                        <div class="flex items-center gap-2 text-sm font-bold text-sky-700">
+                            <i data-lucide="wallet" class="w-4 h-4 text-gold"></i>
+                            <span id="modalPrice">-</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Deskripsi Layanan -->
+                <div>
+                    <h4 class="text-xs font-bold text-corporate uppercase tracking-wider mb-2 flex items-center gap-2">
+                        <i data-lucide="file-text" class="w-4 h-4 text-sky-600"></i> Deskripsi &amp; Cakupan Layanan
+                    </h4>
+                    <p id="modalDesc" class="text-sm text-slate-600 leading-relaxed bg-white p-4 rounded-2xl border border-slate-100">
+                        -
+                    </p>
+                </div>
+
+                <!-- Dokumen Persyaratan -->
+                <div>
+                    <h4 class="text-xs font-bold text-corporate uppercase tracking-wider mb-2 flex items-center gap-2">
+                        <i data-lucide="folder-check" class="w-4 h-4 text-sky-600"></i> Checklist Dokumen Persyaratan
+                    </h4>
+                    <div class="bg-slate-50/80 p-4 rounded-2xl border border-slate-100">
+                        <ul id="modalDocsList" class="space-y-2 text-xs text-slate-700">
+                            <!-- Populated by JS -->
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal Footer -->
+            <div class="p-6 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-between gap-3 bg-slate-50/50">
+                <a href="{{ route('register') }}" class="w-full sm:w-auto px-5 py-3 rounded-xl border border-slate-200 text-slate-700 font-bold text-xs hover:bg-white transition-all text-center flex items-center justify-center gap-2">
+                    <i data-lucide="user-plus" class="w-4 h-4"></i>
+                    Daftar Akun Klien
+                </a>
+                
+                <div class="flex items-center gap-3 w-full sm:w-auto">
+                    <button type="button" onclick="closeServiceDetailModal()" class="w-full sm:w-auto px-5 py-3 rounded-xl bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold text-xs transition-colors">
+                        Tutup
+                    </button>
+                    <a id="modalWhatsAppBtn" href="#" target="_blank" class="w-full sm:w-auto px-6 py-3 bg-sky-600 hover:bg-sky-500 text-white font-bold text-xs rounded-xl shadow-md shadow-sky-600/20 transition-all text-center flex items-center justify-center gap-2">
+                        <i data-lucide="message-circle" class="w-4 h-4"></i>
+                        Konsultasi via WhatsApp
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
     <!-- 7. Section Penilaian & Testimoni Klien -->
@@ -561,6 +790,24 @@
             </div>
 
             <div class="grid md:grid-cols-2 xl:grid-cols-4 gap-6">
+                @if(isset($publishedReviews) && $publishedReviews->isNotEmpty())
+                    @foreach($publishedReviews as $pubRev)
+                        <div class="bg-slate-50 p-8 rounded-3xl shadow-sm border border-sky-100 flex flex-col justify-between">
+                            <div>
+                                <div class="flex items-center gap-1 mb-4 text-gold">
+                                    @for($s = 1; $s <= 5; $s++)
+                                        <i data-lucide="star" class="w-4 h-4 {{ $s <= $pubRev->rating ? 'fill-current' : 'text-slate-300' }}"></i>
+                                    @endfor
+                                </div>
+                                <p class="text-slate-600 text-sm mb-6 italic leading-relaxed">"{{ $pubRev->comment }}"</p>
+                            </div>
+                            <div class="border-t border-slate-200 pt-4">
+                                <h4 class="font-bold text-corporate text-sm">{{ $pubRev->user?->name ?? 'Klien Mitra' }}</h4>
+                                <p class="text-xs text-slate-500">{{ $pubRev->user?->company_name ?? ($pubRev->service?->name ?? 'Mitra IzinYou') }}</p>
+                            </div>
+                        </div>
+                    @endforeach
+                @endif
                 <!-- Testimoni 1 -->
                 <div class="bg-slate-50 p-8 rounded-3xl shadow-sm border border-slate-100 flex flex-col justify-between">
                     <div>
@@ -808,7 +1055,7 @@
                 <ul class="space-y-2.5 text-sm">
                     <li><a href="#beranda" class="text-slate-400 hover:text-sky-400 transition-colors flex items-center gap-2"><span class="text-sky-500">&rsaquo;</span> Beranda Utama</a></li>
                     <li><a href="#tentang" class="text-slate-400 hover:text-sky-400 transition-colors flex items-center gap-2"><span class="text-sky-500">&rsaquo;</span> Tentang IzinYou</a></li>
-                    <li><a href="#layanan" class="text-slate-400 hover:text-sky-400 transition-colors flex items-center gap-2"><span class="text-sky-500">&rsaquo;</span> Katalog Layanan</a></li>
+                    <li><a href="{{ route('catalog.index') }}" class="text-slate-400 hover:text-sky-400 transition-colors flex items-center gap-2"><span class="text-sky-500">&rsaquo;</span> Katalog Layanan</a></li>
                     <li><a href="#testimoni" class="text-slate-400 hover:text-sky-400 transition-colors flex items-center gap-2"><span class="text-sky-500">&rsaquo;</span> Penilaian Klien</a></li>
                     <li><a href="#kontak" class="text-slate-400 hover:text-sky-400 transition-colors flex items-center gap-2"><span class="text-sky-500">&rsaquo;</span> Hubungi Kami</a></li>
                 </ul>
@@ -904,18 +1151,16 @@
         });
 
         // ── Filter Kartu Layanan Berdasarkan Kategori ──
-        // Dipanggil saat user mengklik tombol filter kategori
         function filterServices(category, btn) {
-            // Reset semua pill ke tampilan tidak aktif
             document.querySelectorAll('.filter-pill').forEach(b => {
                 b.classList.remove('bg-sky-600', 'text-white', 'shadow-sky-600/20');
                 b.classList.add('bg-white', 'text-slate-700', 'border', 'border-slate-200');
             });
-            // Tandai pill yang dipilih sebagai aktif
-            btn.classList.remove('bg-white', 'text-slate-700', 'border', 'border-slate-200');
-            btn.classList.add('bg-sky-600', 'text-white', 'shadow-sky-600/20');
+            if (btn) {
+                btn.classList.remove('bg-white', 'text-slate-700', 'border', 'border-slate-200');
+                btn.classList.add('bg-sky-600', 'text-white', 'shadow-sky-600/20');
+            }
 
-            // Tampilkan/sembunyikan kartu layanan berdasarkan kategori
             const cards = document.querySelectorAll('.service-card');
             let visibleCount = 0;
             cards.forEach(card => {
@@ -927,7 +1172,6 @@
                 }
             });
 
-            // Tampilkan pesan kosong jika tidak ada layanan yang cocok
             const noResults = document.getElementById('noResults');
             if (noResults) {
                 if (visibleCount === 0) {
@@ -939,60 +1183,66 @@
         }
 
         // ── Buka Modal Detail Layanan ──
-        // Mengisi isi modal dengan data dari atribut data-* pada kartu layanan
         function openServiceDetailModal(btn) {
-            const card = btn.closest('.service-card'); // Temukan elemen kartu terdekat
+            const card = btn.closest('.service-card');
             if (!card) return;
 
-            // Isi elemen modal dengan data dari kartu
-            document.getElementById('modalCategory').textContent = card.dataset.categoryName || 'Perizinan';
-            document.getElementById('modalTitle').textContent    = card.dataset.title || '';
-            document.getElementById('modalTime').textContent     = card.dataset.time || '-';
-            document.getElementById('modalPrice').textContent    = card.dataset.price || '-';
-            document.getElementById('modalDesc').textContent     = card.dataset.desc || '-';
+            const modalCat = document.getElementById('modalCategory');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalTime = document.getElementById('modalTime');
+            const modalPrice = document.getElementById('modalPrice');
+            const modalDesc = document.getElementById('modalDesc');
 
-            // Bangun daftar checklist dokumen dari data teks multi-baris
+            if (modalCat) modalCat.textContent = card.dataset.categoryName || 'Perizinan & Sertifikasi';
+            if (modalTitle) modalTitle.textContent = card.dataset.title || '';
+            if (modalTime) modalTime.textContent = card.dataset.time || '-';
+            if (modalPrice) modalPrice.textContent = card.dataset.price || '-';
+            if (modalDesc) modalDesc.textContent = card.dataset.desc || '-';
+
             const docsList = document.getElementById('modalDocsList');
-            docsList.innerHTML = '';
-            const rawDocs = card.dataset.docs || '';
-            const lines   = rawDocs.split('\n').map(l => l.replace(/^[•\-\s]+/, '').trim()).filter(l => l.length > 0);
-            
-            if (lines.length > 0) {
-                lines.forEach(doc => {
-                    const li = document.createElement('li');
-                    li.className = 'flex items-start gap-2';
-                    li.innerHTML = '<i data-lucide="check" class="w-4 h-4 text-sky-500 mt-0.5 shrink-0"></i><span>' + doc + '</span>';
-                    docsList.appendChild(li);
-                });
-            } else {
-                // Fallback jika tidak ada dokumen yang tercantum
-                docsList.innerHTML = '<li class="text-slate-400 italic">Hubungi tim ahli kami untuk rincian berkas teknis.</li>';
+            if (docsList) {
+                docsList.innerHTML = '';
+                const rawDocs = card.dataset.docs || '';
+                const lines = rawDocs.split('\n').map(l => l.replace(/^[•\-\s]+/, '').trim()).filter(l => l.length > 0);
+                
+                if (lines.length > 0) {
+                    lines.forEach(doc => {
+                        const li = document.createElement('li');
+                        li.className = 'flex items-start gap-2';
+                        li.innerHTML = '<i data-lucide="check" class="w-4 h-4 text-sky-500 mt-0.5 shrink-0"></i><span>' + doc + '</span>';
+                        docsList.appendChild(li);
+                    });
+                } else {
+                    docsList.innerHTML = '<li class="text-slate-400 italic">Hubungi tim ahli kami untuk rincian berkas teknis.</li>';
+                }
             }
 
-            // Perbarui URL WhatsApp CTA dengan nama layanan yang dipilih
             const waUrl = 'https://wa.me/6282128765874?text=' + encodeURIComponent('Halo IzinYou, saya ingin berkonsultasi gratis mengenai: ' + card.dataset.title);
-            document.getElementById('modalWhatsAppBtn').href = waUrl;
+            const waBtn = document.getElementById('modalWhatsAppBtn');
+            if (waBtn) waBtn.href = waUrl;
 
-            // Tampilkan modal dengan animasi scale-in
-            const modal     = document.getElementById('serviceDetailModal');
+            const modal = document.getElementById('serviceDetailModal');
             const modalCard = document.getElementById('modalCard');
-            modal.classList.remove('hidden');
-            modal.classList.add('flex');
-            setTimeout(() => {
-                modalCard.classList.remove('scale-95');
-                modalCard.classList.add('scale-100');
-            }, 10);
+            if (modal && modalCard) {
+                modal.classList.remove('hidden');
+                modal.classList.add('flex');
+                setTimeout(() => {
+                    modalCard.classList.remove('scale-95');
+                    modalCard.classList.add('scale-100');
+                }, 10);
+            }
 
-            lucide.createIcons(); // Re-init ikon di dalam modal
+            if (window.lucide) {
+                lucide.createIcons();
+            }
         }
 
-        // ── Tutup Modal Detail Layanan dengan animasi scale-out ──
+        // ── Tutup Modal Detail Layanan ──
         function closeServiceDetailModal() {
-            const modal     = document.getElementById('serviceDetailModal');
+            const modal = document.getElementById('serviceDetailModal');
             const modalCard = document.getElementById('modalCard');
             if (!modal) return;
             
-            // Animasi mengecil sebelum disembunyikan
             if (modalCard) {
                 modalCard.classList.remove('scale-100');
                 modalCard.classList.add('scale-95');
@@ -1003,34 +1253,29 @@
             }, 150);
         }
 
-        // Tutup modal saat klik di area luar kartu modal
         document.getElementById('serviceDetailModal')?.addEventListener('click', (e) => {
             if (e.target.id === 'serviceDetailModal') {
                 closeServiceDetailModal();
             }
         });
-        // Tutup modal saat menekan tombol Escape di keyboard
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') {
                 closeServiceDetailModal();
             }
         });
-        // ── Pilih filter kategori dari navigasi dropdown & scroll ke seksi layanan ──
+
         function selectCategoryFilter(slug) {
-            // Scroll halaman ke seksi layanan terlebih dahulu
             const targetSection = document.getElementById('layanan');
             if (targetSection) {
                 targetSection.scrollIntoView({ behavior: 'smooth' });
             }
 
-            // Tunggu scroll selesai, lalu klik pill filter yang sesuai
             setTimeout(() => {
                 const pills = Array.from(document.querySelectorAll('.filter-pill'));
                 let targetBtn = null;
                 if (slug === 'all') {
-                    targetBtn = pills[0]; // Pill pertama = "Semua"
+                    targetBtn = pills[0];
                 } else {
-                    // Cari pill yang atribut onclick-nya mengandung slug kategori
                     targetBtn = pills.find(b => {
                         const attr = b.getAttribute('onclick') || '';
                         return attr.toLowerCase().includes(slug.toLowerCase());
@@ -1038,9 +1283,9 @@
                 }
 
                 if (targetBtn) {
-                    targetBtn.click(); // Simulasi klik pada pill yang ditemukan
+                    targetBtn.click();
                 } else {
-                    filterServices(slug, pills[0] || document.createElement('button'));
+                    filterServices(slug, pills[0] || null);
                 }
             }, 300);
         }
